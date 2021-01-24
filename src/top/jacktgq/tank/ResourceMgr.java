@@ -15,10 +15,10 @@ public class ResourceMgr {
     public static BufferedImage[] explodes = new BufferedImage[16];
     static {
         // 加载四个方向的我方坦克图片
-        tankL = readImage("tankL.gif");
-        tankU = readImage("tankU.gif");
-        tankR = readImage("tankR.gif");
-        tankD = readImage("tankD.gif");
+        tankU = readImage("BadTank1.png");
+        tankL = ImageUtil.rotateImage(tankU, -90);
+        tankR = ImageUtil.rotateImage(tankU, 90);
+        tankD = ImageUtil.rotateImage(tankU, 180);
         // 加载四个方向的子弹图片
         bulletL = readImage("bulletL.gif");
         bulletU = readImage("bulletU.gif");
