@@ -179,9 +179,9 @@ public class TankPanel extends JPanel {
                     bulletIterator.remove();
                     // 从敌方坦克集合中移除坦克
                     enemyTankIterator.remove();
-                    Rectangle rect = enemyTank.getTankRect();
+                    Rectangle tankRect = enemyTank.getTankRect();
                     // 添加一个爆炸动画
-                    explodes.add(new Explode(rect.x, rect.y,2));
+                    explodes.add(new Explode(tankRect,2));
                     break;
                 }
             }

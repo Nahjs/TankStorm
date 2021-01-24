@@ -78,8 +78,12 @@ public class EnemyTank {
                 break;
             }
         }
-        dir = Dir.values()[random.nextInt(4)];
-        if (random.nextInt(10) > 8) {
+        // %5的机会改变方向
+        if (random.nextInt(100) > 95) {
+            dir = Dir.values()[random.nextInt(4)];
+        }
+        // %5的机会开火
+        if (random.nextInt(100) > 95) {
             fire();
         }
     }

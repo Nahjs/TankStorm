@@ -1,6 +1,7 @@
 package top.jacktgq.tank;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * @Author CandyWall
@@ -8,20 +9,21 @@ import java.awt.*;
  * @Description 爆炸动画
  */
 public class Explode {
-    private int x, y;
+    private Rectangle tankRect; // 爆炸坦克的尺寸和坐标
     private int speed = 2;
     private int step = 0;
 
-    public Explode(int x, int y, int speed) {
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
+    public Explode(Rectangle tankRect, int y) {
+        this.tankRect = tankRect;
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
     // 绘制爆炸效果
     public void paint(Graphics g) {
-        g.drawImage(ResourceMgr.explodes[step], x, y, null);
+        BufferedImage explodeImage = ResourceMgr.explodes[step];
+        int width = explodeImage.getWidth();
+        int height = explodeImage.getHeight();
+        g.drawImage(explodeImage, tankRect.x + (tankRect.width - width) / 2, tankRect.y - (tankRect.height - height) / 2, null);
         step++;
     }
 
