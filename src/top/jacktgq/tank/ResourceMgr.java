@@ -10,15 +10,21 @@ import java.io.IOException;
  * @Description 读取游戏图片和音频资源
  */
 public class ResourceMgr {
-    public static BufferedImage tankL, tankU, tankR, tankD;
+    public static BufferedImage selfTankL, selfTankU, selfTankR, selfTankD;
+    public static BufferedImage enemyTankL, enemyTankU, enemyTankR, enemyTankD;
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;
     public static BufferedImage[] explodes = new BufferedImage[16];
     static {
         // 加载四个方向的我方坦克图片
-        tankU = readImage("BadTank1.png");
-        tankL = ImageUtil.rotateImage(tankU, -90);
-        tankR = ImageUtil.rotateImage(tankU, 90);
-        tankD = ImageUtil.rotateImage(tankU, 180);
+        selfTankU = readImage("GoodTank1.png");
+        selfTankL = ImageUtil.rotateImage(selfTankU, -90);
+        selfTankR = ImageUtil.rotateImage(selfTankU, 90);
+        selfTankD = ImageUtil.rotateImage(selfTankU, 180);
+        // 加载四个方向的敌方坦克图片
+        enemyTankU = readImage("BadTank1.png");
+        enemyTankL = ImageUtil.rotateImage(enemyTankU, -90);
+        enemyTankR = ImageUtil.rotateImage(enemyTankU, 90);
+        enemyTankD = ImageUtil.rotateImage(enemyTankU, 180);
         // 加载四个方向的子弹图片
         bulletL = readImage("bulletL.gif");
         bulletU = readImage("bulletU.gif");
