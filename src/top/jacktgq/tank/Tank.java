@@ -19,6 +19,7 @@ public class Tank {
     protected Dir dir = Dir.DOWN;
     protected BufferedImage curTankImage;  // 当前坦克加载的图片
     protected boolean moving = true;
+    private Rectangle rect;
 
     public Tank(int x, int y, Dir dir, int speed, TankPanel tankPanel, Group group) {
         this.x = x;
@@ -28,6 +29,15 @@ public class Tank {
         this.tankPanel = tankPanel;
         this.group = group;
         this.curTankImage = (group == Group.SELF ? ResourceMgr.selfTankU : ResourceMgr.enemyTankD);
+        this.rect = new Rectangle();
+        updateRect(x, y);
+    }
+
+    private void updateRect(int x, int y) {
+        rect.x = x;
+        rect.y = y;
+        rect.width = curTankImage.getWidth();
+        rect.height = curTankImage.getHeight();
     }
 
     public void setDir(Dir dir) {
@@ -79,6 +89,15 @@ public class Tank {
             }
         }
         // 添加边界检测：坦克不能走出游戏区域
+        boundsCheck();
+
+        updateRect(x, y);
+    }
+
+    /**
+     * 边界检测：坦克不能走出游戏区域
+     */
+    private void boundsCheck() {
         if (x < 0) {
             x = 0;
         }
@@ -104,7 +123,8 @@ public class Tank {
         int bulletWidth, bulletHeight;
         switch (dir) {
             case LEFT: {
-                bulletX = x - 5;
+                bulletWidth = ResourceMgr.bulletL.getWidth();
+                bulletX = x - bulletWidth - 5;
                 bulletHeight = ResourceMgr.bulletL.getHeight();
                 bulletY = y + (tankHeight - bulletHeight) / 2;
                 break;
@@ -112,7 +132,8 @@ public class Tank {
             case UP: {
                 bulletWidth = ResourceMgr.bulletU.getWidth();
                 bulletX = x + (tankWidth - bulletWidth) / 2;
-                bulletY = y - 5;
+                bulletHeight = ResourceMgr.bulletU.getHeight();
+                bulletY = y - bulletHeight - 5;
                 break;
             }
             case RIGHT: {

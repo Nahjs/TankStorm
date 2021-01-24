@@ -15,7 +15,7 @@ public class EnemyTank extends Tank {
     }
 
     /**
-     * 坦克移动
+     * 敌方坦克移动的过程中会随机变向和开火
      */
     @Override
     protected void move() {

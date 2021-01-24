@@ -17,6 +17,7 @@ public class Bullet {
     private TankPanel tankPanel;
     public BufferedImage curBulletImage;
     private Group group;
+    private Rectangle rect;
 
     public Bullet(int x, int y, Dir dir, TankPanel tankPanel, Group group) {
         this.x = x;
@@ -24,6 +25,21 @@ public class Bullet {
         this.dir = dir;
         this.tankPanel = tankPanel;
         this.group = group;
+        this.rect = new Rectangle();
+        switch (dir) {
+            case LEFT: curBulletImage = ResourceMgr.bulletL; break;
+            case UP: curBulletImage = ResourceMgr.bulletU; break;
+            case RIGHT: curBulletImage = ResourceMgr.bulletR; break;
+            case DOWN: curBulletImage = ResourceMgr.bulletD; break;
+        }
+        updateRect(x, y);
+    }
+
+    private void updateRect(int x, int y) {
+        rect.x = x;
+        rect.y = y;
+        rect.width = curBulletImage.getWidth();
+        rect.height = curBulletImage.getHeight();
     }
 
     public void paint(Graphics g) {
@@ -56,6 +72,7 @@ public class Bullet {
                 break;
             }
         }
+        updateRect(x, y);
     }
 
     public int getX() {
@@ -83,7 +100,9 @@ public class Bullet {
         return x - bulletWidth < 0 || y - bulletHeight < 0 || x > width || y > height;
     }
 
-    // 子弹和坦克进行碰撞检测
+    // 子弹和坦克进行碰撞检测，碰撞检测的方法调用的频率比较高
+    // 每次都要产生新的Rectangle对象，会占用过多内存，
+    // 所以将Rectangle对象放到全局，在坐标值发生变化的时候动态更新即可
     public boolean collideWith(EnemyTank enemyTank) {
         // 一个阵营的不做碰撞检测
         if (getGroup() == enemyTank.getGroup()) {
@@ -94,9 +113,7 @@ public class Bullet {
 
     // 获取子弹图片坐标和宽高
     public Rectangle getBulletRect() {
-        int bulletWidth = curBulletImage.getWidth();
-        int bulletHeight = curBulletImage.getHeight();
-        return new Rectangle(x, y, bulletWidth, bulletHeight);
+        return rect;
     }
 
     public Group getGroup() {
