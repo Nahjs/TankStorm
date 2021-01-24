@@ -55,6 +55,7 @@ public class Tank {
     protected void move() {
         if(!moving)
             return;
+
         switch (dir) {
             case LEFT: {
                 x -= speed;
@@ -76,6 +77,19 @@ public class Tank {
                 curTankImage = (group == Group.SELF ? ResourceMgr.selfTankD : ResourceMgr.enemyTankD);
                 break;
             }
+        }
+        // 添加边界检测：坦克不能走出游戏区域
+        if (x < 0) {
+            x = 0;
+        }
+        if (y < 0) {
+            y = 0;
+        }
+        if (x + curTankImage.getWidth() > tankPanel.getWidth()) {
+            x = tankPanel.getWidth() - curTankImage.getWidth();
+        }
+        if (y + curTankImage.getHeight() > tankPanel.getHeight()) {
+            y = tankPanel.getHeight() - curTankImage.getHeight();
         }
     }
 
