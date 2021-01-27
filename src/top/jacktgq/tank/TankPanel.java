@@ -14,7 +14,7 @@ import java.util.Iterator;
  */
 public class TankPanel extends JPanel {
     SelfTank selfTank;
-    ArrayList<EnemyTank> enemyTanks = new ArrayList<>();
+    ArrayList<Tank> tanks = new ArrayList<>();
     ArrayList<Bullet> bullets = new ArrayList<>();
     ArrayList<Explode> explodes = new ArrayList<>();
 
@@ -119,10 +119,9 @@ public class TankPanel extends JPanel {
         });
         // 初始化我方坦克
         selfTank = new SelfTank(350, 500, Dir.DOWN, 5, this);
-        // 产生5辆敌方坦克
-        for (int i = 0; i < 5; i++) {
-            enemyTanks.add(new EnemyTank(100 + 100 * i, 100, Dir.DOWN, 5, this));
-        }
+        tanks.add(selfTank);
+        // 随机产生enemy_tank_count辆敌方坦克
+        initEnemyTanks();
         new Thread(() -> {
             while (true) {
                 try {
@@ -133,6 +132,17 @@ public class TankPanel extends JPanel {
                 repaint();
             }
         }).start();
+    }
+
+    private void initEnemyTanks() {
+        int count = PropertyMgr.getEnemy_tank_count();
+        // 将游戏区域网格化
+        // 敌方坦克的高度和宽度
+
+        // int rows = this.getWidth();
+        for (int i = 0; i < count; i++) {
+            tanks.add(new EnemyTank(100 + 100 * i, 100, Dir.DOWN, 5, this));
+        }
     }
 
     @Override
@@ -146,13 +156,11 @@ public class TankPanel extends JPanel {
         g.fillRect(0, 0, width, height);
         g.setColor(Color.WHITE);
         g.drawString("子弹数量：" + bullets.size(), 20, 30);
-        g.drawString("敌方坦克数量：" + enemyTanks.size(), 20, 60);
-        // 绘制我方坦克
-        selfTank.paint(g);
-        // 绘制敌方坦克
-        Iterator<EnemyTank> enemyTankIterator = enemyTanks.iterator();
-        while (enemyTankIterator.hasNext()) {
-            EnemyTank enemyTank = enemyTankIterator.next();
+        g.drawString("敌方坦克数量：" + (tanks.size() - 1), 20, 60);
+        // 绘制所有坦克
+        Iterator<Tank> tankIterator = tanks.iterator();
+        while (tankIterator.hasNext()) {
+            Tank enemyTank = tankIterator.next();
             enemyTank.paint(g);
         }
         // 绘制所有子弹
@@ -170,16 +178,16 @@ public class TankPanel extends JPanel {
         bulletIterator = bullets.iterator();
         while (bulletIterator.hasNext()) {
             Bullet bullet = bulletIterator.next();
-            enemyTankIterator = enemyTanks.iterator();
-            while (enemyTankIterator.hasNext()) {
+            tankIterator = tanks.iterator();
+            while (tankIterator.hasNext()) {
                 // 如果我方子弹和敌方坦克有交集
-                EnemyTank enemyTank = enemyTankIterator.next();
-                if (bullet.collideWith(enemyTank)) {
+                Tank tank = tankIterator.next();
+                if (bullet.collideWith(tank)) {
                     // 从子弹集合中移除子弹
                     bulletIterator.remove();
                     // 从敌方坦克集合中移除坦克
-                    enemyTankIterator.remove();
-                    Rectangle tankRect = enemyTank.getTankRect();
+                    tankIterator.remove();
+                    Rectangle tankRect = tank.getTankRect();
                     // 添加一个爆炸动画
                     explodes.add(new Explode(tankRect,2));
                     break;

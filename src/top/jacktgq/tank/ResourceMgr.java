@@ -26,10 +26,10 @@ public class ResourceMgr {
         enemyTankR = ImageUtil.rotateImage(enemyTankU, 90);
         enemyTankD = ImageUtil.rotateImage(enemyTankU, 180);
         // 加载四个方向的子弹图片
-        bulletL = readImage("bulletL.gif");
-        bulletU = readImage("bulletU.gif");
-        bulletR = readImage("bulletR.gif");
-        bulletD = readImage("bulletD.gif");
+        bulletU = readImage("bulletU.png");
+        bulletL = ImageUtil.rotateImage(bulletU, -90);
+        bulletR = ImageUtil.rotateImage(bulletU, 90);
+        bulletD = ImageUtil.rotateImage(bulletU, 180);
         // 加载坦克爆炸的图片
         for (int i = 0; i < explodes.length; i++) {
             explodes[i] = readImage("e" + (i + 1) + ".gif");

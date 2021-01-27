@@ -103,12 +103,16 @@ public class Bullet {
     // 子弹和坦克进行碰撞检测，碰撞检测的方法调用的频率比较高
     // 每次都要产生新的Rectangle对象，会占用过多内存，
     // 所以将Rectangle对象放到全局，在坐标值发生变化的时候动态更新即可
-    public boolean collideWith(EnemyTank enemyTank) {
-        // 一个阵营的不做碰撞检测
-        if (getGroup() == enemyTank.getGroup()) {
+    public boolean collideWith(Tank tank) {
+        // 如果是己方坦克，无敌
+        if (tank.getGroup() == Group.SELF) {
             return false;
         }
-        return getBulletRect().intersects(enemyTank.getTankRect());
+        // 一个阵营的不做碰撞检测
+        if (getGroup() == tank.getGroup()) {
+            return false;
+        }
+        return getBulletRect().intersects(tank.getTankRect());
     }
 
     // 获取子弹图片坐标和宽高
