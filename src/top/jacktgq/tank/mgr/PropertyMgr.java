@@ -1,4 +1,4 @@
-package top.jacktgq.tank;
+package top.jacktgq.tank.mgr;
 
 import java.io.IOException;
 import java.util.Properties;

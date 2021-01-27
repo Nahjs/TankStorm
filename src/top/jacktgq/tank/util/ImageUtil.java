@@ -1,4 +1,4 @@
-package top.jacktgq.tank;
+package top.jacktgq.tank.util;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

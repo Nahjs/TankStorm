@@ -1,4 +1,7 @@
-package top.jacktgq.tank;
+package top.jacktgq.tank.entity;
+
+import top.jacktgq.tank.mgr.ResourceMgr;
+import top.jacktgq.tank.util.Audio;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

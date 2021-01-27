@@ -1,4 +1,4 @@
-package top.jacktgq.tank;
+package top.jacktgq.tank.view;
 
 import javax.swing.*;
 

@@ -1,4 +1,8 @@
-package top.jacktgq.tank;
+package top.jacktgq.tank.view;
+
+import top.jacktgq.tank.entity.*;
+import top.jacktgq.tank.mgr.PropertyMgr;
+import top.jacktgq.tank.mgr.ResourceMgr;
 
 import javax.swing.*;
 import java.awt.*;

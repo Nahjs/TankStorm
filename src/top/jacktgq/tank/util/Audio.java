@@ -1,5 +1,5 @@
 
-package top.jacktgq.tank;
+package top.jacktgq.tank.util;
 
 import javax.sound.sampled.*;
 import java.io.IOException;

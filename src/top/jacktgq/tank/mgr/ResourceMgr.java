@@ -1,4 +1,6 @@
-package top.jacktgq.tank;
+package top.jacktgq.tank.mgr;
+
+import top.jacktgq.tank.util.ImageUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
