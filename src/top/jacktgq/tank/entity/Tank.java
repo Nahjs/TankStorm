@@ -55,7 +55,7 @@ public class Tank {
         this.moving = moving;
     }
 
-    protected void paint(Graphics g) {
+    public void paint(Graphics g) {
         /*g.setColor(Color.MAGENTA);
         g.fillRect(x, y, WIDTH, HEIGHT);*/
         g.drawImage(curTankImage, x, y, null);

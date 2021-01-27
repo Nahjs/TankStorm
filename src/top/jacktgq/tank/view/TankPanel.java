@@ -18,9 +18,9 @@ import java.util.Iterator;
  */
 public class TankPanel extends JPanel {
     SelfTank selfTank;
-    ArrayList<Tank> tanks = new ArrayList<>();
-    ArrayList<Bullet> bullets = new ArrayList<>();
-    ArrayList<Explode> explodes = new ArrayList<>();
+    public ArrayList<Tank> tanks = new ArrayList<>();
+    public ArrayList<Bullet> bullets = new ArrayList<>();
+    public ArrayList<Explode> explodes = new ArrayList<>();
 
     public TankPanel() {
         super(true);
@@ -173,7 +173,7 @@ public class TankPanel extends JPanel {
             Bullet bullet = bulletIterator.next();
             bullet.paint(g);
             // 判断子弹是否还活着
-            if (bullet.islive()) {
+            if (!bullet.islive()) {
                 bulletIterator.remove();
             }
         }

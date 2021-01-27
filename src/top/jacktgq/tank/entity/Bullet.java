@@ -88,7 +88,7 @@ public class Bullet {
 
     // 判断子弹的状态
     public boolean islive() {
-        return isOutOfScreen();
+        return !isOutOfScreen();
     }
 
     /**
@@ -100,7 +100,7 @@ public class Bullet {
         int height = tankPanel.getHeight();
         int bulletWidth = curBulletImage.getWidth();
         int bulletHeight = curBulletImage.getHeight();
-        return x - bulletWidth < 0 || y - bulletHeight < 0 || x > width || y > height;
+        return x + bulletWidth < 0 || y + bulletHeight < 0 || x > width || y > height;
     }
 
     // 子弹和坦克进行碰撞检测，碰撞检测的方法调用的频率比较高
