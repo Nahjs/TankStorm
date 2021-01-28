@@ -48,7 +48,7 @@ public class DefaultFireStrategy implements FireStrategy {
             }
         }
 
-        t.tankPanel.bullets.add(t.tankPanel.factory.createBullet(bulletX, bulletY, Dir.LEFT, t.tankPanel, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
+        t.gameModel.bullets.add(t.gameModel.factory.createBullet(bulletX, bulletY, Dir.LEFT, t.gameModel, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
         if (t.group == Group.SELF) {
             new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
         }

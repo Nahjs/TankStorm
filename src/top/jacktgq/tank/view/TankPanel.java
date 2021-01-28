@@ -1,19 +1,13 @@
 package top.jacktgq.tank.view;
 
+import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
-import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
-import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
 import top.jacktgq.tank.entity.abstractEntity.BaseTank;
-import top.jacktgq.tank.factory.abstractfactory.GameFactory;
-import top.jacktgq.tank.mgr.PropertyMgr;
-import top.jacktgq.tank.mgr.ResourceMgr;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @Author CandyWall
@@ -21,16 +15,13 @@ import java.util.Iterator;
  * @Description 游戏主界面
  */
 public class TankPanel extends JPanel {
-    BaseTank selfTank;
-    public ArrayList<BaseTank> tanks = new ArrayList<>();
-    public ArrayList<BaseBullet> bullets = new ArrayList<>();
-    public ArrayList<BaseExplode> explodes = new ArrayList<>();
-    public GameFactory factory;
+    GameModel gameModel;
 
     public TankPanel() {
         super(true);
         // 键盘监听事件的前提：获取焦点
         setFocusable(true);
+        gameModel = new GameModel(this.getWidth(), this.getHeight());
         this.addKeyListener(new KeyAdapter() {
             private boolean isU;
             private boolean isD;
@@ -64,7 +55,7 @@ public class TankPanel extends JPanel {
                         break;
                     }
                     case KeyEvent.VK_SPACE: {
-                        selfTank.fire();
+                        gameModel.getSelfTank().fire();
                         break;
                     }
                 }
@@ -101,6 +92,7 @@ public class TankPanel extends JPanel {
              * 设置坦克方向
              */
             public void setMainTankDir() {
+                BaseTank selfTank = gameModel.getSelfTank();
                 // 如果四个方向键都没有被按下
                 if (!isL && !isU && !isR && !isD) {
                     //System.out.println("四个方向键都没有被按下！");
@@ -126,12 +118,7 @@ public class TankPanel extends JPanel {
                 }
             }
         });
-        factory = PropertyMgr.getFactory();
-        // 初始化我方坦克
-        selfTank = factory.createSelfTank(350, 500, Dir.DOWN, 5, this);
-        tanks.add(selfTank);
-        // 随机产生enemy_tank_count辆敌方坦克
-        initEnemyTanks();
+
         new Thread(() -> {
             while (true) {
                 try {
@@ -144,76 +131,12 @@ public class TankPanel extends JPanel {
         }).start();
     }
 
-    private void initEnemyTanks() {
-        int count = PropertyMgr.getEnemy_tank_count();
-        // 将游戏区域网格化
-        // 敌方坦克的高度和宽度
-
-        // int rows = this.getWidth();
-        for (int i = 0; i < count; i++) {
-            tanks.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5, this));
-        }
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         // 重新绘制
         super.paintComponent(g);
         int width = this.getWidth();
         int height = this.getHeight();
-        g.setColor(Color.BLACK);
-
-        g.fillRect(0, 0, width, height);
-        g.setColor(Color.WHITE);
-        g.drawString("子弹数量：" + bullets.size(), 20, 30);
-        g.drawString("敌方坦克数量：" + (tanks.size() - 1), 20, 60);
-        // 绘制所有坦克
-        Iterator<BaseTank> tankIterator = tanks.iterator();
-        while (tankIterator.hasNext()) {
-            BaseTank enemyTank = tankIterator.next();
-            enemyTank.paint(g);
-        }
-        // 绘制所有子弹
-        Iterator<BaseBullet> bulletIterator = bullets.iterator();
-        while (bulletIterator.hasNext()) {
-            BaseBullet bullet = bulletIterator.next();
-            bullet.paint(g);
-            // 判断子弹是否还活着
-            if (!bullet.islive()) {
-                bulletIterator.remove();
-            }
-        }
-
-        // 进行子弹和坦克的碰撞检测
-        bulletIterator = bullets.iterator();
-        while (bulletIterator.hasNext()) {
-            BaseBullet bullet = bulletIterator.next();
-            tankIterator = tanks.iterator();
-            while (tankIterator.hasNext()) {
-                // 如果我方子弹和敌方坦克有交集
-                BaseTank tank = tankIterator.next();
-                if (bullet.collideWith(tank)) {
-                    // 从子弹集合中移除子弹
-                    bulletIterator.remove();
-                    // 从敌方坦克集合中移除坦克
-                    tankIterator.remove();
-                    Rectangle tankRect = tank.getTankRect();
-                    // 添加一个爆炸动画
-                    explodes.add(factory.createExplode(tankRect));
-                    break;
-                }
-            }
-        }
-        Iterator<BaseExplode> explodeIterator = explodes.iterator();
-        // 绘制坦克爆炸动画
-        while (explodeIterator.hasNext()) {
-            BaseExplode explode = explodeIterator.next();
-            explode.paint(g);
-            // 如果爆炸动画已经画到了最后一张，就从集合中移除该爆炸动画
-            if (explode.getStep() == ResourceMgr.explodes.length) {
-                explodeIterator.remove();
-            }
-        }
-
+        gameModel.paint(g, width, height);
     }
 }

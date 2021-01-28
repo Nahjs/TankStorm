@@ -1,11 +1,11 @@
 package top.jacktgq.tank.factory;
 
+import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.*;
 import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
 import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
 import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 import top.jacktgq.tank.factory.abstractfactory.GameFactory;
-import top.jacktgq.tank.view.TankPanel;
 
 import java.awt.*;
 
@@ -16,18 +16,18 @@ import java.awt.*;
  */
 public class DefaultFactory extends GameFactory {
     @Override
-    public BaseTank createSelfTank(int x, int y, Dir dir, int speed, TankPanel tankPanel) {
-        return new DefaultSelfTank(350, 500, Dir.DOWN, speed, tankPanel);
+    public BaseTank createSelfTank(int x, int y, Dir dir, int speed, GameModel gameModel) {
+        return new DefaultSelfTank(350, 500, Dir.DOWN, speed, gameModel);
     }
 
     @Override
-    public BaseTank createEnemyTank(int x, int y, Dir dir, int speed, TankPanel tankPanel) {
-        return new DefaultEnemyTank(x, y, Dir.DOWN, speed, tankPanel);
+    public BaseTank createEnemyTank(int x, int y, Dir dir, int speed, GameModel gameModel) {
+        return new DefaultEnemyTank(x, y, Dir.DOWN, speed, gameModel);
     }
 
     @Override
-    public BaseBullet createBullet(int x, int y, Dir dir, TankPanel tankPanel, Group group) {
-        return new DefaultBullet(x, y, dir, tankPanel, group);
+    public BaseBullet createBullet(int x, int y, Dir dir, GameModel gameModel, Group group) {
+        return new DefaultBullet(x, y, dir, gameModel, group);
     }
 
     @Override

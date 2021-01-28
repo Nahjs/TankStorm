@@ -1,11 +1,11 @@
 package top.jacktgq.tank.entity;
 
+import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 import top.jacktgq.tank.mgr.PropertyMgr;
 import top.jacktgq.tank.mgr.ResourceMgr;
 import top.jacktgq.tank.strategy.DefaultFireStrategy;
 import top.jacktgq.tank.strategy.FireStrategy;
-import top.jacktgq.tank.view.TankPanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
  * @Description 坦克父类
  */
 public abstract class Tank extends BaseTank {
-    public TankPanel tankPanel;
+    public GameModel gameModel;
     public Group group;
     public int x;
     public int y;
@@ -29,12 +29,12 @@ public abstract class Tank extends BaseTank {
     private Rectangle rect;
     private FireStrategy fireStrategy = new DefaultFireStrategy();
 
-    public Tank(int x, int y, Dir dir, int speed, TankPanel tankPanel, Group group) {
+    public Tank(int x, int y, Dir dir, int speed, GameModel gameModel, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.speed = speed;
-        this.tankPanel = tankPanel;
+        this.gameModel = gameModel;
         this.group = group;
         this.curTankImage = (group == Group.SELF ? ResourceMgr.selfTankU : ResourceMgr.enemyTankD);
         this.rect = new Rectangle();
@@ -114,11 +114,11 @@ public abstract class Tank extends BaseTank {
         if (y < 0) {
             y = 0;
         }
-        if (x + curTankImage.getWidth() > tankPanel.getWidth()) {
-            x = tankPanel.getWidth() - curTankImage.getWidth();
+        if (x + curTankImage.getWidth() > gameModel.gameWidth) {
+            x = gameModel.gameWidth - curTankImage.getWidth();
         }
-        if (y + curTankImage.getHeight() > tankPanel.getHeight()) {
-            y = tankPanel.getHeight() - curTankImage.getHeight();
+        if (y + curTankImage.getHeight() > gameModel.gameHeight) {
+            y = gameModel.gameHeight - curTankImage.getHeight();
         }
     }
 

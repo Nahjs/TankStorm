@@ -1,8 +1,8 @@
 package top.jacktgq.tank.entity;
 
+import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
 import top.jacktgq.tank.mgr.ResourceMgr;
-import top.jacktgq.tank.view.TankPanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,14 +15,14 @@ import java.awt.image.BufferedImage;
 public class DefaultBullet extends BaseBullet {
     private static int SPEED = 6;
     private Dir dir;
-    private TankPanel tankPanel;
+    private GameModel gameModel;
     public BufferedImage curBulletImage;
 
-    public DefaultBullet(int x, int y, Dir dir, TankPanel tankPanel, Group group) {
+    public DefaultBullet(int x, int y, Dir dir, GameModel gameModel, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tankPanel = tankPanel;
+        this.gameModel = gameModel;
         this.group = group;
         this.rect = new Rectangle();
         switch (dir) {
@@ -84,8 +84,8 @@ public class DefaultBullet extends BaseBullet {
      * @return
      */
     private boolean isOutOfScreen() {
-        int tankWidth = tankPanel.getWidth();
-        int tankHeight = tankPanel.getHeight();
+        int tankWidth = gameModel.gameWidth;
+        int tankHeight = gameModel.gameHeight;
         int bulletWidth = curBulletImage.getWidth();
         int bulletHeight = curBulletImage.getHeight();
         return x + bulletWidth < 0 || y + bulletHeight < 0 || x > tankWidth || y > tankHeight;

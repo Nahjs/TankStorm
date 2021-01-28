@@ -1,6 +1,6 @@
 package top.jacktgq.tank.entity;
 
-import top.jacktgq.tank.view.TankPanel;
+import top.jacktgq.tank.GameModel;
 
 import java.awt.*;
 
@@ -11,8 +11,8 @@ import java.awt.*;
  */
 public class RectSelfTank extends Tank {
     private int width = 60, height = 60;
-    public RectSelfTank(int x, int y, Dir dir, int speed, TankPanel tankPanel) {
-        super(x, y, dir, speed, tankPanel, Group.SELF);
+    public RectSelfTank(int x, int y, Dir dir, int speed, GameModel gameModel) {
+        super(x, y, dir, speed, gameModel, Group.SELF);
         moving = false;
     }
 
