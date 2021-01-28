@@ -16,7 +16,6 @@ public class RectBullet extends BaseBullet {
     private static int SPEED = 6;
     private int bulletWidth = 20, bulletHeight = 20;
     private Dir dir;
-    private GameModel gameModel;
     public BufferedImage curBulletImage;
 
 

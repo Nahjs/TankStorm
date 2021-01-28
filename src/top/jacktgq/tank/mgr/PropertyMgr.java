@@ -1,9 +1,12 @@
 package top.jacktgq.tank.mgr;
 
+import top.jacktgq.tank.GameModel;
+import top.jacktgq.tank.collider.Collider;
 import top.jacktgq.tank.factory.abstractfactory.GameFactory;
 import top.jacktgq.tank.strategy.FireStrategy;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Properties;
 
 /**
@@ -58,6 +61,23 @@ public class PropertyMgr {
         try {
             Class<?> clazz = Class.forName("top.jacktgq.tank.factory." + get("factory_style"));
             return (GameFactory) clazz.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("开火策略读取失败！");
+        }
+    }
+
+    // 获取碰撞检测规则
+    public static LinkedList<Collider> getColliders(GameModel gameModel) {
+        try {
+            String[] colliderNames = get("colliders").split(",");
+            LinkedList<Collider> colliders = new LinkedList<>();
+            for (String colliderName : colliderNames) {
+                Class<?> clazz = Class.forName("top.jacktgq.tank.collider." + colliderName);
+                Collider collider = (Collider) clazz.getConstructor(GameModel.class).newInstance(gameModel);
+                colliders.add(collider);
+            }
+            return colliders;
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("开火策略读取失败！");

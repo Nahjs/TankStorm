@@ -31,7 +31,7 @@ public class RectFactory extends GameFactory {
     }
 
     @Override
-    public BaseExplode createExplode(Rectangle tankRect) {
-        return new RectExplode(tankRect);
+    public BaseExplode createExplode(Rectangle tankRect, GameModel gameModel) {
+        return new RectExplode(tankRect, gameModel);
     }
 }

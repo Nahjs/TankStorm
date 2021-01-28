@@ -37,5 +37,5 @@ public abstract class GameFactory {
      * 创建爆炸
      * @return
      */
-    public abstract BaseExplode createExplode(Rectangle tankRect);
+    public abstract BaseExplode createExplode(Rectangle tankRect, GameModel gameModel);
 }

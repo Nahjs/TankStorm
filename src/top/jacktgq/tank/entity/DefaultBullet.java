@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
 public class DefaultBullet extends BaseBullet {
     private static int SPEED = 6;
     private Dir dir;
-    private GameModel gameModel;
+
     public BufferedImage curBulletImage;
 
     public DefaultBullet(int x, int y, Dir dir, GameModel gameModel, Group group) {
@@ -43,6 +43,10 @@ public class DefaultBullet extends BaseBullet {
 
     @Override
     public void paint(Graphics g) {
+        // 子弹越界或者打在坦克上，移除掉
+        if (!islive()) {
+            gameModel.gameObjects.remove(this);
+        }
         g.drawImage(curBulletImage, x, y, null);
         move();
     }

@@ -31,7 +31,7 @@ public class DefaultFactory extends GameFactory {
     }
 
     @Override
-    public BaseExplode createExplode(Rectangle tankRect) {
-        return new DefaultExplode(tankRect);
+    public BaseExplode createExplode(Rectangle tankRect, GameModel gameModel) {
+        return new DefaultExplode(tankRect, gameModel);
     }
 }

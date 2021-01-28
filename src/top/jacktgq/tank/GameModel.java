@@ -1,16 +1,15 @@
 package top.jacktgq.tank;
 
+import top.jacktgq.tank.collider.ColliderChain;
 import top.jacktgq.tank.entity.Dir;
-import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
-import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
+import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 import top.jacktgq.tank.factory.abstractfactory.GameFactory;
 import top.jacktgq.tank.mgr.PropertyMgr;
-import top.jacktgq.tank.mgr.ResourceMgr;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  * @Author CandyWall
@@ -21,18 +20,21 @@ import java.util.Iterator;
 public class GameModel {
     public int gameWidth, gameHeight;   // 游戏区域宽高
     BaseTank selfTank;
-    public ArrayList<BaseTank> tanks = new ArrayList<>();
+    /*public ArrayList<BaseTank> tanks = new ArrayList<>();
     public ArrayList<BaseBullet> bullets = new ArrayList<>();
-    public ArrayList<BaseExplode> explodes = new ArrayList<>();
+    public ArrayList<BaseExplode> explodes = new ArrayList<>();*/
+    public List<GameObject> gameObjects = new ArrayList<>();
+    public ColliderChain colliderChain;
     public GameFactory factory;
 
     public GameModel(int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         factory = PropertyMgr.getFactory();
+        colliderChain = new ColliderChain(this);
         // 初始化我方坦克
         selfTank = factory.createSelfTank(350, 500, Dir.DOWN, 5, this);
-        tanks.add(selfTank);
+        gameObjects.add(selfTank);
         // 随机产生enemy_tank_count辆敌方坦克
         initEnemyTanks();
     }
@@ -44,7 +46,7 @@ public class GameModel {
 
         // int rows = this.getWidth();
         for (int i = 0; i < count; i++) {
-            tanks.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5, this));
+            gameObjects.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5, this));
         }
     }
 
@@ -55,7 +57,18 @@ public class GameModel {
 
         g.fillRect(0, 0, gameWidth, gameHeight);
         g.setColor(Color.WHITE);
-        g.drawString("子弹数量：" + bullets.size(), 20, 30);
+        // 绘制所有游戏物体：坦克、子弹、爆炸
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).paint(g);
+        }
+
+        // 处理游戏物体间的碰撞
+        for (int i = 0; i < gameObjects.size(); i++) {
+            for (int j = i + 1; j < gameObjects.size(); j++) {
+                colliderChain.collide(gameObjects.get(i), gameObjects.get(j));
+            }
+        }
+        /*g.drawString("子弹数量：" + bullets.size(), 20, 30);
         g.drawString("敌方坦克数量：" + (tanks.size() - 1), 20, 60);
         // 绘制所有坦克
         Iterator<BaseTank> tankIterator = tanks.iterator();
@@ -103,7 +116,7 @@ public class GameModel {
             if (explode.getStep() == ResourceMgr.explodes.length) {
                 explodeIterator.remove();
             }
-        }
+        }*/
     }
 
     public BaseTank getSelfTank() {
