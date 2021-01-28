@@ -1,6 +1,10 @@
 package top.jacktgq.tank.view;
 
-import top.jacktgq.tank.entity.*;
+import top.jacktgq.tank.entity.Dir;
+import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
+import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
+import top.jacktgq.tank.entity.abstractEntity.BaseTank;
+import top.jacktgq.tank.factory.abstractfactory.GameFactory;
 import top.jacktgq.tank.mgr.PropertyMgr;
 import top.jacktgq.tank.mgr.ResourceMgr;
 
@@ -17,10 +21,11 @@ import java.util.Iterator;
  * @Description 游戏主界面
  */
 public class TankPanel extends JPanel {
-    SelfTank selfTank;
-    public ArrayList<Tank> tanks = new ArrayList<>();
-    public ArrayList<Bullet> bullets = new ArrayList<>();
-    public ArrayList<Explode> explodes = new ArrayList<>();
+    BaseTank selfTank;
+    public ArrayList<BaseTank> tanks = new ArrayList<>();
+    public ArrayList<BaseBullet> bullets = new ArrayList<>();
+    public ArrayList<BaseExplode> explodes = new ArrayList<>();
+    public GameFactory factory;
 
     public TankPanel() {
         super(true);
@@ -121,8 +126,9 @@ public class TankPanel extends JPanel {
                 }
             }
         });
+        factory = PropertyMgr.getFactory();
         // 初始化我方坦克
-        selfTank = new SelfTank(350, 500, Dir.DOWN, 5, this);
+        selfTank = factory.createSelfTank(350, 500, Dir.DOWN, 5, this);
         tanks.add(selfTank);
         // 随机产生enemy_tank_count辆敌方坦克
         initEnemyTanks();
@@ -145,7 +151,7 @@ public class TankPanel extends JPanel {
 
         // int rows = this.getWidth();
         for (int i = 0; i < count; i++) {
-            tanks.add(new EnemyTank(100 + 100 * i, 100, Dir.DOWN, 5, this));
+            tanks.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5, this));
         }
     }
 
@@ -162,15 +168,15 @@ public class TankPanel extends JPanel {
         g.drawString("子弹数量：" + bullets.size(), 20, 30);
         g.drawString("敌方坦克数量：" + (tanks.size() - 1), 20, 60);
         // 绘制所有坦克
-        Iterator<Tank> tankIterator = tanks.iterator();
+        Iterator<BaseTank> tankIterator = tanks.iterator();
         while (tankIterator.hasNext()) {
-            Tank enemyTank = tankIterator.next();
+            BaseTank enemyTank = tankIterator.next();
             enemyTank.paint(g);
         }
         // 绘制所有子弹
-        Iterator<Bullet> bulletIterator = bullets.iterator();
+        Iterator<BaseBullet> bulletIterator = bullets.iterator();
         while (bulletIterator.hasNext()) {
-            Bullet bullet = bulletIterator.next();
+            BaseBullet bullet = bulletIterator.next();
             bullet.paint(g);
             // 判断子弹是否还活着
             if (!bullet.islive()) {
@@ -181,11 +187,11 @@ public class TankPanel extends JPanel {
         // 进行子弹和坦克的碰撞检测
         bulletIterator = bullets.iterator();
         while (bulletIterator.hasNext()) {
-            Bullet bullet = bulletIterator.next();
+            BaseBullet bullet = bulletIterator.next();
             tankIterator = tanks.iterator();
             while (tankIterator.hasNext()) {
                 // 如果我方子弹和敌方坦克有交集
-                Tank tank = tankIterator.next();
+                BaseTank tank = tankIterator.next();
                 if (bullet.collideWith(tank)) {
                     // 从子弹集合中移除子弹
                     bulletIterator.remove();
@@ -193,15 +199,15 @@ public class TankPanel extends JPanel {
                     tankIterator.remove();
                     Rectangle tankRect = tank.getTankRect();
                     // 添加一个爆炸动画
-                    explodes.add(new Explode(tankRect,2));
+                    explodes.add(factory.createExplode(tankRect));
                     break;
                 }
             }
         }
-        Iterator<Explode> explodeIterator = explodes.iterator();
+        Iterator<BaseExplode> explodeIterator = explodes.iterator();
         // 绘制坦克爆炸动画
         while (explodeIterator.hasNext()) {
-            Explode explode = explodeIterator.next();
+            BaseExplode explode = explodeIterator.next();
             explode.paint(g);
             // 如果爆炸动画已经画到了最后一张，就从集合中移除该爆炸动画
             if (explode.getStep() == ResourceMgr.explodes.length) {

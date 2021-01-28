@@ -2,17 +2,19 @@ package top.jacktgq.tank.entity;
 
 import top.jacktgq.tank.view.TankPanel;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
  * @Author CandyWall
  * @Date 2021/1/23--21:16
- * @Description 敌方坦克
+ * @Description 方块风格的敌方坦克
  */
-public class EnemyTank extends Tank {
+public class RectEnemyTank extends Tank {
+    private int width = 60, height = 60;
     private Random random = new Random();
 
-    public EnemyTank(int x, int y, Dir dir, int speed, TankPanel tankPanel) {
+    public RectEnemyTank(int x, int y, Dir dir, int speed, TankPanel tankPanel) {
         super(x, y, dir, speed, tankPanel, Group.ENEMY);
     }
 
@@ -30,5 +32,12 @@ public class EnemyTank extends Tank {
         if (random.nextInt(100) > 95) {
             fire();
         }
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        g.setColor(Color.BLUE);
+        g.fillRect(x, y, width, height);
+        move();
     }
 }

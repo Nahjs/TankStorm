@@ -1,5 +1,6 @@
 package top.jacktgq.tank.mgr;
 
+import top.jacktgq.tank.factory.abstractfactory.GameFactory;
 import top.jacktgq.tank.strategy.FireStrategy;
 
 import java.io.IOException;
@@ -46,6 +47,17 @@ public class PropertyMgr {
         try {
             Class<?> clazz = Class.forName("top.jacktgq.tank.strategy." + get("self_tank_fs"));
             return (FireStrategy) clazz.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("开火策略读取失败！");
+        }
+    }
+
+    // 获取生产坦克、炮弹和爆炸效果的工厂类
+    public static GameFactory getFactory() {
+        try {
+            Class<?> clazz = Class.forName("top.jacktgq.tank.factory." + get("factory_style"));
+            return (GameFactory) clazz.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("开火策略读取失败！");

@@ -1,5 +1,6 @@
 package top.jacktgq.tank.entity;
 
+import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 import top.jacktgq.tank.mgr.PropertyMgr;
 import top.jacktgq.tank.mgr.ResourceMgr;
 import top.jacktgq.tank.strategy.DefaultFireStrategy;
@@ -14,7 +15,7 @@ import java.awt.image.BufferedImage;
  * @Date 2021/1/23--21:16
  * @Description 坦克父类
  */
-public class Tank {
+public abstract class Tank extends BaseTank {
     public TankPanel tankPanel;
     public Group group;
     public int x;
@@ -52,6 +53,7 @@ public class Tank {
         rect.height = curTankImage.getHeight();
     }
 
+    @Override
     public void setDir(Dir dir) {
         this.dir = dir;
     }
@@ -60,16 +62,12 @@ public class Tank {
         return moving;
     }
 
+    @Override
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
 
-    public void paint(Graphics g) {
-        /*g.setColor(Color.MAGENTA);
-        g.fillRect(x, y, WIDTH, HEIGHT);*/
-        g.drawImage(curTankImage, x, y, null);
-        move();
-    }
+    public abstract void paint(Graphics g);
 
     /**
      * 坦克移动
@@ -127,17 +125,20 @@ public class Tank {
     /**
      * 打出一颗子弹
      */
+    @Override
     public void fire() {
         fireStrategy.fire(this);
     }
 
     // 获取坦克图片坐标和宽高
+    @Override
     public Rectangle getTankRect() {
         int tankWidth = curTankImage.getWidth();
         int tankHeight = curTankImage.getHeight();
         return new Rectangle(x, y, tankWidth, tankHeight);
     }
 
+    @Override
     public Group getGroup() {
         return group;
     }
