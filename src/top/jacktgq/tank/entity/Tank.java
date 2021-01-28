@@ -1,6 +1,9 @@
 package top.jacktgq.tank.entity;
 
+import top.jacktgq.tank.mgr.PropertyMgr;
 import top.jacktgq.tank.mgr.ResourceMgr;
+import top.jacktgq.tank.strategy.DefaultFireStrategy;
+import top.jacktgq.tank.strategy.FireStrategy;
 import top.jacktgq.tank.view.TankPanel;
 
 import java.awt.*;
@@ -12,17 +15,18 @@ import java.awt.image.BufferedImage;
  * @Description 坦克父类
  */
 public class Tank {
-    protected TankPanel tankPanel;
-    protected Group group;
-    protected int x;
-    protected int y;
+    public TankPanel tankPanel;
+    public Group group;
+    public int x;
+    public int y;
     //private static final int WIDTH = 60;
     //private static final int HEIGHT = 60;
     protected int speed = 10;
-    protected Dir dir = Dir.DOWN;
-    protected BufferedImage curTankImage;  // 当前坦克加载的图片
+    public Dir dir = Dir.DOWN;
+    public BufferedImage curTankImage;  // 当前坦克加载的图片
     protected boolean moving = true;
     private Rectangle rect;
+    private FireStrategy fireStrategy = new DefaultFireStrategy();
 
     public Tank(int x, int y, Dir dir, int speed, TankPanel tankPanel, Group group) {
         this.x = x;
@@ -34,6 +38,11 @@ public class Tank {
         this.curTankImage = (group == Group.SELF ? ResourceMgr.selfTankU : ResourceMgr.enemyTankD);
         this.rect = new Rectangle();
         updateRect(x, y);
+        if (group == Group.SELF) {
+            fireStrategy = PropertyMgr.getSelf_tank_fs();
+        } else {
+            fireStrategy = PropertyMgr.getEnemy_tank_fs();
+        }
     }
 
     private void updateRect(int x, int y) {
@@ -119,41 +128,7 @@ public class Tank {
      * 打出一颗子弹
      */
     public void fire() {
-        // 根据坦克的方向确定打出子弹的位置
-        int bulletX = 0, bulletY = 0;
-        int tankWidth = curTankImage.getWidth();
-        int tankHeight = curTankImage.getHeight();
-        int bulletWidth, bulletHeight;
-        switch (dir) {
-            case LEFT: {
-                bulletWidth = ResourceMgr.bulletL.getWidth();
-                bulletX = x - bulletWidth - 5;
-                bulletHeight = ResourceMgr.bulletL.getHeight();
-                bulletY = y + (tankHeight - bulletHeight) / 2;
-                break;
-            }
-            case UP: {
-                bulletWidth = ResourceMgr.bulletU.getWidth();
-                bulletX = x + (tankWidth - bulletWidth) / 2;
-                bulletHeight = ResourceMgr.bulletU.getHeight();
-                bulletY = y - bulletHeight - 5;
-                break;
-            }
-            case RIGHT: {
-                bulletHeight = ResourceMgr.bulletR.getHeight();
-                bulletX = x + tankWidth + 5;
-                bulletY = y + (tankHeight - bulletHeight) / 2;
-                break;
-            }
-            case DOWN: {
-                bulletWidth = ResourceMgr.bulletD.getWidth();
-                bulletX = x + (tankWidth - bulletWidth) / 2;
-                bulletY = y + tankHeight + 5;
-                break;
-            }
-        }
-
-        tankPanel.bullets.add(new Bullet(bulletX, bulletY, this.dir, tankPanel, group == Group.SELF ? Group.SELF : Group.ENEMY));
+        fireStrategy.fire(this);
     }
 
     // 获取坦克图片坐标和宽高
