@@ -27,13 +27,13 @@ public class BulletTankCollider implements Collider {
                 return false;
             }
             // 如果子弹和坦克碰撞到一起了
-            if (bullet.getBulletRect().intersects(tank.getTankRect())) {
+            if (bullet.getRect().intersects(tank.getRect())) {
                 // 移除子弹
                 GameModel.getINSTANCE().gameObjects.remove(bullet);
                 // 移除坦克
                 GameModel.getINSTANCE().gameObjects.remove(tank);
                 // 添加一个爆炸动画
-                GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createExplode(tank.getTankRect()));
+                GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createExplode(tank.getRect()));
                 return true;
             }
         } else if (o1 instanceof BaseTank && o2 instanceof BaseBullet) {

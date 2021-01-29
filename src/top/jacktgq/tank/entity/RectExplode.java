@@ -20,7 +20,18 @@ public class RectExplode extends BaseExplode {
         step++;
         int width = 6 * step;
         int height = width;
+        x = tankRect.x + (tankRect.width - width) / 2;
+        y = tankRect.y - (tankRect.height - height) / 2;
+        rect.x = x;
+        rect.y = y;
+        rect.width = width;
+        rect.height = height;
         g.setColor(Color.RED);
-        g.fillRect(tankRect.x + (tankRect.width - width) / 2, tankRect.y - (tankRect.height - height) / 2, width, height);
+        g.fillRect(x, y, width, height);
+    }
+
+    @Override
+    public Rectangle getRect() {
+        return rect;
     }
 }

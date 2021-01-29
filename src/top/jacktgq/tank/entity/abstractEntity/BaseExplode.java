@@ -11,6 +11,7 @@ import java.awt.*;
  * @Description
  */
 public abstract class BaseExplode extends GameObject {
+    protected Rectangle rect;
     protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
     protected int speed = 2;
     protected int step = 0;
@@ -20,6 +21,7 @@ public abstract class BaseExplode extends GameObject {
 
     public BaseExplode(Rectangle tankRect) {
         this.tankRect = tankRect;
+        rect = new Rectangle();
         new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
@@ -30,4 +32,7 @@ public abstract class BaseExplode extends GameObject {
     public int getStep() {
         return step;
     }
+
+    @Override
+    public abstract Rectangle getRect();
 }

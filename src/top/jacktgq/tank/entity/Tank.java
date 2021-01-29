@@ -130,7 +130,7 @@ public abstract class Tank extends BaseTank {
 
     // 获取坦克图片坐标和宽高
     @Override
-    public Rectangle getTankRect() {
+    public Rectangle getRect() {
         int tankWidth = curTankImage.getWidth();
         int tankHeight = curTankImage.getHeight();
         return new Rectangle(x, y, tankWidth, tankHeight);

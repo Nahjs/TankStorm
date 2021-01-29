@@ -18,7 +18,7 @@ public class TankWallCollider implements Collider {
             BaseWall wall = (BaseWall) o2;
 
             // 如果坦克和墙碰撞到一起了
-            if (tank.getTankRect().intersects(wall.getWallRect())) {
+            if (tank.getRect().intersects(wall.getRect())) {
                 tank.back();
                 return true;
             }

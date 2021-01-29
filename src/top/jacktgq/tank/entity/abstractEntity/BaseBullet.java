@@ -41,7 +41,8 @@ public abstract class BaseBullet extends GameObject {
     public abstract boolean islive();
 
     // 获取子弹图片坐标和宽高
-    public Rectangle getBulletRect() {
+    @Override
+    public Rectangle getRect() {
         return rect;
     }
 

@@ -11,4 +11,6 @@ public abstract class GameObject {
     protected int x, y;
 
     public abstract void paint(Graphics g);
+
+    public abstract Rectangle getRect();
 }

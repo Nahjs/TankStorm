@@ -15,7 +15,7 @@ public class TankTankCollider implements Collider {
             BaseTank tank1 = (BaseTank) o1;
             BaseTank tank2 = (BaseTank) o2;
             // 如果坦克和坦克碰撞到一起了，不能继续
-            if (tank1.getTankRect().intersects(tank2.getTankRect())) {
+            if (tank1.getRect().intersects(tank2.getRect())) {
                 tank1.back();
                 tank2.back();
                 return true;

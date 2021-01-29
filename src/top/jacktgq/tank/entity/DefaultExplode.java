@@ -23,11 +23,22 @@ public class DefaultExplode extends BaseExplode {
         BufferedImage explodeImage = ResourceMgr.explodes[step];
         int width = explodeImage.getWidth();
         int height = explodeImage.getHeight();
-        g.drawImage(explodeImage, tankRect.x + (tankRect.width - width) / 2, tankRect.y - (tankRect.height - height) / 2, null);
+        x = tankRect.x + (tankRect.width - width) / 2;
+        y = tankRect.y - (tankRect.height - height) / 2;
+        rect.x = x;
+        rect.y = y;
+        rect.width = width;
+        rect.height = height;
+        g.drawImage(explodeImage, x, y, null);
         step++;
         // 播放到爆炸动画的最后一帧，就移除这个爆炸动画
         if (step == ResourceMgr.explodes.length) {
             GameModel.getINSTANCE().gameObjects.remove(this);
         }
+    }
+
+    @Override
+    public Rectangle getRect() {
+        return rect;
     }
 }

@@ -26,7 +26,8 @@ public abstract class BaseTank extends GameObject {
     public abstract void fire();
 
     // 获取坦克图片坐标和宽高
-    public abstract Rectangle getTankRect();
+    @Override
+    public abstract Rectangle getRect();
 
     public abstract Group getGroup();
 

@@ -23,7 +23,8 @@ public abstract class BaseWall extends GameObject {
 
     public abstract void paint(Graphics g);
 
-    public Rectangle getWallRect() {
+    @Override
+    public Rectangle getRect() {
         return rect;
     }
 }
