@@ -13,8 +13,8 @@ import java.awt.image.BufferedImage;
  * @Description 默认风格的爆炸动画
  */
 public class DefaultExplode extends BaseExplode {
-    public DefaultExplode(Rectangle tankRect, GameModel gameModel) {
-        super(tankRect, gameModel);
+    public DefaultExplode(Rectangle tankRect) {
+        super(tankRect);
     }
 
     // 绘制爆炸效果
@@ -27,7 +27,7 @@ public class DefaultExplode extends BaseExplode {
         step++;
         // 播放到爆炸动画的最后一帧，就移除这个爆炸动画
         if (step == ResourceMgr.explodes.length) {
-            gameModel.gameObjects.remove(this);
+            GameModel.getINSTANCE().gameObjects.remove(this);
         }
     }
 }

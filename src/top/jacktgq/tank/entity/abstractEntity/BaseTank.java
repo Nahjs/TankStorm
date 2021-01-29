@@ -12,6 +12,10 @@ import java.awt.*;
  * @Description 坦克基类
  */
 public abstract class BaseTank extends GameObject {
+    public int x;
+    public int y;
+    protected int oldX, oldY;
+
     public abstract void setDir(Dir dir);
 
     public abstract void setMoving(boolean moving);
@@ -25,4 +29,10 @@ public abstract class BaseTank extends GameObject {
     public abstract Rectangle getTankRect();
 
     public abstract Group getGroup();
+
+    // 坦克在碰撞后回到上一次的位置
+    public void back() {
+        x = oldX;
+        y = oldY;
+    }
 }

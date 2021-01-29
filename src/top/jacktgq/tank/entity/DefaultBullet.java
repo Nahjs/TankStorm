@@ -18,11 +18,10 @@ public class DefaultBullet extends BaseBullet {
 
     public BufferedImage curBulletImage;
 
-    public DefaultBullet(int x, int y, Dir dir, GameModel gameModel, Group group) {
+    public DefaultBullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gameModel = gameModel;
         this.group = group;
         this.rect = new Rectangle();
         switch (dir) {
@@ -45,7 +44,7 @@ public class DefaultBullet extends BaseBullet {
     public void paint(Graphics g) {
         // 子弹越界或者打在坦克上，移除掉
         if (!islive()) {
-            gameModel.gameObjects.remove(this);
+            GameModel.getINSTANCE().gameObjects.remove(this);
         }
         g.drawImage(curBulletImage, x, y, null);
         move();
@@ -88,8 +87,8 @@ public class DefaultBullet extends BaseBullet {
      * @return
      */
     private boolean isOutOfScreen() {
-        int tankWidth = gameModel.gameWidth;
-        int tankHeight = gameModel.gameHeight;
+        int tankWidth = GameModel.getINSTANCE().gameWidth;
+        int tankHeight = GameModel.getINSTANCE().gameHeight;
         int bulletWidth = curBulletImage.getWidth();
         int bulletHeight = curBulletImage.getHeight();
         return x + bulletWidth < 0 || y + bulletHeight < 0 || x > tankWidth || y > tankHeight;

@@ -1,6 +1,5 @@
 package top.jacktgq.tank.entity.abstractEntity;
 
-import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.mgr.ResourceMgr;
@@ -20,7 +19,6 @@ public abstract class BaseBullet extends GameObject {
     protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
     protected int speed = 2;
     protected int step = 0;
-    protected GameModel gameModel;
     // 绘制爆炸效果
     @Override
     public void paint(Graphics g) {

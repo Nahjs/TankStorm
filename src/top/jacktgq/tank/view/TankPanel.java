@@ -15,13 +15,10 @@ import java.awt.event.KeyEvent;
  * @Description 游戏主界面
  */
 public class TankPanel extends JPanel {
-    GameModel gameModel;
-
     public TankPanel() {
         super(true);
         // 键盘监听事件的前提：获取焦点
         setFocusable(true);
-        gameModel = new GameModel(this.getWidth(), this.getHeight());
         this.addKeyListener(new KeyAdapter() {
             private boolean isU;
             private boolean isD;
@@ -55,7 +52,7 @@ public class TankPanel extends JPanel {
                         break;
                     }
                     case KeyEvent.VK_SPACE: {
-                        gameModel.getSelfTank().fire();
+                        GameModel.getINSTANCE().getSelfTank().fire();
                         break;
                     }
                 }
@@ -92,7 +89,7 @@ public class TankPanel extends JPanel {
              * 设置坦克方向
              */
             public void setMainTankDir() {
-                BaseTank selfTank = gameModel.getSelfTank();
+                BaseTank selfTank = GameModel.getINSTANCE().getSelfTank();
                 // 如果四个方向键都没有被按下
                 if (!isL && !isU && !isR && !isD) {
                     //System.out.println("四个方向键都没有被按下！");
@@ -137,6 +134,6 @@ public class TankPanel extends JPanel {
         super.paintComponent(g);
         int width = this.getWidth();
         int height = this.getHeight();
-        gameModel.paint(g, width, height);
+        GameModel.getINSTANCE().paint(g, width, height);
     }
 }

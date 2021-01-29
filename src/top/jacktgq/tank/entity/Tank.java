@@ -16,10 +16,7 @@ import java.awt.image.BufferedImage;
  * @Description 坦克父类
  */
 public abstract class Tank extends BaseTank {
-    public GameModel gameModel;
     public Group group;
-    public int x;
-    public int y;
     //private static final int WIDTH = 60;
     //private static final int HEIGHT = 60;
     protected int speed = 10;
@@ -29,12 +26,11 @@ public abstract class Tank extends BaseTank {
     private Rectangle rect;
     private FireStrategy fireStrategy = new DefaultFireStrategy();
 
-    public Tank(int x, int y, Dir dir, int speed, GameModel gameModel, Group group) {
+    public Tank(int x, int y, Dir dir, int speed, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.speed = speed;
-        this.gameModel = gameModel;
         this.group = group;
         this.curTankImage = (group == Group.SELF ? ResourceMgr.selfTankU : ResourceMgr.enemyTankD);
         this.rect = new Rectangle();
@@ -73,6 +69,8 @@ public abstract class Tank extends BaseTank {
      * 坦克移动
      */
     protected void move() {
+        oldX = x;
+        oldY = y;
         if(!moving)
             return;
 
@@ -114,11 +112,11 @@ public abstract class Tank extends BaseTank {
         if (y < 0) {
             y = 0;
         }
-        if (x + curTankImage.getWidth() > gameModel.gameWidth) {
-            x = gameModel.gameWidth - curTankImage.getWidth();
+        if (x + curTankImage.getWidth() > GameModel.getINSTANCE().gameWidth) {
+            x = GameModel.getINSTANCE().gameWidth - curTankImage.getWidth();
         }
-        if (y + curTankImage.getHeight() > gameModel.gameHeight) {
-            y = gameModel.gameHeight - curTankImage.getHeight();
+        if (y + curTankImage.getHeight() > GameModel.getINSTANCE().gameHeight) {
+            y = GameModel.getINSTANCE().gameHeight - curTankImage.getHeight();
         }
     }
 

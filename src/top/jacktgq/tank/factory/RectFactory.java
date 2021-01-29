@@ -1,6 +1,5 @@
 package top.jacktgq.tank.factory;
 
-import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.*;
 import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
 import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
@@ -16,22 +15,27 @@ import java.awt.*;
  */
 public class RectFactory extends GameFactory {
     @Override
-    public BaseTank createSelfTank(int x, int y, Dir dir, int speed, GameModel gameModel) {
-        return new RectSelfTank(350, 500, Dir.DOWN, speed, gameModel);
+    public BaseTank createSelfTank(int x, int y, Dir dir, int speed) {
+        return new RectSelfTank(350, 500, Dir.DOWN, speed);
     }
 
     @Override
-    public BaseTank createEnemyTank(int x, int y, Dir dir, int speed, GameModel gameModel) {
-        return new RectEnemyTank(x, y, Dir.DOWN, speed, gameModel);
+    public BaseTank createEnemyTank(int x, int y, Dir dir, int speed) {
+        return new RectEnemyTank(x, y, Dir.DOWN, speed);
     }
 
     @Override
-    public BaseBullet createBullet(int x, int y, Dir dir, GameModel gameModel, Group group) {
-        return new RectBullet(x, y, dir, gameModel, group);
+    public BaseBullet createBullet(int x, int y, Dir dir, Group group) {
+        return new RectBullet(x, y, dir, group);
     }
 
     @Override
-    public BaseExplode createExplode(Rectangle tankRect, GameModel gameModel) {
-        return new RectExplode(tankRect, gameModel);
+    public BaseExplode createExplode(Rectangle tankRect) {
+        return new RectExplode(tankRect);
+    }
+
+    @Override
+    public GameObject createWall(int x, int y, int width, int height) {
+        return new DefaultWall(x, y, width, height);
     }
 }

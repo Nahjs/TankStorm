@@ -19,11 +19,10 @@ public class RectBullet extends BaseBullet {
     public BufferedImage curBulletImage;
 
 
-    public RectBullet(int x, int y, Dir dir, GameModel gameModel, Group group) {
+    public RectBullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gameModel = gameModel;
         this.group = group;
         this.rect = new Rectangle();
         switch (dir) {
@@ -81,8 +80,8 @@ public class RectBullet extends BaseBullet {
      * @return
      */
     private boolean isOutOfScreen() {
-        int tankWidth = gameModel.gameWidth;
-        int tankHeight = gameModel.gameHeight;
+        int tankWidth = GameModel.getINSTANCE().gameWidth;
+        int tankHeight = GameModel.getINSTANCE().gameHeight;
         return x + bulletWidth < 0 || y + bulletHeight < 0 || x > tankWidth || y > tankHeight;
     }
 }

@@ -1,7 +1,5 @@
 package top.jacktgq.tank.entity;
 
-import top.jacktgq.tank.GameModel;
-
 import java.awt.*;
 
 /**
@@ -11,8 +9,8 @@ import java.awt.*;
  */
 public class DefaultSelfTank extends Tank {
 
-    public DefaultSelfTank(int x, int y, Dir dir, int speed, GameModel gameModel) {
-        super(x, y, dir, speed, gameModel, Group.SELF);
+    public DefaultSelfTank(int x, int y, Dir dir, int speed) {
+        super(x, y, dir, speed, Group.SELF);
         moving = false;
     }
 

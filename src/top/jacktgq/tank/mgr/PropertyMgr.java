@@ -1,6 +1,5 @@
 package top.jacktgq.tank.mgr;
 
-import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.collider.Collider;
 import top.jacktgq.tank.factory.abstractfactory.GameFactory;
 import top.jacktgq.tank.strategy.FireStrategy;
@@ -27,6 +26,16 @@ public class PropertyMgr {
 
     public static String get(String key) {
         return props.getProperty(key);
+    }
+
+    // 获取游戏区域宽度
+    public static int getGameWidth() {
+        return Integer.parseInt(get("gameWidth"));
+    }
+
+    // 获取游戏区域高度
+    public static int getGameHeight() {
+        return Integer.parseInt(get("gameHeight"));
     }
 
     // 获取敌方坦克数量
@@ -68,13 +77,13 @@ public class PropertyMgr {
     }
 
     // 获取碰撞检测规则
-    public static LinkedList<Collider> getColliders(GameModel gameModel) {
+    public static LinkedList<Collider> getColliders() {
         try {
             String[] colliderNames = get("colliders").split(",");
             LinkedList<Collider> colliders = new LinkedList<>();
             for (String colliderName : colliderNames) {
                 Class<?> clazz = Class.forName("top.jacktgq.tank.collider." + colliderName);
-                Collider collider = (Collider) clazz.getConstructor(GameModel.class).newInstance(gameModel);
+                Collider collider = (Collider) clazz.newInstance();
                 colliders.add(collider);
             }
             return colliders;

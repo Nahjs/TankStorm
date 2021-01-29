@@ -1,6 +1,5 @@
 package top.jacktgq.tank.entity;
 
-import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
 
 import java.awt.*;
@@ -11,8 +10,8 @@ import java.awt.*;
  * @Description 方块风格的爆炸动画
  */
 public class RectExplode extends BaseExplode {
-    public RectExplode(Rectangle tankRect, GameModel gameModel) {
-        super(tankRect, gameModel);
+    public RectExplode(Rectangle tankRect) {
+        super(tankRect);
     }
 
     // 绘制爆炸效果

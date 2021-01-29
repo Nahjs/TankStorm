@@ -12,11 +12,6 @@ import top.jacktgq.tank.entity.abstractEntity.BaseTank;
  * @Description 子弹和坦克的碰撞器
  */
 public class BulletTankCollider implements Collider {
-    private GameModel gameModel;
-    public BulletTankCollider(GameModel gameModel) {
-        this.gameModel = gameModel;
-    }
-
     @Override
     public boolean collide(GameObject o1, GameObject o2) {
         if (o1 instanceof BaseBullet && o2 instanceof BaseTank) {
@@ -34,11 +29,11 @@ public class BulletTankCollider implements Collider {
             // 如果子弹和坦克碰撞到一起了
             if (bullet.getBulletRect().intersects(tank.getTankRect())) {
                 // 移除子弹
-                gameModel.gameObjects.remove(bullet);
+                GameModel.getINSTANCE().gameObjects.remove(bullet);
                 // 移除坦克
-                gameModel.gameObjects.remove(tank);
+                GameModel.getINSTANCE().gameObjects.remove(tank);
                 // 添加一个爆炸动画
-                gameModel.gameObjects.add(gameModel.factory.createExplode(tank.getTankRect(), gameModel));
+                GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createExplode(tank.getTankRect()));
                 return true;
             }
         } else if (o1 instanceof BaseTank && o2 instanceof BaseBullet) {

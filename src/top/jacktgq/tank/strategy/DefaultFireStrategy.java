@@ -1,6 +1,6 @@
 package top.jacktgq.tank.strategy;
 
-import top.jacktgq.tank.entity.Dir;
+import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.Tank;
 import top.jacktgq.tank.mgr.ResourceMgr;
@@ -48,7 +48,7 @@ public class DefaultFireStrategy implements FireStrategy {
             }
         }
 
-        t.gameModel.gameObjects.add(t.gameModel.factory.createBullet(bulletX, bulletY, Dir.LEFT, t.gameModel, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
+        GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createBullet(bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
         if (t.group == Group.SELF) {
             new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
         }

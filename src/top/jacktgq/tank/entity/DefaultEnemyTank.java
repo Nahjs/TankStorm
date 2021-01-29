@@ -1,7 +1,5 @@
 package top.jacktgq.tank.entity;
 
-import top.jacktgq.tank.GameModel;
-
 import java.awt.*;
 import java.util.Random;
 
@@ -13,8 +11,8 @@ import java.util.Random;
 public class DefaultEnemyTank extends Tank {
     private Random random = new Random();
 
-    public DefaultEnemyTank(int x, int y, Dir dir, int speed, GameModel gameModel) {
-        super(x, y, dir, speed, gameModel, Group.ENEMY);
+    public DefaultEnemyTank(int x, int y, Dir dir, int speed) {
+        super(x, y, dir, speed, Group.ENEMY);
     }
 
     /**

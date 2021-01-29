@@ -1,7 +1,7 @@
 package top.jacktgq.tank.factory.abstractfactory;
 
-import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
+import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
 import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
@@ -19,23 +19,25 @@ public abstract class GameFactory {
      * 创建己方坦克
      * @return
      */
-    public abstract BaseTank createSelfTank(int x, int y, Dir dir, int speed, GameModel gameModel);
+    public abstract BaseTank createSelfTank(int x, int y, Dir dir, int speed);
 
     /**
      * 创建敌方坦克
      * @return
      */
-    public abstract BaseTank createEnemyTank(int x, int y, Dir dir, int speed, GameModel gameModel);
+    public abstract BaseTank createEnemyTank(int x, int y, Dir dir, int speed);
 
     /**
      * 创建子弹
      * @return
      */
-    public abstract BaseBullet createBullet(int x, int y, Dir dir, GameModel gameModel, Group group);
+    public abstract BaseBullet createBullet(int x, int y, Dir dir, Group group);
 
     /**
      * 创建爆炸
      * @return
      */
-    public abstract BaseExplode createExplode(Rectangle tankRect, GameModel gameModel);
+    public abstract BaseExplode createExplode(Rectangle tankRect);
+
+    public abstract GameObject createWall(int x, int y, int width, int height);
 }

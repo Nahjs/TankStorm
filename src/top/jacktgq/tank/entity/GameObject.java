@@ -8,7 +8,7 @@ import java.awt.*;
  * @Description 游戏物体
  */
 public abstract class GameObject {
-    int x, y;
+    protected int x, y;
 
     public abstract void paint(Graphics g);
 }
