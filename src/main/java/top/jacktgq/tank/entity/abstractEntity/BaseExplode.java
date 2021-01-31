@@ -1,6 +1,8 @@
 package top.jacktgq.tank.entity.abstractEntity;
 
 import top.jacktgq.tank.entity.GameObject;
+import top.jacktgq.tank.entity.GameObjectType;
+import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.util.Audio;
 
 import java.awt.*;
@@ -15,6 +17,7 @@ public abstract class BaseExplode extends GameObject {
     protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
     protected int speed = 2;
     protected int step = 0;
+    protected GameObjectType gameObjectType = GameObjectType.EXPLODE;
 
     @Override
     public abstract void paint(Graphics g);
@@ -35,4 +38,18 @@ public abstract class BaseExplode extends GameObject {
 
     @Override
     public abstract Rectangle getRect();
+
+    @Override
+    public GameObjectType getGameObjectType() {
+        return gameObjectType;
+    }
+
+    // 碰撞后回到上一次的位置
+    @Override
+    public void back() {}
+
+    @Override
+    public Group getGroup() {
+        return group;
+    }
 }

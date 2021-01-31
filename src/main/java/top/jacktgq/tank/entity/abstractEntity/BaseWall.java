@@ -1,6 +1,8 @@
 package top.jacktgq.tank.entity.abstractEntity;
 
 import top.jacktgq.tank.entity.GameObject;
+import top.jacktgq.tank.entity.GameObjectType;
+import top.jacktgq.tank.entity.Group;
 
 import java.awt.*;
 
@@ -12,6 +14,7 @@ import java.awt.*;
 public abstract class BaseWall extends GameObject {
     protected int width, height;
     protected Rectangle rect;
+    protected GameObjectType gameObjectType = GameObjectType.WALL;
 
     public BaseWall(int x, int y, int width, int height) {
         this.x = x;
@@ -26,5 +29,19 @@ public abstract class BaseWall extends GameObject {
     @Override
     public Rectangle getRect() {
         return rect;
+    }
+
+    @Override
+    public GameObjectType getGameObjectType() {
+        return gameObjectType;
+    }
+
+    // 碰撞后回到上一次的位置
+    @Override
+    public void back() {}
+
+    @Override
+    public Group getGroup() {
+        return null;
     }
 }

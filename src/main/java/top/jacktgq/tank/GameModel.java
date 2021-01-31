@@ -1,6 +1,7 @@
 package top.jacktgq.tank;
 
 import top.jacktgq.tank.collider.ColliderChain;
+import top.jacktgq.tank.decorator.RectDecorator;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.abstractEntity.BaseTank;
@@ -53,8 +54,8 @@ public class GameModel {
 
         // int rows = this.getWidth();
         for (int i = 0; i < count; i++) {
-            // gameObjects.add(new RectDecorator(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5)));
-            gameObjects.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5));
+             gameObjects.add(new RectDecorator(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5)));
+            // gameObjects.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5));
         }
     }
 
