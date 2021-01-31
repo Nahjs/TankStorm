@@ -24,3 +24,4 @@ hs_err_pid*
 /out/
 /.idea/
 /TankWar_DesignPattern.iml
+/target
