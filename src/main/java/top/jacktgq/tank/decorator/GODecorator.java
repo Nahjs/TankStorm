@@ -1,6 +1,8 @@
 package top.jacktgq.tank.decorator;
 
 import top.jacktgq.tank.entity.GameObject;
+import top.jacktgq.tank.entity.GameObjectType;
+import top.jacktgq.tank.entity.Group;
 
 import java.awt.*;
 
@@ -24,5 +26,21 @@ public class GODecorator extends GameObject {
     @Override
     public Rectangle getRect() {
         return gameObject.getRect();
+    }
+
+    @Override
+    public GameObjectType getGameObjectType() {
+        return gameObject.getGameObjectType();
+    }
+
+    @Override
+    public Group getGroup() {
+        return gameObject.getGroup();
+    }
+
+    // 碰撞后回到上一次的位置
+    @Override
+    public void back() {
+        gameObject.back();
     }
 }

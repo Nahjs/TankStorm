@@ -1,8 +1,7 @@
 package top.jacktgq.tank.collider;
 
 import top.jacktgq.tank.entity.GameObject;
-import top.jacktgq.tank.entity.abstractEntity.BaseTank;
-import top.jacktgq.tank.entity.abstractEntity.BaseWall;
+import top.jacktgq.tank.entity.GameObjectType;
 
 /**
  * @Author CandyWall
@@ -13,16 +12,13 @@ public class TankWallCollider implements Collider {
 
     @Override
     public boolean collide(GameObject o1, GameObject o2) {
-        if (o1 instanceof BaseTank && o2 instanceof BaseWall) {
-            BaseTank tank = (BaseTank) o1;
-            BaseWall wall = (BaseWall) o2;
-
+        if (o1.getGameObjectType() == GameObjectType.TANK && o2.getGameObjectType() == GameObjectType.WALL) {
             // 如果坦克和墙碰撞到一起了
-            if (tank.getRect().intersects(wall.getRect())) {
-                tank.back();
+            if (o1.getRect().intersects(o2.getRect())) {
+                o1.back();
                 return true;
             }
-        } else if (o1 instanceof BaseWall && o2 instanceof BaseTank) {
+        } else if (o1.getGameObjectType() == GameObjectType.WALL && o2.getGameObjectType() == GameObjectType.TANK) {
             return collide(o2, o1);
         }
         return false;

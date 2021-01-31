@@ -9,8 +9,16 @@ import java.awt.*;
  */
 public abstract class GameObject {
     protected int x, y;
+    protected int oldX, oldY;
+    protected Group group;
 
     public abstract void paint(Graphics g);
 
     public abstract Rectangle getRect();
+
+    public abstract GameObjectType getGameObjectType();
+
+    public abstract void back();
+
+    public abstract Group getGroup();
 }

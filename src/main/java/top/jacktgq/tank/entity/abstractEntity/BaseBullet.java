@@ -1,6 +1,7 @@
 package top.jacktgq.tank.entity.abstractEntity;
 
 import top.jacktgq.tank.entity.GameObject;
+import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.mgr.ResourceMgr;
 
@@ -19,6 +20,8 @@ public abstract class BaseBullet extends GameObject {
     protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
     protected int speed = 2;
     protected int step = 0;
+    protected GameObjectType gameObjectType = GameObjectType.BULLET;
+
     // 绘制爆炸效果
     @Override
     public void paint(Graphics g) {
@@ -46,6 +49,7 @@ public abstract class BaseBullet extends GameObject {
         return rect;
     }
 
+    @Override
     public Group getGroup() {
         return group;
     }
@@ -57,4 +61,13 @@ public abstract class BaseBullet extends GameObject {
     public int getY() {
         return y;
     }
+
+    @Override
+    public GameObjectType getGameObjectType() {
+        return gameObjectType;
+    }
+
+    // 碰撞后回到上一次的位置
+    @Override
+    public void back() {}
 }

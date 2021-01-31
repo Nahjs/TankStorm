@@ -2,9 +2,8 @@ package top.jacktgq.tank.collider;
 
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.GameObject;
+import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
-import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
-import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 
 /**
  * @Author CandyWall
@@ -14,29 +13,26 @@ import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 public class BulletTankCollider implements Collider {
     @Override
     public boolean collide(GameObject o1, GameObject o2) {
-        if (o1 instanceof BaseBullet && o2 instanceof BaseTank) {
-            BaseBullet bullet = (BaseBullet) o1;
-            BaseTank tank = (BaseTank) o2;
-
+        if (o1.getGameObjectType() == GameObjectType.BULLET && o2.getGameObjectType() == GameObjectType.TANK) {
             // 如果是己方坦克，无敌
-            if (tank.getGroup() == Group.SELF) {
+            if (o2.getGroup() == Group.SELF) {
                 return false;
             }
             // 一个阵营的不做碰撞检测
-            if (bullet.getGroup() == tank.getGroup()) {
+            if (o1.getGroup() == o2.getGroup()) {
                 return false;
             }
             // 如果子弹和坦克碰撞到一起了
-            if (bullet.getRect().intersects(tank.getRect())) {
+            if (o1.getRect().intersects(o2.getRect())) {
                 // 移除子弹
-                GameModel.getINSTANCE().gameObjects.remove(bullet);
+                GameModel.getINSTANCE().gameObjects.remove(o1);
                 // 移除坦克
-                GameModel.getINSTANCE().gameObjects.remove(tank);
+                GameModel.getINSTANCE().gameObjects.remove(o2);
                 // 添加一个爆炸动画
-                GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createExplode(tank.getRect()));
+                GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createExplode(o2.getRect()));
                 return true;
             }
-        } else if (o1 instanceof BaseTank && o2 instanceof BaseBullet) {
+        } else if (o1.getGameObjectType() == GameObjectType.TANK && o2.getGameObjectType() == GameObjectType.BULLET) {
             return collide(o2, o1);
         }
         return false;

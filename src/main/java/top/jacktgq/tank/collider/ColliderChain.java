@@ -1,6 +1,5 @@
 package top.jacktgq.tank.collider;
 
-import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.mgr.PropertyMgr;
 

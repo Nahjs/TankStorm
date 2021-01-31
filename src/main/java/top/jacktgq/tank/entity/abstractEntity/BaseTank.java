@@ -2,6 +2,7 @@ package top.jacktgq.tank.entity.abstractEntity;
 
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
+import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
 
 import java.awt.*;
@@ -14,7 +15,8 @@ import java.awt.*;
 public abstract class BaseTank extends GameObject {
     public int x;
     public int y;
-    protected int oldX, oldY;
+
+    protected GameObjectType gameObjectType = GameObjectType.TANK;
 
     public abstract void setDir(Dir dir);
 
@@ -29,11 +31,18 @@ public abstract class BaseTank extends GameObject {
     @Override
     public abstract Rectangle getRect();
 
+    @Override
     public abstract Group getGroup();
 
     // 坦克在碰撞后回到上一次的位置
+    @Override
     public void back() {
         x = oldX;
         y = oldY;
+    }
+
+    @Override
+    public GameObjectType getGameObjectType() {
+        return gameObjectType;
     }
 }

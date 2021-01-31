@@ -1,7 +1,7 @@
 package top.jacktgq.tank.collider;
 
 import top.jacktgq.tank.entity.GameObject;
-import top.jacktgq.tank.entity.abstractEntity.BaseTank;
+import top.jacktgq.tank.entity.GameObjectType;
 
 /**
  * @Author CandyWall
@@ -11,13 +11,11 @@ import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 public class TankTankCollider implements Collider {
     @Override
     public boolean collide(GameObject o1, GameObject o2) {
-        if (o1 instanceof BaseTank && o2 instanceof BaseTank) {
-            BaseTank tank1 = (BaseTank) o1;
-            BaseTank tank2 = (BaseTank) o2;
+        if (o1.getGameObjectType() == GameObjectType.TANK && o2.getGameObjectType() == GameObjectType.TANK) {
             // 如果坦克和坦克碰撞到一起了，不能继续
-            if (tank1.getRect().intersects(tank2.getRect())) {
-                tank1.back();
-                tank2.back();
+            if (o1.getRect().intersects(o2.getRect())) {
+                o1.back();
+                o2.back();
                 return true;
             }
         }
