@@ -48,8 +48,7 @@ public class GameModel {
         // initEnemyTanks();
         // 连接服务器
         new Thread(() -> {
-            Client c = new Client();
-            c.connect();
+            Client.INSTANCE.connect();
         }).start();
     }
 

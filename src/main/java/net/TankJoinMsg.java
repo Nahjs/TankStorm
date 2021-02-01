@@ -1,5 +1,6 @@
 package net;
 
+import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.Group;
@@ -14,7 +15,7 @@ import java.util.UUID;
  * @Date 2021/1/31--17:53
  * @Description 玩家加入游戏的时候，给服务器发送的消息
  */
-public class TankJoinMsg {
+public class TankJoinMsg extends Msg {
     public int x, y;
     public Dir dir;
     public boolean isMoving;
@@ -51,6 +52,7 @@ public class TankJoinMsg {
     }
 
     // 将对象转成字节数组
+    @Override
     public byte[] toBytes() {
         ByteArrayOutputStream baos = null;
         DataOutputStream dos = null;
@@ -121,5 +123,20 @@ public class TankJoinMsg {
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public void handle() {
+        // 客户端接收到TankJoinMsg的逻辑处理：是不是自己？列表是否已经有了
+        // 如果传过来的连接信息的ID和本身的ID相等或者本地的列表中有这个ID，不做处理
+        if (this.id.equals(GameModel.INSTANCE.getSelfTank().getId()) ||
+                GameModel.INSTANCE.findByUUID(this.id) != null) {
+            return;
+        }
+        GameObject tank = GameModel.INSTANCE.factory.createSelfTank(this.id, this.x, this.y, this.dir, 5);
+        GameModel.INSTANCE.addTank(tank);
+
+        // 再发送一次消息给新连上的坦克
+        Client.INSTANCE.send(new TankJoinMsg(GameModel.INSTANCE.getSelfTank()));
     }
 }
