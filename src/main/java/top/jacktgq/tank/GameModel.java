@@ -44,7 +44,7 @@ public class GameModel {
         selfTank = factory.createSelfTank(350, 500, Dir.DOWN, 5);
         gameObjects.add(selfTank);
         // 随机产生enemy_tank_count辆敌方坦克
-        initEnemyTanks();
+        // initEnemyTanks();
     }
 
     private void initEnemyTanks() {
