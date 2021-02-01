@@ -25,26 +25,26 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         bulletX = t.x - bulletWidth - 5;
         bulletHeight = ResourceMgr.bulletL.getHeight();
         bulletY = t.y + (tankHeight - bulletHeight) / 2;
-        GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createBullet(bulletX, bulletY, Dir.LEFT, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
+        GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createBullet(bulletX, bulletY, Dir.LEFT, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
 
         // 上
         bulletWidth = ResourceMgr.bulletU.getWidth();
         bulletX = t.x + (tankWidth - bulletWidth) / 2;
         bulletHeight = ResourceMgr.bulletU.getHeight();
         bulletY = t.y - bulletHeight - 5;
-        GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createBullet(bulletX, bulletY, Dir.UP, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
+        GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createBullet(bulletX, bulletY, Dir.UP, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
 
         // 右
         bulletHeight = ResourceMgr.bulletR.getHeight();
         bulletX = t.x + tankWidth + 5;
         bulletY = t.y + (tankHeight - bulletHeight) / 2;
-        GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createBullet(bulletX, bulletY, Dir.RIGHT, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
+        GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createBullet(bulletX, bulletY, Dir.RIGHT, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
 
         // 下
         bulletWidth = ResourceMgr.bulletD.getWidth();
         bulletX = t.x + (tankWidth - bulletWidth) / 2;
         bulletY = t.y + tankHeight + 5;
-        GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createBullet(bulletX, bulletY, Dir.DOWN, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
+        GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createBullet(bulletX, bulletY, Dir.DOWN, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
 
         if (t.group == Group.SELF) {
             new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();

@@ -80,8 +80,8 @@ public class RectBullet extends BaseBullet {
      * @return
      */
     private boolean isOutOfScreen() {
-        int tankWidth = GameModel.getINSTANCE().gameWidth;
-        int tankHeight = GameModel.getINSTANCE().gameHeight;
+        int tankWidth = GameModel.INSTANCE.gameWidth;
+        int tankHeight = GameModel.INSTANCE.gameHeight;
         return x + bulletWidth < 0 || y + bulletHeight < 0 || x > tankWidth || y > tankHeight;
     }
 }

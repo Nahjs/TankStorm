@@ -1,10 +1,12 @@
 package top.jacktgq.tank.decorator;
 
+import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
 
 import java.awt.*;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -16,6 +18,8 @@ public class GODecorator extends GameObject {
 
     public GODecorator(GameObject gameObject) {
         this.gameObject = gameObject;
+        this.x = gameObject.x;
+        this.y = gameObject.y;
     }
 
     @Override
@@ -42,5 +46,51 @@ public class GODecorator extends GameObject {
     @Override
     public void back() {
         gameObject.back();
+    }
+
+    @Override
+    public UUID getId() {
+        return gameObject.getId();
+    }
+
+    @Override
+    public boolean isMoving() {
+        return gameObject.isMoving();
+    }
+
+    @Override
+    public String getName() {
+        return gameObject.getName();
+    }
+
+    @Override
+    public void setMoving(boolean b) {
+        gameObject.setMoving(b);
+    }
+
+    @Override
+    public void setDir(Dir dir) {
+        gameObject.setDir(dir);
+    }
+
+    @Override
+    public void fire() {
+        gameObject.fire();
+    }
+
+
+    @Override
+    public int getX() {
+        return gameObject.getX();
+    }
+
+    @Override
+    public int getY() {
+        return gameObject.getY();
+    }
+
+    @Override
+    public Dir getDir() {
+        return gameObject.getDir();
     }
 }

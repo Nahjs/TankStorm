@@ -48,7 +48,7 @@ public class DefaultFireStrategy implements FireStrategy {
             }
         }
 
-        GameModel.getINSTANCE().gameObjects.add(GameModel.getINSTANCE().factory.createBullet(bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
+        GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createBullet(bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
         if (t.group == Group.SELF) {
             new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
         }

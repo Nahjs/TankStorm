@@ -17,7 +17,7 @@ public class BulletWallCollider implements Collider {
             // 如果子弹和墙碰撞到一起了
             if (o1.getRect().intersects(o2.getRect())) {
                 // 移除子弹
-                GameModel.getINSTANCE().gameObjects.remove(o1);
+                GameModel.INSTANCE.gameObjects.remove(o1);
                 return true;
             }
         } else if (o1.getGameObjectType() == GameObjectType.WALL && o2.getGameObjectType() == GameObjectType.BULLET) {

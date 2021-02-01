@@ -33,7 +33,7 @@ public class DefaultExplode extends BaseExplode {
         step++;
         // 播放到爆炸动画的最后一帧，就移除这个爆炸动画
         if (step == ResourceMgr.explodes.length) {
-            GameModel.getINSTANCE().gameObjects.remove(this);
+            GameModel.INSTANCE.gameObjects.remove(this);
         }
     }
 

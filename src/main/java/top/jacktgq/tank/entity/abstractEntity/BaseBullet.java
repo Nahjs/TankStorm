@@ -1,5 +1,6 @@
 package top.jacktgq.tank.entity.abstractEntity;
 
+import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
@@ -7,6 +8,7 @@ import top.jacktgq.tank.mgr.ResourceMgr;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -14,7 +16,6 @@ import java.awt.image.BufferedImage;
  * @Description 炮弹类
  */
 public abstract class BaseBullet extends GameObject {
-    protected int x, y;
     protected Group group;
     protected Rectangle rect;
     protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
@@ -43,6 +44,11 @@ public abstract class BaseBullet extends GameObject {
     // 判断子弹的状态
     public abstract boolean islive();
 
+    @Override
+    public boolean isMoving() {
+        return true;
+    }
+
     // 获取子弹图片坐标和宽高
     @Override
     public Rectangle getRect() {
@@ -70,4 +76,28 @@ public abstract class BaseBullet extends GameObject {
     // 碰撞后回到上一次的位置
     @Override
     public void back() {}
+
+    @Override
+    public UUID getId() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void fire() {}
+
+    @Override
+    public void setMoving(boolean b) {}
+
+    @Override
+    public void setDir(Dir dir) {}
+
+    @Override
+    public Dir getDir() {
+        return dir;
+    }
 }

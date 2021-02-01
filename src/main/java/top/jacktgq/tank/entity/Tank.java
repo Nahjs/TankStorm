@@ -17,12 +17,10 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Tank extends BaseTank {
     public Group group;
-    //private static final int WIDTH = 60;
-    //private static final int HEIGHT = 60;
     protected int speed = 10;
-    public Dir dir = Dir.DOWN;
+
     public BufferedImage curTankImage;  // 当前坦克加载的图片
-    protected boolean moving = true;
+
     private Rectangle rect;
     private FireStrategy fireStrategy = new DefaultFireStrategy();
 
@@ -32,9 +30,10 @@ public abstract class Tank extends BaseTank {
         this.dir = dir;
         this.speed = speed;
         this.group = group;
-        this.curTankImage = (group == Group.SELF ? ResourceMgr.selfTankU : ResourceMgr.enemyTankD);
+        // this.curTankImage = (group == Group.SELF ? ResourceMgr.selfTankU : ResourceMgr.enemyTankD);
+        initCurTankImage();
         this.rect = new Rectangle();
-        updateRect(x, y);
+        updateRect();
         if (group == Group.SELF) {
             fireStrategy = PropertyMgr.getSelf_tank_fs();
         } else {
@@ -42,7 +41,41 @@ public abstract class Tank extends BaseTank {
         }
     }
 
-    private void updateRect(int x, int y) {
+    private void initCurTankImage() {
+        if (group == Group.SELF) {
+            switch (dir) {
+                case LEFT:
+                    curTankImage = ResourceMgr.selfTankL;
+                    break;
+                case UP:
+                    curTankImage = ResourceMgr.selfTankU;
+                    break;
+                case RIGHT:
+                    curTankImage = ResourceMgr.selfTankR;
+                    break;
+                case DOWN:
+                    curTankImage = ResourceMgr.selfTankD;
+                    break;
+            }
+        } else {
+            switch (dir) {
+                case LEFT:
+                    curTankImage = ResourceMgr.enemyTankL;
+                    break;
+                case UP:
+                    curTankImage = ResourceMgr.enemyTankU;
+                    break;
+                case RIGHT:
+                    curTankImage = ResourceMgr.enemyTankR;
+                    break;
+                case DOWN:
+                    curTankImage = ResourceMgr.enemyTankD;
+                    break;
+            }
+        }
+    }
+
+    private void updateRect() {
         rect.x = x;
         rect.y = y;
         rect.width = curTankImage.getWidth();
@@ -52,10 +85,6 @@ public abstract class Tank extends BaseTank {
     @Override
     public void setDir(Dir dir) {
         this.dir = dir;
-    }
-
-    public boolean isMoving() {
-        return moving;
     }
 
     @Override
@@ -99,7 +128,7 @@ public abstract class Tank extends BaseTank {
         // 添加边界检测：坦克不能走出游戏区域
         boundsCheck();
 
-        updateRect(x, y);
+        updateRect();
     }
 
     /**
@@ -112,11 +141,11 @@ public abstract class Tank extends BaseTank {
         if (y < 0) {
             y = 0;
         }
-        if (x + curTankImage.getWidth() > GameModel.getINSTANCE().gameWidth) {
-            x = GameModel.getINSTANCE().gameWidth - curTankImage.getWidth();
+        if (x + curTankImage.getWidth() > GameModel.INSTANCE.gameWidth) {
+            x = GameModel.INSTANCE.gameWidth - curTankImage.getWidth();
         }
-        if (y + curTankImage.getHeight() > GameModel.getINSTANCE().gameHeight) {
-            y = GameModel.getINSTANCE().gameHeight - curTankImage.getHeight();
+        if (y + curTankImage.getHeight() > GameModel.INSTANCE.gameHeight) {
+            y = GameModel.INSTANCE.gameHeight - curTankImage.getHeight();
         }
     }
 
@@ -131,9 +160,7 @@ public abstract class Tank extends BaseTank {
     // 获取坦克图片坐标和宽高
     @Override
     public Rectangle getRect() {
-        int tankWidth = curTankImage.getWidth();
-        int tankHeight = curTankImage.getHeight();
-        return new Rectangle(x, y, tankWidth, tankHeight);
+        return rect;
     }
 
     @Override

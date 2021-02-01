@@ -16,7 +16,7 @@ import java.awt.*;
 public class DefaultFactory extends GameFactory {
     @Override
     public BaseTank createSelfTank(int x, int y, Dir dir, int speed) {
-        return new DefaultSelfTank(350, 500, Dir.DOWN, speed);
+        return new DefaultSelfTank(x, y, dir, speed);
     }
 
     @Override

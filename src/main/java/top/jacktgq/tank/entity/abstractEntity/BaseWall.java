@@ -1,10 +1,12 @@
 package top.jacktgq.tank.entity.abstractEntity;
 
+import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
 
 import java.awt.*;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -43,5 +45,44 @@ public abstract class BaseWall extends GameObject {
     @Override
     public Group getGroup() {
         return null;
+    }
+
+    @Override
+    public UUID getId() {
+        return null;
+    }
+
+    @Override
+    public void fire() {}
+
+    @Override
+    public boolean isMoving() {
+        return true;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void setMoving(boolean b) {}
+
+    @Override
+    public void setDir(Dir dir) {}
+
+    @Override
+    public Dir getDir() {
+        return dir;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
     }
 }

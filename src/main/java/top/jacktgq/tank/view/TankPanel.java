@@ -2,7 +2,7 @@ package top.jacktgq.tank.view;
 
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
-import top.jacktgq.tank.entity.abstractEntity.BaseTank;
+import top.jacktgq.tank.entity.GameObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,7 +52,7 @@ public class TankPanel extends JPanel {
                         break;
                     }
                     case KeyEvent.VK_SPACE: {
-                        GameModel.getINSTANCE().getSelfTank().fire();
+                        GameModel.INSTANCE.getSelfTank().fire();
                         break;
                     }
                 }
@@ -89,7 +89,7 @@ public class TankPanel extends JPanel {
              * 设置坦克方向
              */
             public void setMainTankDir() {
-                BaseTank selfTank = GameModel.getINSTANCE().getSelfTank();
+                GameObject selfTank = GameModel.INSTANCE.getSelfTank();
                 // 如果四个方向键都没有被按下
                 if (!isL && !isU && !isR && !isD) {
                     //System.out.println("四个方向键都没有被按下！");
@@ -134,6 +134,6 @@ public class TankPanel extends JPanel {
         super.paintComponent(g);
         int width = this.getWidth();
         int height = this.getHeight();
-        GameModel.getINSTANCE().paint(g, width, height);
+        GameModel.INSTANCE.paint(g, width, height);
     }
 }
