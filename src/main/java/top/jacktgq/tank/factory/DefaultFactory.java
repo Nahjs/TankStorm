@@ -7,6 +7,7 @@ import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 import top.jacktgq.tank.factory.abstractfactory.GameFactory;
 
 import java.awt.*;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -15,13 +16,13 @@ import java.awt.*;
  */
 public class DefaultFactory extends GameFactory {
     @Override
-    public BaseTank createSelfTank(int x, int y, Dir dir, int speed) {
-        return new DefaultSelfTank(x, y, dir, speed);
+    public BaseTank createSelfTank(UUID id, int x, int y, Dir dir, int speed) {
+        return new DefaultSelfTank(id, x, y, dir, speed);
     }
 
     @Override
-    public BaseTank createEnemyTank(int x, int y, Dir dir, int speed) {
-        return new DefaultEnemyTank(x, y, Dir.DOWN, speed);
+    public BaseTank createEnemyTank(UUID id, int x, int y, Dir dir, int speed) {
+        return new DefaultEnemyTank(id, x, y, Dir.DOWN, speed);
     }
 
     @Override

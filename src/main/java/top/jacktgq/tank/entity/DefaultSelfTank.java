@@ -1,6 +1,7 @@
 package top.jacktgq.tank.entity;
 
 import java.awt.*;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -9,8 +10,8 @@ import java.awt.*;
  */
 public class DefaultSelfTank extends Tank {
 
-    public DefaultSelfTank(int x, int y, Dir dir, int speed) {
-        super(x, y, dir, speed, Group.SELF);
+    public DefaultSelfTank(UUID id, int x, int y, Dir dir, int speed) {
+        super(id, x, y, dir, speed, Group.SELF);
         moving = false;
     }
 

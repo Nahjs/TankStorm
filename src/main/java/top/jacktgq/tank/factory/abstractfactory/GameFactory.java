@@ -8,6 +8,7 @@ import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
 import top.jacktgq.tank.entity.abstractEntity.BaseTank;
 
 import java.awt.*;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -19,13 +20,13 @@ public abstract class GameFactory {
      * 创建己方坦克
      * @return
      */
-    public abstract BaseTank createSelfTank(int x, int y, Dir dir, int speed);
+    public abstract BaseTank createSelfTank(UUID id, int x, int y, Dir dir, int speed);
 
     /**
      * 创建敌方坦克
      * @return
      */
-    public abstract BaseTank createEnemyTank(int x, int y, Dir dir, int speed);
+    public abstract BaseTank createEnemyTank(UUID id, int x, int y, Dir dir, int speed);
 
     /**
      * 创建子弹

@@ -24,7 +24,7 @@ public abstract class GameObject {
 
     public abstract Group getGroup();
 
-    public abstract UUID getId();
+    public abstract UUID  getId();
 
     public abstract boolean isMoving();
 

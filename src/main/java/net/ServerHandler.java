@@ -24,14 +24,14 @@ public class ServerHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
         //这里是先群发了再加入组，所以不会发给自己
         // channelGroup.writeAndFlush(forwardMsg);
         //将当前channel加入到channelGroup中
-        //channelGroup.add(channel);
+        channelGroup.add(channel);
     }
     
     //表示断开连接，将xx客户离开的信息推送给当前在线的客户
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        String forwardMsg = "[客户端 "+ channel.remoteAddress().toString().substring(1) +"] 离开群聊\n";
+        String forwardMsg = "[客户端 "+ channel.remoteAddress().toString().substring(1) +"] 离开游戏\n";
         ServerFrame.INSTANCE.addMsg(forwardMsg);
         channelGroup.writeAndFlush(forwardMsg);
         //这里不需要自己去把当前的channel从channelGroup中移除，netty内部已经实现
@@ -44,6 +44,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
         Channel channel = ctx.channel();
         String forwardMsg = LogUtils.getCurrentTime() + " [客户端 " + channel.remoteAddress().toString().substring(1) + "] 的连接信息：" + msg + "\n";
         ServerFrame.INSTANCE.addMsg(forwardMsg);
+        channelGroup.writeAndFlush(msg);
         //这时我们遍历channelGroup，根据不同的情况，回送不同的消息
         /*channelGroup.forEach(ch -> {
             if (ch != channel) {    //不是当前的channel，转发消息

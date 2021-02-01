@@ -9,6 +9,7 @@ import top.jacktgq.tank.strategy.FireStrategy;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -24,7 +25,8 @@ public abstract class Tank extends BaseTank {
     private Rectangle rect;
     private FireStrategy fireStrategy = new DefaultFireStrategy();
 
-    public Tank(int x, int y, Dir dir, int speed, Group group) {
+    public Tank(UUID id, int x, int y, Dir dir, int speed, Group group) {
+        this.id = id;
         this.x = x;
         this.y = y;
         this.dir = dir;

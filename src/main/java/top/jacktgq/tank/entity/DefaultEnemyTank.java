@@ -2,6 +2,7 @@ package top.jacktgq.tank.entity;
 
 import java.awt.*;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -11,8 +12,8 @@ import java.util.Random;
 public class DefaultEnemyTank extends Tank {
     private Random random = new Random();
 
-    public DefaultEnemyTank(int x, int y, Dir dir, int speed) {
-        super(x, y, dir, speed, Group.ENEMY);
+    public DefaultEnemyTank(UUID id, int x, int y, Dir dir, int speed) {
+        super(id, x, y, dir, speed, Group.ENEMY);
     }
 
     /**

@@ -17,7 +17,7 @@ public abstract class BaseTank extends GameObject {
     public boolean moving = true;
 
     public String name;
-    public UUID id = UUID.randomUUID();
+    public UUID id;
 
     protected GameObjectType gameObjectType = GameObjectType.TANK;
 
