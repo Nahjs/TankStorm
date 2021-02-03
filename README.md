@@ -34,3 +34,7 @@
    ![装饰器模式的缺陷](https://img-blog.csdnimg.cn/20210201152341287.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NTA1OTY5,size_16,color_FFFFFF,t_70)
 
    <font color="red">总结：使用了装饰器模式之后，不能使用被装饰后的对象的public 属性了，取而代之的是使用内部的方法，而顶级父类中的属性最好全部设置成private的，然后获取属性的值应该使用对应属性的get方法。</font>
+
+7. 重构消息，让消息自己handle
+
+8. 添加TankJoinMsg、TankDirChangeMsg、TankStopMsg、TankStartingMovingMsg、BulletNewMsg；基于这些不同的类型的消息类抽象出父类Msg；新增MsgType枚举类，不同子类消息类中添加MsgType加以区别；将TankJoinMsgEncoder改名为MsgEncoder，将TankJoinMsgDecoder改名为MsgDecoder，完成TankStartMoving、TankStop两种状态下的消息发送。

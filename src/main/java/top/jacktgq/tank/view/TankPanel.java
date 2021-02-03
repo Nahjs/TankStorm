@@ -1,5 +1,8 @@
 package top.jacktgq.tank.view;
 
+import net.Client;
+import net.msg.TankStartMovingMsg;
+import net.msg.TankStopMsg;
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
@@ -94,6 +97,8 @@ public class TankPanel extends JPanel {
                 if (!isL && !isU && !isR && !isD) {
                     //System.out.println("四个方向键都没有被按下！");
                     selfTank.setMoving(false);
+                    // 坦克停下，向服务器发送停下的消息
+                    Client.INSTANCE.send(new TankStopMsg(selfTank));
                 } else {
                     selfTank.setMoving(true);
                     if (isL) {
@@ -112,6 +117,8 @@ public class TankPanel extends JPanel {
                         //System.out.println("按下方向下");
                         selfTank.setDir(Dir.DOWN);
                     }
+                    // 坦克开始移动，向服务器发送坦克移动的消息
+                    Client.INSTANCE.send(new TankStartMovingMsg(selfTank));
                 }
             }
         });

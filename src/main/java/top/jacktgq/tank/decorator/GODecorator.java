@@ -93,4 +93,14 @@ public class GODecorator extends GameObject {
     public Dir getDir() {
         return gameObject.getDir();
     }
+
+    @Override
+    public void setX(int x) {
+        gameObject.setX(x);
+    }
+
+    @Override
+    public void setY(int y) {
+        gameObject.setY(y);
+    }
 }

@@ -1,4 +1,4 @@
-package net;
+package net.msg;
 
 /**
  * @Author CandyWall
@@ -7,6 +7,7 @@ package net;
  */
 public abstract class Msg {
     public abstract void handle();
-
+    public abstract void parse(byte[] bytes);
     public abstract byte[] toBytes();
+    public abstract MsgType getMsgType();
 }

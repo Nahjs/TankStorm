@@ -1,13 +1,12 @@
-package net;
+package net.msg;
 
+import net.Client;
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.Group;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.UUID;
 
 /**
@@ -18,7 +17,7 @@ import java.util.UUID;
 public class TankJoinMsg extends Msg {
     public int x, y;
     public Dir dir;
-    public boolean isMoving;
+    public boolean moving;
     public Group group;
     public UUID id;
     public String name;
@@ -31,7 +30,7 @@ public class TankJoinMsg extends Msg {
         this.x = tank.getX();
         this.y = tank.getY();
         this.dir = tank.getDir();
-        this.isMoving = tank.isMoving();
+        this.moving = tank.isMoving();
         this.group = tank.getGroup();
         this.id = tank.getId();
         this.name = tank.getName();
@@ -41,14 +40,39 @@ public class TankJoinMsg extends Msg {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.isMoving = isMoving;
+        this.moving = isMoving;
         this.group = group;
         this.id = id;
         this.name = name;
     }
 
+    @Override
     public void parse(byte[] bytes) {
-
+        ByteArrayInputStream bais = null;
+        DataInputStream dis = null;
+        try {
+            bais = new ByteArrayInputStream(bytes);
+            dis = new DataInputStream(bais);
+            this.x = dis.readInt();
+            this.y = dis.readInt();
+            this.dir = Dir.values()[dis.readInt()];
+            this.moving = dis.readBoolean();
+            this.group = Group.values()[dis.readInt()];
+            this.id = new UUID(dis.readLong(), dis.readLong());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (dis != null) {
+                    dis.close();
+                }
+                if (bais != null) {
+                    bais.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     // 将对象转成字节数组
@@ -63,7 +87,7 @@ public class TankJoinMsg extends Msg {
             dos.writeInt(x);    // 4字节
             dos.writeInt(y);    // 4字节
             dos.writeInt(dir.ordinal()); // 4字节
-            dos.writeBoolean(isMoving);  // 1字节
+            dos.writeBoolean(moving);  // 1字节
             dos.writeInt(group.ordinal()); // 4字节
             dos.writeLong(id.getMostSignificantBits());  // 8字节
             dos.writeLong(id.getLeastSignificantBits()); // 8字节
@@ -84,6 +108,11 @@ public class TankJoinMsg extends Msg {
             }
         }
         return bytes;
+    }
+
+    @Override
+    public MsgType getMsgType() {
+        return MsgType.TankJoin;
     }
     /*public byte[] toBytes() {
         byte[] bytes = null;
@@ -118,7 +147,7 @@ public class TankJoinMsg extends Msg {
                 "x=" + x +
                 ", y=" + y +
                 ", dir=" + dir +
-                ", isMoving=" + isMoving +
+                ", isMoving=" + moving +
                 ", group=" + group +
                 ", id=" + id +
                 ", name='" + name + '\'' +

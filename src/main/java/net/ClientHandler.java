@@ -2,12 +2,14 @@ package net;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import net.msg.Msg;
+import net.msg.TankJoinMsg;
 import top.jacktgq.tank.GameModel;
 
-public class ClientHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
+public class ClientHandler extends SimpleChannelInboundHandler<Msg> {
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, TankJoinMsg msg) throws Exception {
-        // System.out.println(msg);
+    protected void channelRead0(ChannelHandlerContext ctx, Msg msg) throws Exception {
+        System.out.println(msg);
         msg.handle();
     }
 

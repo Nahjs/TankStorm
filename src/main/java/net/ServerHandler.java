@@ -6,9 +6,10 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import net.msg.Msg;
 import top.jacktgq.tank.util.LogUtils;
 
-public class ServerHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
+public class ServerHandler extends SimpleChannelInboundHandler<Msg> {
     //定义一个channel组，管理所有的Channel
     //GlobalEventExecutor.INSTANCE：是一个全局的事件执行器，是一个单例
     private static final ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
@@ -39,19 +40,11 @@ public class ServerHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
     }
     
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, TankJoinMsg msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Msg msg) throws Exception {
         //获取到当前Channel
         Channel channel = ctx.channel();
-        String forwardMsg = LogUtils.getCurrentTime() + " [客户端 " + channel.remoteAddress().toString().substring(1) + "] 的连接信息：" + msg + "\n";
+        String forwardMsg = LogUtils.getCurrentTime() + " 来自[客户端 " + channel.remoteAddress().toString().substring(1) + " " + msg.getMsgType() + "] 的消息：" + msg + "\n";
         ServerFrame.INSTANCE.addMsg(forwardMsg);
         channelGroup.writeAndFlush(msg);
-        //这时我们遍历channelGroup，根据不同的情况，回送不同的消息
-        /*channelGroup.forEach(ch -> {
-            if (ch != channel) {    //不是当前的channel，转发消息
-                ch.writeAndFlush(forwardMsg);
-            } else {    //回显自己发送消息给自己
-                ch.writeAndFlush(LogUtils.getCurrentTime() + " [我] 说：" + msg + "\n");
-            }
-        });*/
     }
 }

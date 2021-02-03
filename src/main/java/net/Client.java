@@ -4,6 +4,7 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import net.msg.Msg;
 
 /**
  * @author CandyWall
@@ -18,10 +19,6 @@ public class Client {
 
     private Client() {}
 
-    private void sendMsg(String msg) {
-        channel.writeAndFlush(msg);
-    }
-
     public void connect() {
         EventLoopGroup group = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
@@ -33,8 +30,8 @@ public class Client {
                         @Override
                         protected void initChannel(Channel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
-                            pipeline.addLast(new TankJoinMsgEncoder());
-                            pipeline.addLast(new TankJoinMsgDecoder());
+                            pipeline.addLast(new MsgEncoder());
+                            pipeline.addLast(new MsgDecoder());
                             pipeline.addLast(new ClientHandler());
                         }
                     })
@@ -61,7 +58,7 @@ public class Client {
     }
 
     // 发送消息
-    public void send(TankJoinMsg tankJoinMsg) {
-        channel.writeAndFlush(tankJoinMsg);
+    public void send(Msg msg) {
+        channel.writeAndFlush(msg);
     }
 }

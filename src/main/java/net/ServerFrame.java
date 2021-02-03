@@ -61,8 +61,8 @@ public class ServerFrame extends JFrame {
                     @Override
                     protected void initChannel(Channel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new TankJoinMsgEncoder());
-                        pipeline.addLast(new TankJoinMsgDecoder());
+                        pipeline.addLast(new MsgEncoder());
+                        pipeline.addLast(new MsgDecoder());
                         pipeline.addLast(new ServerHandler());
                     }
                 })
