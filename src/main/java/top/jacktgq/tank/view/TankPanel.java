@@ -60,7 +60,7 @@ public class TankPanel extends JPanel {
                     }
                 }
                 setMainTankDir();
-                repaint();
+                // repaint();
             }
 
             @Override
@@ -100,7 +100,6 @@ public class TankPanel extends JPanel {
                     // 坦克停下，向服务器发送停下的消息
                     Client.INSTANCE.send(new TankStopMsg(selfTank));
                 } else {
-                    selfTank.setMoving(true);
                     if (isL) {
                         //System.out.println("按下方向左");
                         selfTank.setDir(Dir.LEFT);
@@ -117,8 +116,11 @@ public class TankPanel extends JPanel {
                         //System.out.println("按下方向下");
                         selfTank.setDir(Dir.DOWN);
                     }
-                    // 坦克开始移动，向服务器发送坦克移动的消息
-                    Client.INSTANCE.send(new TankStartMovingMsg(selfTank));
+                    if (!selfTank.isMoving()) {
+                        // 坦克开始移动，向服务器发送坦克移动的消息
+                        Client.INSTANCE.send(new TankStartMovingMsg(selfTank));
+                    }
+                    selfTank.setMoving(true);
                 }
             }
         });

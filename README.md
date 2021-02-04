@@ -38,3 +38,5 @@
 7. 重构消息，让消息自己handle
 
 8. 添加TankJoinMsg、TankDirChangeMsg、TankStopMsg、TankStartingMovingMsg、BulletNewMsg；基于这些不同的类型的消息类抽象出父类Msg；新增MsgType枚举类，不同子类消息类中添加MsgType加以区别；将TankJoinMsgEncoder改名为MsgEncoder，将TankJoinMsgDecoder改名为MsgDecoder，完成TankStartMoving、TankStop两种状态下的消息发送。
+
+9. 修复坦克在每次通过键盘事件移动后重绘引起的bug。
