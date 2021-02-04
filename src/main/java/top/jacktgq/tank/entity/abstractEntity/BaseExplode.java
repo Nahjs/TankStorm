@@ -104,4 +104,9 @@ public abstract class BaseExplode extends GameObject {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public UUID getTankId() {
+        return null;
+    }
 }

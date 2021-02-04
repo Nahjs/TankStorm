@@ -89,4 +89,9 @@ public abstract class BaseTank extends GameObject {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public UUID getTankId() {
+        return null;
+    }
 }

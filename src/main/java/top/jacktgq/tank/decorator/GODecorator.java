@@ -103,4 +103,9 @@ public class GODecorator extends GameObject {
     public void setY(int y) {
         gameObject.setY(y);
     }
+
+    @Override
+    public UUID getTankId() {
+        return gameObject.getTankId();
+    }
 }

@@ -118,7 +118,7 @@ public class TankStartMovingMsg extends Msg {
             return;
         }
         // 根据id找到对应的坦克
-        GameObject tank = GameModel.INSTANCE.findByUUID(id);
+        GameObject tank = GameModel.INSTANCE.findTankByUUID(id);
         if (tank != null) {
             tank.setMoving(true);
             tank.setX(x);

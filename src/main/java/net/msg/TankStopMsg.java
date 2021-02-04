@@ -118,7 +118,7 @@ public class TankStopMsg extends Msg {
             return;
         }
         // 根据id找到对应的坦克
-        GameObject tank = GameModel.INSTANCE.findByUUID(id);
+        GameObject tank = GameModel.INSTANCE.findTankByUUID(id);
         if (tank != null) {
             //System.out.println(tank);
             tank.setMoving(false);

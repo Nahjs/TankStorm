@@ -45,4 +45,6 @@ public abstract class GameObject {
     public abstract void setX(int x);
 
     public abstract void setY(int y);
+
+    public abstract UUID getTankId();
 }

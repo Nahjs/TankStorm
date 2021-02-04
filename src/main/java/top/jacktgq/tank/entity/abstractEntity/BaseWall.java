@@ -95,4 +95,9 @@ public abstract class BaseWall extends GameObject {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public UUID getTankId() {
+        return null;
+    }
 }

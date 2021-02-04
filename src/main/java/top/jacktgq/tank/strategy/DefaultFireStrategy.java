@@ -1,10 +1,15 @@
 package top.jacktgq.tank.strategy;
 
+import net.Client;
+import net.msg.BulletNewMsg;
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.Tank;
+import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
 import top.jacktgq.tank.mgr.ResourceMgr;
 import top.jacktgq.tank.util.Audio;
+
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -48,7 +53,10 @@ public class DefaultFireStrategy implements FireStrategy {
             }
         }
 
-        GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createBullet(bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY));
+        BaseBullet bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
+        GameModel.INSTANCE.gameObjects.add(bullet);
+        // 将该坦克打出了新子弹的消息发送给服务器
+        Client.INSTANCE.send(new BulletNewMsg(bullet));
         if (t.group == Group.SELF) {
             new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
         }

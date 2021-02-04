@@ -27,6 +27,7 @@ public class GameModel {
     GameObject selfTank;
     public List<GameObject> gameObjects = new ArrayList<>();
     public HashMap<UUID, GameObject> tankMap = new HashMap<>();
+    public HashMap<UUID, GameObject> bulletMap = new HashMap<>();
     public ColliderChain colliderChain;
     public GameFactory factory;
     public Random ramdom = new Random();
@@ -117,13 +118,21 @@ public class GameModel {
         return selfTank;
     }
 
-
     public void addTank(GameObject tank) {
         gameObjects.add(new TankIdDecorator(tank));
         tankMap.put(tank.getId(), tank);
     }
 
-    public GameObject findByUUID(UUID id) {
+    public void addBullet(GameObject bullet) {
+        gameObjects.add(bullet);
+        bulletMap.put(bullet.getId(), bullet);
+    }
+
+    public GameObject findTankByUUID(UUID id) {
         return tankMap.get(id);
+    }
+
+    public GameObject findBulletByUUID(UUID id) {
+        return bulletMap.get(id);
     }
 }

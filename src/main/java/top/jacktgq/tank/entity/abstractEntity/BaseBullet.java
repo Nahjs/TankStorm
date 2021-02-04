@@ -19,9 +19,11 @@ public abstract class BaseBullet extends GameObject {
     protected Group group;
     protected Rectangle rect;
     protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
-    protected int speed = 2;
+    protected int speed = 6;
     protected int step = 0;
     protected GameObjectType gameObjectType = GameObjectType.BULLET;
+    protected UUID id;
+    protected UUID tankId;
 
     // 绘制爆炸效果
     @Override
@@ -89,7 +91,7 @@ public abstract class BaseBullet extends GameObject {
 
     @Override
     public UUID getId() {
-        return null;
+        return id;
     }
 
     @Override
@@ -110,4 +112,7 @@ public abstract class BaseBullet extends GameObject {
     public Dir getDir() {
         return dir;
     }
+
+    @Override
+    public abstract UUID getTankId();
 }

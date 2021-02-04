@@ -6,6 +6,7 @@ import top.jacktgq.tank.mgr.ResourceMgr;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -13,12 +14,11 @@ import java.awt.image.BufferedImage;
  * @Description 默认风格的炮弹类
  */
 public class DefaultBullet extends BaseBullet {
-    private static int SPEED = 6;
-    private Dir dir;
-
     public BufferedImage curBulletImage;
 
-    public DefaultBullet(int x, int y, Dir dir, Group group) {
+    public DefaultBullet(UUID id, UUID tankId, int x, int y, Dir dir, Group group) {
+        this.id = id;
+        this.tankId = tankId;
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -53,22 +53,22 @@ public class DefaultBullet extends BaseBullet {
     private void move() {
         switch (dir) {
             case LEFT: {
-                x -= SPEED;
+                x -= speed;
                 curBulletImage = ResourceMgr.bulletL;
                 break;
             }
             case UP: {
-                y -= SPEED;
+                y -= speed;
                 curBulletImage = ResourceMgr.bulletU;
                 break;
             }
             case RIGHT: {
-                x += SPEED;
+                x += speed;
                 curBulletImage = ResourceMgr.bulletR;
                 break;
             }
             case DOWN: {
-                y += SPEED;
+                y += speed;
                 curBulletImage = ResourceMgr.bulletD;
                 break;
             }
@@ -94,4 +94,18 @@ public class DefaultBullet extends BaseBullet {
         return x + bulletWidth < 0 || y + bulletHeight < 0 || x > tankWidth || y > tankHeight;
     }
 
+    @Override
+    public UUID getTankId() {
+        return tankId;
+    }
+
+    @Override
+    public String toString() {
+        return "DefaultBullet{" +
+                "dir=" + dir +
+                ", group=" + group +
+                ", id=" + id +
+                ", tankId=" + tankId +
+                '}';
+    }
 }

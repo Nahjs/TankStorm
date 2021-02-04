@@ -6,6 +6,7 @@ import top.jacktgq.tank.mgr.ResourceMgr;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.UUID;
 
 /**
  * @Author CandyWall
@@ -13,13 +14,13 @@ import java.awt.image.BufferedImage;
  * @Description 方块风格的炮弹类
  */
 public class RectBullet extends BaseBullet {
-    private static int SPEED = 6;
     private int bulletWidth = 20, bulletHeight = 20;
-    private Dir dir;
     public BufferedImage curBulletImage;
 
 
-    public RectBullet(int x, int y, Dir dir, Group group) {
+    public RectBullet(UUID id, UUID tankId, int x, int y, Dir dir, Group group) {
+        this.id = id;
+        this.tankId = tankId;
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -50,19 +51,19 @@ public class RectBullet extends BaseBullet {
     private void move() {
         switch (dir) {
             case LEFT: {
-                x -= SPEED;
+                x -= speed;
                 break;
             }
             case UP: {
-                y -= SPEED;
+                y -= speed;
                 break;
             }
             case RIGHT: {
-                x += SPEED;
+                x += speed;
                 break;
             }
             case DOWN: {
-                y += SPEED;
+                y += speed;
                 break;
             }
         }
@@ -73,6 +74,11 @@ public class RectBullet extends BaseBullet {
     @Override
     public boolean islive() {
         return !isOutOfScreen();
+    }
+
+    @Override
+    public UUID getTankId() {
+        return tankId;
     }
 
     /**

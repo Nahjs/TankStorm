@@ -32,7 +32,7 @@ public abstract class GameFactory {
      * 创建子弹
      * @return
      */
-    public abstract BaseBullet createBullet(int x, int y, Dir dir, Group group);
+    public abstract BaseBullet createBullet(UUID id, UUID tankId, int x, int y, Dir dir, Group group);
 
     /**
      * 创建爆炸

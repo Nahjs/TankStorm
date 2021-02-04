@@ -57,10 +57,11 @@ public class TankPanel extends JPanel {
                     }
                     case KeyEvent.VK_SPACE: {
                         GameModel.INSTANCE.getSelfTank().fire();
-                        break;
+                        return;
                     }
                 }
                 setMainTankDir();
+                // 坦克在每次通过键盘事件移动后不需要重绘
                 // repaint();
             }
 
@@ -84,6 +85,9 @@ public class TankPanel extends JPanel {
                     case KeyEvent.VK_RIGHT: {
                         isR = false;
                         break;
+                    }
+                    case KeyEvent.VK_SPACE: {
+                        return;
                     }
                 }
                 setMainTankDir();

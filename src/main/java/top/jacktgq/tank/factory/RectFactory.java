@@ -26,8 +26,8 @@ public class RectFactory extends GameFactory {
     }
 
     @Override
-    public BaseBullet createBullet(int x, int y, Dir dir, Group group) {
-        return new RectBullet(x, y, dir, group);
+    public BaseBullet createBullet(UUID id, UUID tankId, int x, int y, Dir dir, Group group) {
+        return new RectBullet(id, tankId, x, y, dir, group);
     }
 
     @Override
