@@ -31,6 +31,7 @@ public class GameModel {
     public ColliderChain colliderChain;
     public GameFactory factory;
     public Random ramdom = new Random();
+    public boolean gameOver = false;
 
     private GameModel(int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
@@ -40,11 +41,11 @@ public class GameModel {
         // 初始化墙
         gameObjects.add(factory.createWall(100, 400, 60, 200));
         gameObjects.add(factory.createWall(820, 400, 60, 200));
-        gameObjects.add(factory.createWall(200, 250, 200, 50));
-        gameObjects.add(factory.createWall(600, 250, 200, 50));
+        gameObjects.add(factory.createWall(200, 200, 200, 50));
+        gameObjects.add(factory.createWall(600, 200, 200, 50));
         // 初始化我方坦克，位置随机（位置必须合法，不能和墙壁相交），方向随机
         initSelfTank();
-        gameObjects.add(selfTank);
+        addTank(selfTank);
         // 随机产生enemy_tank_count辆敌方坦克
         // initEnemyTanks();
         // 连接服务器
@@ -100,6 +101,11 @@ public class GameModel {
         g.setColor(Color.BLACK);
 
         g.fillRect(0, 0, gameWidth, gameHeight);
+        if (gameOver) {
+            int imgWidth = ResourceMgr.gameOver.getWidth();
+            int imgHeight = ResourceMgr.gameOver.getHeight();
+            g.drawImage(ResourceMgr.gameOver, (gameWidth - imgWidth) / 2, (gameHeight - imgHeight) / 2, null);
+        }
         g.setColor(Color.WHITE);
         // 绘制所有游戏物体：坦克、子弹、爆炸
         for (int i = 0; i < gameObjects.size(); i++) {
@@ -134,5 +140,21 @@ public class GameModel {
 
     public GameObject findBulletByUUID(UUID id) {
         return bulletMap.get(id);
+    }
+
+    public void removeTankByUUID(UUID tankId) {
+        GameObject tank = tankMap.get(tankId);
+        if (tank != null) {
+            gameObjects.remove(tank);
+            tankMap.remove(tankId);
+        }
+    }
+
+    public void removeBulletByUUID(UUID bulletId) {
+        GameObject bullet = bulletMap.get(bulletId);
+        if (bullet != null) {
+            gameObjects.remove(bullet);
+            bulletMap.remove(bulletId);
+        }
     }
 }

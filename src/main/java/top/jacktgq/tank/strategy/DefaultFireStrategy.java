@@ -54,7 +54,7 @@ public class DefaultFireStrategy implements FireStrategy {
         }
 
         BaseBullet bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
-        GameModel.INSTANCE.gameObjects.add(bullet);
+        GameModel.INSTANCE.addBullet(bullet);
         // 将该坦克打出了新子弹的消息发送给服务器
         Client.INSTANCE.send(new BulletNewMsg(bullet));
         if (t.group == Group.SELF) {

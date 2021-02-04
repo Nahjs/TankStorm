@@ -46,3 +46,7 @@
 11. 空格键按下不应该调用setMainTankDir()方法，将switch case KeyEvent.VK_SPACE中的break改成return，也就不会发送TankStopMsg消息了。
 
 12. 坦克打出新的子弹发送BulletNewMsg给服务器。
+
+13. 本地客户端的坦克和子弹产生后应该也加入到各自的集合中。
+
+14. 增加一个网络版子弹和坦克的碰撞检测器，坦克和其他坦克的打出的子弹碰撞后发送TankDieMsg。

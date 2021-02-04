@@ -16,6 +16,7 @@ public class ResourceMgr {
     public static BufferedImage enemyTankL, enemyTankU, enemyTankR, enemyTankD;
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;
     public static BufferedImage[] explodes = new BufferedImage[16];
+    public static BufferedImage gameOver;
     static {
         // 加载四个方向的我方坦克图片
         selfTankU = readImage("GoodTank1.png");
@@ -36,6 +37,7 @@ public class ResourceMgr {
         for (int i = 0; i < explodes.length; i++) {
             explodes[i] = readImage("e" + (i + 1) + ".gif");
         }
+        gameOver = readImage("GameOver.png");
     }
 
     private static BufferedImage readImage(String filename) {
