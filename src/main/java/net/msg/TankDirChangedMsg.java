@@ -1,10 +1,8 @@
 package net.msg;
 
-import net.Client;
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
-import top.jacktgq.tank.entity.Group;
 
 import java.io.*;
 import java.util.UUID;
@@ -17,10 +15,7 @@ import java.util.UUID;
 public class TankDirChangedMsg extends Msg {
     public int x, y;
     public Dir dir;
-    public boolean moving;
-    public Group group;
     public UUID id;
-    public String name;
 
     public TankDirChangedMsg() {
 
@@ -30,20 +25,14 @@ public class TankDirChangedMsg extends Msg {
         this.x = tank.getX();
         this.y = tank.getY();
         this.dir = tank.getDir();
-        this.moving = tank.isMoving();
-        this.group = tank.getGroup();
         this.id = tank.getId();
-        this.name = tank.getName();
     }
 
-    public TankDirChangedMsg(int x, int y, Dir dir, boolean isMoving, Group group, UUID id, String name) {
+    public TankDirChangedMsg(int x, int y, Dir dir, UUID id) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.moving = isMoving;
-        this.group = group;
         this.id = id;
-        this.name = name;
     }
 
     @Override
@@ -56,7 +45,6 @@ public class TankDirChangedMsg extends Msg {
             this.x = dis.readInt();
             this.y = dis.readInt();
             this.dir = Dir.values()[dis.readInt()];
-            this.moving = dis.readBoolean();
             this.id = new UUID(dis.readLong(), dis.readLong());
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,8 +74,6 @@ public class TankDirChangedMsg extends Msg {
             dos.writeInt(x);    // 4字节
             dos.writeInt(y);    // 4字节
             dos.writeInt(dir.ordinal()); // 4字节
-            dos.writeBoolean(moving);  // 1字节
-            dos.writeInt(group.ordinal()); // 4字节
             dos.writeLong(id.getMostSignificantBits());  // 8字节
             dos.writeLong(id.getLeastSignificantBits()); // 8字节
             dos.flush();
@@ -120,25 +106,23 @@ public class TankDirChangedMsg extends Msg {
                 "x=" + x +
                 ", y=" + y +
                 ", dir=" + dir +
-                ", isMoving=" + moving +
-                ", group=" + group +
                 ", id=" + id +
-                ", name='" + name + '\'' +
                 '}';
     }
 
     @Override
     public void handle() {
-        // 客户端接收到TankJoinMsg的逻辑处理：是不是自己？列表是否已经有了
+        // 客户端接收到TankJoinMsg的逻辑处理：是不是自己？
         // 如果传过来的连接信息的ID和本身的ID相等或者本地的列表中有这个ID，不做处理
-        if (this.id.equals(GameModel.INSTANCE.getSelfTank().getId()) ||
-                GameModel.INSTANCE.findByUUID(this.id) != null) {
+        if (this.id.equals(GameModel.INSTANCE.getSelfTank().getId())) {
             return;
         }
-        GameObject tank = GameModel.INSTANCE.factory.createSelfTank(this.id, this.x, this.y, this.dir, 5);
-        GameModel.INSTANCE.addTank(tank);
-
-        // 再发送一次消息给新连上的坦克
-        Client.INSTANCE.send(new TankDirChangedMsg(GameModel.INSTANCE.getSelfTank()));
+        // 根据id找到对应的坦克
+        GameObject tank = GameModel.INSTANCE.findByUUID(id);
+        if (tank != null) {
+            tank.setX(x);
+            tank.setY(y);
+            tank.setDir(dir);
+        }
     }
 }

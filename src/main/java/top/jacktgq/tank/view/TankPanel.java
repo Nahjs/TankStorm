@@ -1,6 +1,7 @@
 package top.jacktgq.tank.view;
 
 import net.Client;
+import net.msg.TankDirChangedMsg;
 import net.msg.TankStartMovingMsg;
 import net.msg.TankStopMsg;
 import top.jacktgq.tank.GameModel;
@@ -100,6 +101,8 @@ public class TankPanel extends JPanel {
                     // 坦克停下，向服务器发送停下的消息
                     Client.INSTANCE.send(new TankStopMsg(selfTank));
                 } else {
+                    // 存储改变前的方向
+                    Dir oldDir = selfTank.getDir();
                     if (isL) {
                         //System.out.println("按下方向左");
                         selfTank.setDir(Dir.LEFT);
@@ -121,6 +124,10 @@ public class TankPanel extends JPanel {
                         Client.INSTANCE.send(new TankStartMovingMsg(selfTank));
                     }
                     selfTank.setMoving(true);
+                    // 如果方向发生改变，就发送消息给服务器
+                    if (oldDir != selfTank.getDir()) {
+                        Client.INSTANCE.send(new TankDirChangedMsg(selfTank));
+                    }
                 }
             }
         });
