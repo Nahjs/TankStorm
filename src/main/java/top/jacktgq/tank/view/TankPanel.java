@@ -1,7 +1,7 @@
 package top.jacktgq.tank.view;
 
 import net.Client;
-import net.msg.DirChangedMsg;
+import net.msg.DirChangeMsg;
 import net.msg.MoveMsg;
 import net.msg.StopMsg;
 import top.jacktgq.tank.GameModel;
@@ -130,7 +130,7 @@ public class TankPanel extends JPanel {
                     selfTank.setMoving(true);
                     // 如果方向发生改变，就发送消息给服务器
                     if (oldDir != selfTank.getDir()) {
-                        Client.INSTANCE.send(new DirChangedMsg(selfTank));
+                        Client.INSTANCE.send(new DirChangeMsg(selfTank));
                     }
                 }
             }

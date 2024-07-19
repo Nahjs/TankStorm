@@ -6,9 +6,7 @@ import io.netty.handler.codec.MessageToByteEncoder;
 import net.msg.Msg;
 
 /**
- * @Author CandyWall
- * @Date 2021/2/1--9:58
- * @Description 用户发送坦克信息给服务器时的编码器
+ * 编码器，负责将消息对象编码成字节流发送到网络
  */
 public class MsgEncoder extends MessageToByteEncoder<Msg> {
 

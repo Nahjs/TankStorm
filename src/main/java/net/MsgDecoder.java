@@ -8,9 +8,7 @@ import net.msg.*;
 import java.util.List;
 
 /**
- * @Author CandyWall
- * @Date 2021/2/1--9:27
- * @Description 服务器接收各个用户坦克信息时的编码器
+ * 解码器，负责将从网络接收到的字节流解码成消息对象
  */
 public class MsgDecoder extends ByteToMessageDecoder {
     @Override
@@ -37,7 +35,7 @@ public class MsgDecoder extends ByteToMessageDecoder {
                 msg = new JoinMsg();
                 break;
             case TankDirChanged:
-                msg = new DirChangedMsg();
+                msg = new DirChangeMsg();
                 break;
             case TankStartMoving:
                 msg = new MoveMsg();

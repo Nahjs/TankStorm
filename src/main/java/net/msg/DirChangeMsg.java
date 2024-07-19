@@ -10,23 +10,23 @@ import java.util.UUID;
 /**
  * 坦克方向改变的时候，给服务器发送的消息
  */
-public class DirChangedMsg extends Msg {
+public class DirChangeMsg extends Msg {
     public int x, y;
     public Dir dir;
     public UUID id;
 
-    public DirChangedMsg() {
+    public DirChangeMsg() {
 
     }
 
-    public DirChangedMsg(GameObject tank) {
+    public DirChangeMsg(GameObject tank) {
         this.x = tank.getX();
         this.y = tank.getY();
         this.dir = tank.getDir();
         this.id = tank.getId();
     }
 
-    public DirChangedMsg(int x, int y, Dir dir, UUID id) {
+    public DirChangeMsg(int x, int y, Dir dir, UUID id) {
         this.x = x;
         this.y = y;
         this.dir = dir;
