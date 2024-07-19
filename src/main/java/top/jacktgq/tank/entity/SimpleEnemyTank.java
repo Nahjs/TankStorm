@@ -5,9 +5,7 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/23--21:16
- * @Description 方块风格的敌方坦克
+ * 敌方坦克
  */
 public class SimpleEnemyTank extends Tank {
     private int width = 60, height = 60;

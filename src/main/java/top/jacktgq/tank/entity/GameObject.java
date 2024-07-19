@@ -4,9 +4,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--17:04
- * @Description 游戏物体
+ * 游戏物体
  */
 public abstract class GameObject {
     public int x, y;

@@ -4,9 +4,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/23--21:16
- * @Description 方块风格的我方坦克
+ * 我方坦克
  */
 public class SimpleMyTank extends Tank {
     private int width = 60, height = 60;

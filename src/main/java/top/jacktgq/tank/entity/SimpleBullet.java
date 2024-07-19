@@ -9,9 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/23--22:13
- * @Description 方块风格的炮弹类
+ *炮弹类
  */
 public class SimpleBullet extends BaseBullet {
     private int bulletWidth = 20, bulletHeight = 20;

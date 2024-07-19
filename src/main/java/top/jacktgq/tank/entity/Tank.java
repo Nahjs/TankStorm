@@ -12,9 +12,7 @@ import java.awt.image.BufferedImage;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/23--21:16
- * @Description 坦克父类
+ * 坦克父类
  */
 public abstract class Tank extends BaseTank {
     public Group group;

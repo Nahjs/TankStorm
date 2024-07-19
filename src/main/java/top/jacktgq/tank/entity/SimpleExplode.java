@@ -5,9 +5,7 @@ import top.jacktgq.tank.entity.BaseObject.BaseBoom;
 import java.awt.*;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/24--11:52
- * @Description 方块风格的爆炸动画
+ * 爆炸动画
  */
 public class SimpleExplode extends BaseBoom {
     public SimpleExplode(Rectangle tankRect) {
