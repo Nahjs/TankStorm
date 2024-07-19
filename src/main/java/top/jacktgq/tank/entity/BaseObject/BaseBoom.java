@@ -10,11 +10,9 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--9:22
- * @Description
+ * 爆炸效果基类
  */
-public abstract class BaseExplode extends GameObject {
+public abstract class BaseBoom extends GameObject {
     protected Rectangle rect;
     protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
     protected Group group;
@@ -25,7 +23,7 @@ public abstract class BaseExplode extends GameObject {
     @Override
     public abstract void paint(Graphics g);
 
-    public BaseExplode(Rectangle tankRect) {
+    public BaseBoom(Rectangle tankRect) {
         this.tankRect = tankRect;
         rect = new Rectangle();
         new Thread(()->new AudioUtil("audio/explode.wav").play()).start();

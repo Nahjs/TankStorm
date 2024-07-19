@@ -2,7 +2,7 @@ package top.jacktgq.tank.factory;
 
 import top.jacktgq.tank.entity.*;
 import top.jacktgq.tank.entity.BaseObject.BaseBullet;
-import top.jacktgq.tank.entity.BaseObject.BaseExplode;
+import top.jacktgq.tank.entity.BaseObject.BaseBoom;
 import top.jacktgq.tank.entity.BaseObject.BaseTank;
 import top.jacktgq.tank.factory.abstractfactory.GameFactory;
 
@@ -31,7 +31,7 @@ public class RectFactory extends GameFactory {
     }
 
     @Override
-    public BaseExplode createExplode(Rectangle tankRect) {
+    public BaseBoom createExplode(Rectangle tankRect) {
         return new SimpleExplode(tankRect);
     }
 

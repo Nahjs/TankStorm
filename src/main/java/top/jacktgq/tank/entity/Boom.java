@@ -1,7 +1,7 @@
 package top.jacktgq.tank.entity;
 
 import top.jacktgq.tank.GameModel;
-import top.jacktgq.tank.entity.BaseObject.BaseExplode;
+import top.jacktgq.tank.entity.BaseObject.BaseBoom;
 import top.jacktgq.tank.loader.ResourceLoader;
 
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
  * @Date 2021/1/24--11:52
  * @Description 默认风格的爆炸动画
  */
-public class Boom extends BaseExplode {
+public class Boom extends BaseBoom {
     public Boom(Rectangle tankRect) {
         super(tankRect);
     }

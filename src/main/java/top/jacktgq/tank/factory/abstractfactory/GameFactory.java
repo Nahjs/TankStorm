@@ -4,7 +4,7 @@ import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.BaseObject.BaseBullet;
-import top.jacktgq.tank.entity.BaseObject.BaseExplode;
+import top.jacktgq.tank.entity.BaseObject.BaseBoom;
 import top.jacktgq.tank.entity.BaseObject.BaseTank;
 
 import java.awt.*;
@@ -38,7 +38,7 @@ public abstract class GameFactory {
      * 创建爆炸
      * @return
      */
-    public abstract BaseExplode createExplode(Rectangle tankRect);
+    public abstract BaseBoom createExplode(Rectangle tankRect);
 
     public abstract GameObject createWall(int x, int y, int width, int height);
 }

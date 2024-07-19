@@ -1,5 +1,6 @@
 package top.jacktgq.tank.entity.BaseObject;
 
+
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
@@ -11,19 +12,17 @@ import java.awt.image.BufferedImage;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--9:22
- * @Description 炮弹类
+ * 炮弹基类，包含炮弹的通用属性和方法。
  */
 public abstract class BaseBullet extends GameObject {
-    protected Group group;
-    protected Rectangle rect;
-    protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
-    protected int speed = 6;
-    protected int step = 0;
-    protected GameObjectType gameObjectType = GameObjectType.BULLET;
-    protected UUID id;
-    protected UUID tankId;
+    protected Group group;//炮弹所属的组
+    protected Rectangle rect;//炮弹的矩形区域
+    protected Rectangle tankRect; // 被击中坦克的矩形区域，用于爆炸效果的定位。
+    protected int speed = 6;//炮弹的移动速度
+    protected int step = 0;//爆炸动画的当前步骤
+    protected GameObjectType gameObjectType = GameObjectType.BULLET;//游戏对象的类型，这里为 BULLET。
+    protected UUID id;//炮弹的唯一标识符
+    protected UUID tankId;//发射炮弹的坦克的唯一标识符
 
     // 绘制爆炸效果
     @Override
@@ -36,7 +35,7 @@ public abstract class BaseBullet extends GameObject {
     }
 
     /**
-     * 获取爆炸动画到了第几张图片
+     * 获取爆炸动画
      * @return
      */
     public int getStep() {
