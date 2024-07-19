@@ -1,7 +1,7 @@
 package top.jacktgq.tank.entity;
 
 import top.jacktgq.tank.GameModel;
-import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
+import top.jacktgq.tank.entity.BaseObject.BaseBullet;
 import top.jacktgq.tank.mgr.ResourceMgr;
 
 import java.awt.*;
@@ -13,10 +13,10 @@ import java.util.UUID;
  * @Date 2021/1/23--22:13
  * @Description 默认风格的炮弹类
  */
-public class DefaultBullet extends BaseBullet {
+public class Bullet extends BaseBullet {
     public BufferedImage curBulletImage;
 
-    public DefaultBullet(UUID id, UUID tankId, int x, int y, Dir dir, Group group) {
+    public Bullet(UUID id, UUID tankId, int x, int y, Dir dir, Group group) {
         this.id = id;
         this.tankId = tankId;
         this.x = x;

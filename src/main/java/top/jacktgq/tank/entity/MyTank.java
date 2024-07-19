@@ -6,19 +6,20 @@ import java.util.UUID;
 /**
  * @Author CandyWall
  * @Date 2021/1/23--21:16
- * @Description 方块风格的我方坦克
+ * @Description 默认风格的我方坦克
  */
-public class RectSelfTank extends Tank {
-    private int width = 60, height = 60;
-    public RectSelfTank(UUID id, int x, int y, Dir dir, int speed) {
+public class MyTank extends Tank {
+
+    public MyTank(UUID id, int x, int y, Dir dir, int speed) {
         super(id, x, y, dir, speed, Group.SELF);
         moving = false;
     }
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fillRect(x, y, width, height);
+        /*g.setColor(Color.MAGENTA);
+        g.fillRect(x, y, WIDTH, HEIGHT);*/
+        g.drawImage(curTankImage, x, y, null);
         move();
     }
 }

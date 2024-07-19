@@ -1,46 +1,37 @@
-package top.jacktgq.tank.entity.abstractEntity;
+package top.jacktgq.tank.entity.BaseObject;
 
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
-import top.jacktgq.tank.util.Audio;
 
 import java.awt.*;
 import java.util.UUID;
 
 /**
  * @Author CandyWall
- * @Date 2021/1/28--9:22
- * @Description
+ * @Date 2021/1/29--8:13
+ * @Description 墙
  */
-public abstract class BaseExplode extends GameObject {
+public abstract class BaseWall extends GameObject {
+    protected int width, height;
     protected Rectangle rect;
-    protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
-    protected Group group;
-    protected int speed = 2;
-    protected int step = 0;
-    protected GameObjectType gameObjectType = GameObjectType.EXPLODE;
+    protected GameObjectType gameObjectType = GameObjectType.WALL;
 
-    @Override
+    public BaseWall(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        rect = new Rectangle(x, y, width, height);
+    }
+
     public abstract void paint(Graphics g);
 
-    public BaseExplode(Rectangle tankRect) {
-        this.tankRect = tankRect;
-        rect = new Rectangle();
-        new Thread(()->new Audio("audio/explode.wav").play()).start();
-    }
-
-    /**
-     * 获取爆炸动画到了第几张图片
-     * @return
-     */
-    public int getStep() {
-        return step;
-    }
-
     @Override
-    public abstract Rectangle getRect();
+    public Rectangle getRect() {
+        return rect;
+    }
 
     @Override
     public GameObjectType getGameObjectType() {
@@ -53,13 +44,16 @@ public abstract class BaseExplode extends GameObject {
 
     @Override
     public Group getGroup() {
-        return group;
+        return null;
     }
 
     @Override
     public UUID getId() {
         return null;
     }
+
+    @Override
+    public void fire() {}
 
     @Override
     public boolean isMoving() {
@@ -70,9 +64,6 @@ public abstract class BaseExplode extends GameObject {
     public String getName() {
         return null;
     }
-
-    @Override
-    public void fire() {}
 
     @Override
     public void setMoving(boolean b) {}

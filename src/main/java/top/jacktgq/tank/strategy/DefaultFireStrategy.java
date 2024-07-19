@@ -5,7 +5,7 @@ import net.msg.BulletMsg;
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.Tank;
-import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
+import top.jacktgq.tank.entity.BaseObject.BaseBullet;
 import top.jacktgq.tank.mgr.ResourceMgr;
 import top.jacktgq.tank.util.Audio;
 

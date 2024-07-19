@@ -1,6 +1,6 @@
 package top.jacktgq.tank.entity;
 
-import top.jacktgq.tank.entity.abstractEntity.BaseWall;
+import top.jacktgq.tank.entity.BaseObject.BaseWall;
 
 import java.awt.*;
 
@@ -9,8 +9,8 @@ import java.awt.*;
  * @Date 2021/1/29--8:13
  * @Description 默认风格的墙
  */
-public class DefaultWall extends BaseWall {
-    public DefaultWall(int x, int y, int width, int height) {
+public class Wall extends BaseWall {
+    public Wall(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
 

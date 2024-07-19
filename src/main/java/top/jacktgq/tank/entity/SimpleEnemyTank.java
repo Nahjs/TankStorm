@@ -9,11 +9,11 @@ import java.util.UUID;
  * @Date 2021/1/23--21:16
  * @Description 方块风格的敌方坦克
  */
-public class RectEnemyTank extends Tank {
+public class SimpleEnemyTank extends Tank {
     private int width = 60, height = 60;
     private Random random = new Random();
 
-    public RectEnemyTank(UUID id, int x, int y, Dir dir, int speed) {
+    public SimpleEnemyTank(UUID id, int x, int y, Dir dir, int speed) {
         super(id, x, y, dir, speed, Group.ENEMY);
     }
 

@@ -1,4 +1,4 @@
-package top.jacktgq.tank.entity.abstractEntity;
+package top.jacktgq.tank.entity.BaseObject;
 
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;

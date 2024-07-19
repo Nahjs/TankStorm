@@ -3,9 +3,9 @@ package top.jacktgq.tank.factory.abstractfactory;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.Group;
-import top.jacktgq.tank.entity.abstractEntity.BaseBullet;
-import top.jacktgq.tank.entity.abstractEntity.BaseExplode;
-import top.jacktgq.tank.entity.abstractEntity.BaseTank;
+import top.jacktgq.tank.entity.BaseObject.BaseBullet;
+import top.jacktgq.tank.entity.BaseObject.BaseExplode;
+import top.jacktgq.tank.entity.BaseObject.BaseTank;
 
 import java.awt.*;
 import java.util.UUID;

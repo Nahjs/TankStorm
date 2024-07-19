@@ -1,7 +1,7 @@
 package top.jacktgq.tank.entity;
 
 import top.jacktgq.tank.GameModel;
-import top.jacktgq.tank.entity.abstractEntity.BaseTank;
+import top.jacktgq.tank.entity.BaseObject.BaseTank;
 import top.jacktgq.tank.mgr.PropertyMgr;
 import top.jacktgq.tank.mgr.ResourceMgr;
 import top.jacktgq.tank.strategy.DefaultFireStrategy;

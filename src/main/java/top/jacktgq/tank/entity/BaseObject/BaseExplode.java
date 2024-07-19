@@ -1,37 +1,46 @@
-package top.jacktgq.tank.entity.abstractEntity;
+package top.jacktgq.tank.entity.BaseObject;
 
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
+import top.jacktgq.tank.util.Audio;
 
 import java.awt.*;
 import java.util.UUID;
 
 /**
  * @Author CandyWall
- * @Date 2021/1/29--8:13
- * @Description 墙
+ * @Date 2021/1/28--9:22
+ * @Description
  */
-public abstract class BaseWall extends GameObject {
-    protected int width, height;
+public abstract class BaseExplode extends GameObject {
     protected Rectangle rect;
-    protected GameObjectType gameObjectType = GameObjectType.WALL;
-
-    public BaseWall(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        rect = new Rectangle(x, y, width, height);
-    }
-
-    public abstract void paint(Graphics g);
+    protected Rectangle tankRect; // 爆炸坦克的尺寸和坐标
+    protected Group group;
+    protected int speed = 2;
+    protected int step = 0;
+    protected GameObjectType gameObjectType = GameObjectType.EXPLODE;
 
     @Override
-    public Rectangle getRect() {
-        return rect;
+    public abstract void paint(Graphics g);
+
+    public BaseExplode(Rectangle tankRect) {
+        this.tankRect = tankRect;
+        rect = new Rectangle();
+        new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
+
+    /**
+     * 获取爆炸动画到了第几张图片
+     * @return
+     */
+    public int getStep() {
+        return step;
+    }
+
+    @Override
+    public abstract Rectangle getRect();
 
     @Override
     public GameObjectType getGameObjectType() {
@@ -44,16 +53,13 @@ public abstract class BaseWall extends GameObject {
 
     @Override
     public Group getGroup() {
-        return null;
+        return group;
     }
 
     @Override
     public UUID getId() {
         return null;
     }
-
-    @Override
-    public void fire() {}
 
     @Override
     public boolean isMoving() {
@@ -64,6 +70,9 @@ public abstract class BaseWall extends GameObject {
     public String getName() {
         return null;
     }
+
+    @Override
+    public void fire() {}
 
     @Override
     public void setMoving(boolean b) {}
