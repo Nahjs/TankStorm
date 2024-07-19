@@ -9,9 +9,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/29--11:52
- * @Description 游戏物体装饰器
+ * 游戏物体装饰器
  */
 public class ObjectDecorator extends GameObject {
     protected GameObject gameObject;

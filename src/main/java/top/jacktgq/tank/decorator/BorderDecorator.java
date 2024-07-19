@@ -5,9 +5,7 @@ import top.jacktgq.tank.entity.GameObject;
 import java.awt.*;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/29--11:54
- * @Description 在游戏物体外围加上矩形边框的装饰器
+ * 在游戏物体外围加上矩形边框的装饰器
  */
 public class BorderDecorator extends ObjectDecorator {
     public BorderDecorator(GameObject gameObject) {
