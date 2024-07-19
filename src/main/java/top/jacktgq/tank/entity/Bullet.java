@@ -2,7 +2,7 @@ package top.jacktgq.tank.entity;
 
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.BaseObject.BaseBullet;
-import top.jacktgq.tank.mgr.ResourceMgr;
+import top.jacktgq.tank.loader.ResourceLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,10 +25,10 @@ public class Bullet extends BaseBullet {
         this.group = group;
         this.rect = new Rectangle();
         switch (dir) {
-            case LEFT: curBulletImage = ResourceMgr.bulletL; break;
-            case UP: curBulletImage = ResourceMgr.bulletU; break;
-            case RIGHT: curBulletImage = ResourceMgr.bulletR; break;
-            case DOWN: curBulletImage = ResourceMgr.bulletD; break;
+            case LEFT: curBulletImage = ResourceLoader.bulletL; break;
+            case UP: curBulletImage = ResourceLoader.bulletU; break;
+            case RIGHT: curBulletImage = ResourceLoader.bulletR; break;
+            case DOWN: curBulletImage = ResourceLoader.bulletD; break;
         }
         updateRect(x, y);
     }
@@ -54,22 +54,22 @@ public class Bullet extends BaseBullet {
         switch (dir) {
             case LEFT: {
                 x -= speed;
-                curBulletImage = ResourceMgr.bulletL;
+                curBulletImage = ResourceLoader.bulletL;
                 break;
             }
             case UP: {
                 y -= speed;
-                curBulletImage = ResourceMgr.bulletU;
+                curBulletImage = ResourceLoader.bulletU;
                 break;
             }
             case RIGHT: {
                 x += speed;
-                curBulletImage = ResourceMgr.bulletR;
+                curBulletImage = ResourceLoader.bulletR;
                 break;
             }
             case DOWN: {
                 y += speed;
-                curBulletImage = ResourceMgr.bulletD;
+                curBulletImage = ResourceLoader.bulletD;
                 break;
             }
         }

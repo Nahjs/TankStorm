@@ -2,8 +2,8 @@ package top.jacktgq.tank.entity;
 
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.BaseObject.BaseTank;
-import top.jacktgq.tank.mgr.PropertyMgr;
-import top.jacktgq.tank.mgr.ResourceMgr;
+import top.jacktgq.tank.loader.ConfigLoader;
+import top.jacktgq.tank.loader.ResourceLoader;
 import top.jacktgq.tank.strategy.DefaultFireStrategy;
 import top.jacktgq.tank.strategy.FireStrategy;
 
@@ -37,9 +37,9 @@ public abstract class Tank extends BaseTank {
         this.rect = new Rectangle();
         updateRect();
         if (group == Group.SELF) {
-            fireStrategy = PropertyMgr.getSelf_tank_fs();
+            fireStrategy = ConfigLoader.getSelf_tank_fs();
         } else {
-            fireStrategy = PropertyMgr.getEnemy_tank_fs();
+            fireStrategy = ConfigLoader.getEnemy_tank_fs();
         }
     }
 
@@ -47,31 +47,31 @@ public abstract class Tank extends BaseTank {
         if (group == Group.SELF) {
             switch (dir) {
                 case LEFT:
-                    curTankImage = ResourceMgr.selfTankL;
+                    curTankImage = ResourceLoader.selfTankL;
                     break;
                 case UP:
-                    curTankImage = ResourceMgr.selfTankU;
+                    curTankImage = ResourceLoader.selfTankU;
                     break;
                 case RIGHT:
-                    curTankImage = ResourceMgr.selfTankR;
+                    curTankImage = ResourceLoader.selfTankR;
                     break;
                 case DOWN:
-                    curTankImage = ResourceMgr.selfTankD;
+                    curTankImage = ResourceLoader.selfTankD;
                     break;
             }
         } else {
             switch (dir) {
                 case LEFT:
-                    curTankImage = ResourceMgr.enemyTankL;
+                    curTankImage = ResourceLoader.enemyTankL;
                     break;
                 case UP:
-                    curTankImage = ResourceMgr.enemyTankU;
+                    curTankImage = ResourceLoader.enemyTankU;
                     break;
                 case RIGHT:
-                    curTankImage = ResourceMgr.enemyTankR;
+                    curTankImage = ResourceLoader.enemyTankR;
                     break;
                 case DOWN:
-                    curTankImage = ResourceMgr.enemyTankD;
+                    curTankImage = ResourceLoader.enemyTankD;
                     break;
             }
         }
@@ -108,22 +108,22 @@ public abstract class Tank extends BaseTank {
         switch (dir) {
             case LEFT: {
                 x -= speed;
-                curTankImage = (group == Group.SELF ? ResourceMgr.selfTankL : ResourceMgr.enemyTankL);
+                curTankImage = (group == Group.SELF ? ResourceLoader.selfTankL : ResourceLoader.enemyTankL);
                 break;
             }
             case UP: {
                 y -= speed;
-                curTankImage = (group == Group.SELF ? ResourceMgr.selfTankU : ResourceMgr.enemyTankU);
+                curTankImage = (group == Group.SELF ? ResourceLoader.selfTankU : ResourceLoader.enemyTankU);
                 break;
             }
             case RIGHT: {
                 x += speed;
-                curTankImage = (group == Group.SELF ? ResourceMgr.selfTankR : ResourceMgr.enemyTankR);
+                curTankImage = (group == Group.SELF ? ResourceLoader.selfTankR : ResourceLoader.enemyTankR);
                 break;
             }
             case DOWN: {
                 y += speed;
-                curTankImage = (group == Group.SELF ? ResourceMgr.selfTankD : ResourceMgr.enemyTankD);
+                curTankImage = (group == Group.SELF ? ResourceLoader.selfTankD : ResourceLoader.enemyTankD);
                 break;
             }
         }

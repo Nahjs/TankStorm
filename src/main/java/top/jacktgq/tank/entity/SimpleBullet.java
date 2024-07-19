@@ -2,7 +2,7 @@ package top.jacktgq.tank.entity;
 
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.BaseObject.BaseBullet;
-import top.jacktgq.tank.mgr.ResourceMgr;
+import top.jacktgq.tank.loader.ResourceLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -27,10 +27,10 @@ public class SimpleBullet extends BaseBullet {
         this.group = group;
         this.rect = new Rectangle();
         switch (dir) {
-            case LEFT: curBulletImage = ResourceMgr.bulletL; break;
-            case UP: curBulletImage = ResourceMgr.bulletU; break;
-            case RIGHT: curBulletImage = ResourceMgr.bulletR; break;
-            case DOWN: curBulletImage = ResourceMgr.bulletD; break;
+            case LEFT: curBulletImage = ResourceLoader.bulletL; break;
+            case UP: curBulletImage = ResourceLoader.bulletU; break;
+            case RIGHT: curBulletImage = ResourceLoader.bulletR; break;
+            case DOWN: curBulletImage = ResourceLoader.bulletD; break;
         }
         rect.width = bulletWidth;
         rect.height = bulletHeight;

@@ -8,8 +8,8 @@ import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.factory.abstractfactory.GameFactory;
-import top.jacktgq.tank.mgr.PropertyMgr;
-import top.jacktgq.tank.mgr.ResourceMgr;
+import top.jacktgq.tank.loader.ConfigLoader;
+import top.jacktgq.tank.loader.ResourceLoader;
 
 import java.awt.*;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.*;
  *              使用门面模式，GameModel作为Facade，负责与TankPanel打交道
  */
 public class GameModel {
-    public static final GameModel INSTANCE = new GameModel(PropertyMgr.getGameWidth(), PropertyMgr.getGameHeight());
+    public static final GameModel INSTANCE = new GameModel(ConfigLoader.getGameWidth(), ConfigLoader.getGameHeight());
     public int gameWidth, gameHeight;   // 游戏区域宽高
     GameObject selfTank;
     public List<GameObject> gameObjects = new ArrayList<>();
@@ -36,7 +36,7 @@ public class GameModel {
     private GameModel(int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
-        factory = PropertyMgr.getFactory();
+        factory = ConfigLoader.getFactory();
         colliderChain = new ColliderChain();
         // 初始化墙
         gameObjects.add(factory.createWall(100, 400, 60, 200));
@@ -59,8 +59,8 @@ public class GameModel {
         Rectangle tankRect = new Rectangle();
         while (true) {
             boolean valid = true;
-            tankRect.width = ResourceMgr.selfTankU.getWidth();
-            tankRect.height = ResourceMgr.selfTankU.getHeight();
+            tankRect.width = ResourceLoader.selfTankU.getWidth();
+            tankRect.height = ResourceLoader.selfTankU.getHeight();
             tankRect.x = ramdom.nextInt(gameWidth - tankRect.width);
             tankRect.y = ramdom.nextInt(gameHeight - tankRect.height);
             for (GameObject gameObject : gameObjects) {
@@ -84,7 +84,7 @@ public class GameModel {
     }
 
     private void initEnemyTanks() {
-        int count = PropertyMgr.getEnemy_tank_count();
+        int count = ConfigLoader.getEnemy_tank_count();
         // 将游戏区域网格化
         // 敌方坦克的高度和宽度
 
@@ -102,9 +102,9 @@ public class GameModel {
 
         g.fillRect(0, 0, gameWidth, gameHeight);
         if (gameOver) {
-            int imgWidth = ResourceMgr.gameOver.getWidth();
-            int imgHeight = ResourceMgr.gameOver.getHeight();
-            g.drawImage(ResourceMgr.gameOver, (gameWidth - imgWidth) / 2, (gameHeight - imgHeight) / 2, null);
+            int imgWidth = ResourceLoader.gameOver.getWidth();
+            int imgHeight = ResourceLoader.gameOver.getHeight();
+            g.drawImage(ResourceLoader.gameOver, (gameWidth - imgWidth) / 2, (gameHeight - imgHeight) / 2, null);
         }
         g.setColor(Color.WHITE);
         // 绘制所有游戏物体：坦克、子弹、爆炸

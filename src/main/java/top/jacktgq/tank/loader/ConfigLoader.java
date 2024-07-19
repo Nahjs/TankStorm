@@ -1,4 +1,4 @@
-package top.jacktgq.tank.mgr;
+package top.jacktgq.tank.loader;
 
 import top.jacktgq.tank.collider.Collider;
 import top.jacktgq.tank.factory.abstractfactory.GameFactory;
@@ -13,12 +13,12 @@ import java.util.Properties;
  * @Date 2021/1/24--17:04
  * @Description 读取配置文件
  */
-public class PropertyMgr {
+public class ConfigLoader {
     private static Properties props = null;
     static {
         try {
             props = new Properties();
-            props.load(PropertyMgr.class.getResourceAsStream("/config.properties"));
+            props.load(ConfigLoader.class.getResourceAsStream("/config.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }

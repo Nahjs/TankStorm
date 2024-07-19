@@ -1,4 +1,4 @@
-package top.jacktgq.tank.mgr;
+package top.jacktgq.tank.loader;
 
 import top.jacktgq.tank.util.ImageUtil;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
  * @Date 2021/1/24--8:43
  * @Description 读取游戏图片和音频资源
  */
-public class ResourceMgr {
+public class ResourceLoader {
     public static BufferedImage selfTankL, selfTankU, selfTankR, selfTankD;
     public static BufferedImage enemyTankL, enemyTankU, enemyTankR, enemyTankD;
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;
@@ -42,7 +42,7 @@ public class ResourceMgr {
 
     private static BufferedImage readImage(String filename) {
         try {
-            return ImageIO.read(ResourceMgr.class.getResource("/images/" + filename));
+            return ImageIO.read(ResourceLoader.class.getResource("/images/" + filename));
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("读取图片资源失败！");

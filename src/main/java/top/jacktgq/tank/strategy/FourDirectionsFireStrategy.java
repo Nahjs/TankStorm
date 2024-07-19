@@ -7,7 +7,7 @@ import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.Tank;
 import top.jacktgq.tank.entity.BaseObject.BaseBullet;
-import top.jacktgq.tank.mgr.ResourceMgr;
+import top.jacktgq.tank.loader.ResourceLoader;
 import top.jacktgq.tank.util.Audio;
 
 import java.util.UUID;
@@ -26,9 +26,9 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         int tankHeight = t.curTankImage.getHeight();
         int bulletWidth, bulletHeight;
         // 左
-        bulletWidth = ResourceMgr.bulletL.getWidth();
+        bulletWidth = ResourceLoader.bulletL.getWidth();
         bulletX = t.x - bulletWidth - 5;
-        bulletHeight = ResourceMgr.bulletL.getHeight();
+        bulletHeight = ResourceLoader.bulletL.getHeight();
         bulletY = t.y + (tankHeight - bulletHeight) / 2;
         BaseBullet bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.LEFT, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
         GameModel.INSTANCE.addBullet(bullet);
@@ -39,9 +39,9 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         Client.INSTANCE.send(new BulletMsg(bullet));
 
         // 上
-        bulletWidth = ResourceMgr.bulletU.getWidth();
+        bulletWidth = ResourceLoader.bulletU.getWidth();
         bulletX = t.x + (tankWidth - bulletWidth) / 2;
-        bulletHeight = ResourceMgr.bulletU.getHeight();
+        bulletHeight = ResourceLoader.bulletU.getHeight();
         bulletY = t.y - bulletHeight - 5;
         bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.UP, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
         GameModel.INSTANCE.addBullet(bullet);
@@ -49,7 +49,7 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         Client.INSTANCE.send(new BulletMsg(bullet));
 
         // 右
-        bulletHeight = ResourceMgr.bulletR.getHeight();
+        bulletHeight = ResourceLoader.bulletR.getHeight();
         bulletX = t.x + tankWidth + 5;
         bulletY = t.y + (tankHeight - bulletHeight) / 2;
         bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.RIGHT, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
@@ -58,7 +58,7 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         Client.INSTANCE.send(new BulletMsg(bullet));
 
         // 下
-        bulletWidth = ResourceMgr.bulletD.getWidth();
+        bulletWidth = ResourceLoader.bulletD.getWidth();
         bulletX = t.x + (tankWidth - bulletWidth) / 2;
         bulletY = t.y + tankHeight + 5;
         bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.DOWN, t.group == Group.SELF ? Group.SELF : Group.ENEMY);

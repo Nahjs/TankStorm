@@ -6,7 +6,7 @@ import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.Tank;
 import top.jacktgq.tank.entity.BaseObject.BaseBullet;
-import top.jacktgq.tank.mgr.ResourceMgr;
+import top.jacktgq.tank.loader.ResourceLoader;
 import top.jacktgq.tank.util.Audio;
 
 import java.util.UUID;
@@ -26,27 +26,27 @@ public class DefaultFireStrategy implements FireStrategy {
         int bulletWidth, bulletHeight;
         switch (t.dir) {
             case LEFT: {
-                bulletWidth = ResourceMgr.bulletL.getWidth();
+                bulletWidth = ResourceLoader.bulletL.getWidth();
                 bulletX = t.x - bulletWidth - 5;
-                bulletHeight = ResourceMgr.bulletL.getHeight();
+                bulletHeight = ResourceLoader.bulletL.getHeight();
                 bulletY = t.y + (tankHeight - bulletHeight) / 2;
                 break;
             }
             case UP: {
-                bulletWidth = ResourceMgr.bulletU.getWidth();
+                bulletWidth = ResourceLoader.bulletU.getWidth();
                 bulletX = t.x + (tankWidth - bulletWidth) / 2;
-                bulletHeight = ResourceMgr.bulletU.getHeight();
+                bulletHeight = ResourceLoader.bulletU.getHeight();
                 bulletY = t.y - bulletHeight - 5;
                 break;
             }
             case RIGHT: {
-                bulletHeight = ResourceMgr.bulletR.getHeight();
+                bulletHeight = ResourceLoader.bulletR.getHeight();
                 bulletX = t.x + tankWidth + 5;
                 bulletY = t.y + (tankHeight - bulletHeight) / 2;
                 break;
             }
             case DOWN: {
-                bulletWidth = ResourceMgr.bulletD.getWidth();
+                bulletWidth = ResourceLoader.bulletD.getWidth();
                 bulletX = t.x + (tankWidth - bulletWidth) / 2;
                 bulletY = t.y + tankHeight + 5;
                 break;

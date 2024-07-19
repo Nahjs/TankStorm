@@ -1,6 +1,6 @@
 package top.jacktgq.tank.view;
 
-import top.jacktgq.tank.mgr.PropertyMgr;
+import top.jacktgq.tank.loader.ConfigLoader;
 
 import javax.swing.*;
 
@@ -10,8 +10,8 @@ import javax.swing.*;
  * @Description
  */
 public class TankFrame extends JFrame {
-    private static final int GAME_WIDTH = PropertyMgr.getGameWidth();
-    private static final int GAME_HEIGHT =  PropertyMgr.getGameHeight();
+    private static final int GAME_WIDTH = ConfigLoader.getGameWidth();
+    private static final int GAME_HEIGHT =  ConfigLoader.getGameHeight();
 
     public TankFrame() {
         setTitle("糖果坦克大战");
