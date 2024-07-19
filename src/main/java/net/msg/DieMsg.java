@@ -6,9 +6,7 @@ import java.io.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/2/3--13:47
- * @Description 坦克死亡的时候，给服务器发送的消息
+ * 坦克死亡的时候，给服务器发送的消息
  */
 public class DieMsg extends Msg {
     public UUID tankId;

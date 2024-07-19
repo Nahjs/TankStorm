@@ -9,10 +9,9 @@ import top.jacktgq.tank.entity.Group;
 import java.io.*;
 import java.util.UUID;
 
+
 /**
- * @Author CandyWall
- * @Date 2021/1/31--17:53
- * @Description 玩家加入游戏的时候，给服务器发送的消息
+ * 玩家加入游戏的时候，给服务器发送的消息
  */
 public class JoinMsg extends Msg {
     public int x, y;

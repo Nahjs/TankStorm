@@ -1,9 +1,7 @@
 package net.msg;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/31--21:23
- * @Description 玩家坦克消息类型
+ * 消息类型
  */
 public enum MsgType {
     TankJoin,           // 加入游戏

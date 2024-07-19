@@ -8,9 +8,7 @@ import java.io.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/2/3--13:47
- * @Description 坦克开始移动时给服务器发送的消息
+ * 坦克开始移动时给服务器发送的消息
  */
 public class MoveMsg extends Msg {
     public int x, y;
