@@ -9,12 +9,10 @@ import java.awt.image.BufferedImage;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/23--22:13
- * @Description 默认风格的炮弹类
+ * 炮弹
  */
 public class Bullet extends BaseBullet {
-    public BufferedImage curBulletImage;
+    public BufferedImage curBulletImage;//用于存储当前炮弹的图像
 
     public Bullet(UUID id, UUID tankId, int x, int y, Dir dir, Group group) {
         this.id = id;
@@ -24,6 +22,8 @@ public class Bullet extends BaseBullet {
         this.dir = dir;
         this.group = group;
         this.rect = new Rectangle();
+
+        //根据炮弹的方向 (dir) 来设置 curBulletImage（炮弹的图像）。
         switch (dir) {
             case LEFT: curBulletImage = ResourceLoader.bulletL; break;
             case UP: curBulletImage = ResourceLoader.bulletU; break;
@@ -33,6 +33,7 @@ public class Bullet extends BaseBullet {
         updateRect(x, y);
     }
 
+    //更新炮弹的矩形区域 rect，设置其位置和尺寸以匹配 curBulletImage 的宽度和高度。
     private void updateRect(int x, int y) {
         rect.x = x;
         rect.y = y;
@@ -40,6 +41,7 @@ public class Bullet extends BaseBullet {
         rect.height = curBulletImage.getHeight();
     }
 
+    //绘制炮弹的图像，并调用 move() 方法来移动炮弹。
     @Override
     public void paint(Graphics g) {
         // 子弹越界或者打在坦克上，移除掉
@@ -50,6 +52,8 @@ public class Bullet extends BaseBullet {
         move();
     }
 
+
+    //根据炮弹的方向移动炮弹，每次移动后更新炮弹的矩形区域 rect。
     private void move() {
         switch (dir) {
             case LEFT: {
@@ -94,6 +98,7 @@ public class Bullet extends BaseBullet {
         return x + bulletWidth < 0 || y + bulletHeight < 0 || x > tankWidth || y > tankHeight;
     }
 
+    //返回发射炮弹的坦克的 ID。
     @Override
     public UUID getTankId() {
         return tankId;
