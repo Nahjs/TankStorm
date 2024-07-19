@@ -10,9 +10,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--9:25
- * @Description 默认的生产坦克、子弹、爆炸的工厂
+ * 生产坦克、子弹、爆炸的工厂
  */
 public class DefaultFactory extends GameFactory {
     @Override

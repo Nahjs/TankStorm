@@ -11,9 +11,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--8:56
- * @Description 生产坦克、子弹和爆炸的抽象工厂类
+ * 生产坦克、子弹和爆炸的抽象工厂类
  */
 public abstract class GameFactory {
     /**

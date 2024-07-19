@@ -10,9 +10,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--9:25
- * @Description 生产方形风格的坦克、子弹和爆炸效果的工厂类
+ * 生产方形风格的坦克、子弹和爆炸效果的工厂类
  */
 public class RectFactory extends GameFactory {
     @Override
