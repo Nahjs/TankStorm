@@ -4,9 +4,7 @@ import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--20:54
- * @Description 坦克和墙的碰撞器
+ * 坦克和墙的碰撞器
  */
 public class TankWallCollider implements Collider {
 

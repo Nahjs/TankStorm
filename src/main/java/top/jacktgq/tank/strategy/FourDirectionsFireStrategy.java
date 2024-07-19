@@ -8,7 +8,7 @@ import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.Tank;
 import top.jacktgq.tank.entity.BaseObject.BaseBullet;
 import top.jacktgq.tank.loader.ResourceLoader;
-import top.jacktgq.tank.util.Audio;
+import top.jacktgq.tank.util.AudioUtil;
 
 import java.util.UUID;
 
@@ -67,7 +67,7 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         Client.INSTANCE.send(new BulletMsg(bullet));
 
         if (t.group == Group.SELF) {
-            new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
+            new Thread(() -> new AudioUtil("audio/tank_fire.wav").play()).start();
         }
     }
 }

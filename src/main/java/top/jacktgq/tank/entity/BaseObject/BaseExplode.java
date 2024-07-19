@@ -4,7 +4,7 @@ import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
-import top.jacktgq.tank.util.Audio;
+import top.jacktgq.tank.util.AudioUtil;
 
 import java.awt.*;
 import java.util.UUID;
@@ -28,7 +28,7 @@ public abstract class BaseExplode extends GameObject {
     public BaseExplode(Rectangle tankRect) {
         this.tankRect = tankRect;
         rect = new Rectangle();
-        new Thread(()->new Audio("audio/explode.wav").play()).start();
+        new Thread(()->new AudioUtil("audio/explode.wav").play()).start();
     }
 
     /**

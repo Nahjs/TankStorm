@@ -1,6 +1,6 @@
 package top.jacktgq.tank;
 
-import top.jacktgq.tank.util.Audio;
+import top.jacktgq.tank.util.AudioUtil;
 import top.jacktgq.tank.view.TankFrame;
 
 import javax.swing.*;
@@ -19,6 +19,6 @@ public class StartWindow {
 				createGUI();
 			}
 		});
-		new Thread(()->new Audio("audio/war1.wav").loop()).start();
+		new Thread(()->new AudioUtil("audio/war1.wav").loop()).start();
 	}
 }

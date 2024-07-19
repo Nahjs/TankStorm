@@ -6,9 +6,7 @@ import top.jacktgq.tank.loader.ConfigLoader;
 import java.util.LinkedList;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--21:55
- * @Description 碰撞器链
+ * 碰撞器链
  */
 public class ColliderChain implements Collider {
     private LinkedList<Collider> colliders;

@@ -6,9 +6,7 @@ import top.jacktgq.tank.entity.GameObjectType;
 import top.jacktgq.tank.entity.Group;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--20:54
- * @Description 子弹和坦克的碰撞器
+ * 子弹和坦克的碰撞器
  */
 public class BulletTankCollider implements Collider {
     @Override

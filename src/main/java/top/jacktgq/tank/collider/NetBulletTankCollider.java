@@ -7,9 +7,7 @@ import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--20:54
- * @Description 网络版子弹和坦克的碰撞器
+ * 网络版子弹和坦克的碰撞器
  */
 public class NetBulletTankCollider implements Collider {
     @Override
