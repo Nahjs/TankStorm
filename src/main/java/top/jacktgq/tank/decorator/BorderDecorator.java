@@ -9,8 +9,8 @@ import java.awt.*;
  * @Date 2021/1/29--11:54
  * @Description 在游戏物体外围加上矩形边框的装饰器
  */
-public class RectDecorator extends GODecorator {
-    public RectDecorator(GameObject gameObject) {
+public class BorderDecorator extends ObjectDecorator {
+    public BorderDecorator(GameObject gameObject) {
         super(gameObject);
     }
 

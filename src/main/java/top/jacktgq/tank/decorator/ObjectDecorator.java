@@ -13,10 +13,10 @@ import java.util.UUID;
  * @Date 2021/1/29--11:52
  * @Description 游戏物体装饰器
  */
-public class GODecorator extends GameObject {
+public class ObjectDecorator extends GameObject {
     protected GameObject gameObject;
 
-    public GODecorator(GameObject gameObject) {
+    public ObjectDecorator(GameObject gameObject) {
         this.gameObject = gameObject;
         this.x = gameObject.x;
         this.y = gameObject.y;

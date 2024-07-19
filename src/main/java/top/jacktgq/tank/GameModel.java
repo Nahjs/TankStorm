@@ -2,8 +2,8 @@ package top.jacktgq.tank;
 
 import net.Client;
 import top.jacktgq.tank.collider.ColliderChain;
-import top.jacktgq.tank.decorator.RectDecorator;
-import top.jacktgq.tank.decorator.TankIdDecorator;
+import top.jacktgq.tank.decorator.BorderDecorator;
+import top.jacktgq.tank.decorator.IdDecorator;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
@@ -78,7 +78,7 @@ public class GameModel {
             }
         }
         // 使用装饰器模式在坦克上方绘制id，用以标识
-        selfTank = new TankIdDecorator(factory.createSelfTank(UUID.randomUUID(), tankRect.x, tankRect.y, Dir.values()[ramdom.nextInt(4)], 5));
+        selfTank = new IdDecorator(factory.createSelfTank(UUID.randomUUID(), tankRect.x, tankRect.y, Dir.values()[ramdom.nextInt(4)], 5));
         //selfTank = factory.createSelfTank(tankRect.x, tankRect.y, Dir.values()[ramdom.nextInt(4)], 5);
         return;
     }
@@ -90,7 +90,7 @@ public class GameModel {
 
         // int rows = this.getWidth();
         for (int i = 0; i < count; i++) {
-             gameObjects.add(new RectDecorator(factory.createEnemyTank(UUID.randomUUID(), 100 + 100 * i, 100, Dir.DOWN, 5)));
+             gameObjects.add(new BorderDecorator(factory.createEnemyTank(UUID.randomUUID(), 100 + 100 * i, 100, Dir.DOWN, 5)));
             // gameObjects.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5));
         }
     }
@@ -125,7 +125,7 @@ public class GameModel {
     }
 
     public void addTank(GameObject tank) {
-        gameObjects.add(new TankIdDecorator(tank));
+        gameObjects.add(new IdDecorator(tank));
         tankMap.put(tank.getId(), tank);
     }
 
