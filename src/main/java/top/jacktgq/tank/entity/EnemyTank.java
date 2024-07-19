@@ -3,11 +3,8 @@ package top.jacktgq.tank.entity;
 import java.awt.*;
 import java.util.Random;
 import java.util.UUID;
-
 /**
- * @Author CandyWall
- * @Date 2021/1/23--21:16
- * @Description 默认风格的敌方坦克
+ * 敌方坦克
  */
 public class EnemyTank extends Tank {
     private Random random = new Random();
@@ -17,13 +14,13 @@ public class EnemyTank extends Tank {
     }
 
     /**
-     * 敌方坦克移动的过程中会随机变向和开火
+     * 敌方坦克移动的过程中会随机变换方向和开火
      */
     @Override
     protected void move() {
         super.move();
-        // %5的机会改变方向
-        if (random.nextInt(100) > 95) {
+        // %10的机会改变方向
+        if (random.nextInt(100) > 90) {
             dir = Dir.values()[random.nextInt(4)];
         }
         // %5的机会开火

@@ -1,9 +1,7 @@
 package top.jacktgq.tank.entity;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/23--20:50
- * @Description
+ * 方向控制类
  */
 public enum Dir {
     LEFT, UP, RIGHT, DOWN
