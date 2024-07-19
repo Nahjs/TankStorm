@@ -9,9 +9,7 @@ import java.util.LinkedList;
 import java.util.Properties;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/24--17:04
- * @Description 读取配置文件
+ * 加载和管理游戏的配置属性，如开火策略、工厂类和碰撞检测规则等
  */
 public class ConfigLoader {
     private static Properties props = null;

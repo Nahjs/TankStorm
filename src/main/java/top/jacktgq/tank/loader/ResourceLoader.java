@@ -7,16 +7,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/24--8:43
- * @Description 读取游戏图片和音频资源
+ * 加载和管理游戏中的资源，如图片和音频文件
  */
 public class ResourceLoader {
-    public static BufferedImage selfTankL, selfTankU, selfTankR, selfTankD;
-    public static BufferedImage enemyTankL, enemyTankU, enemyTankR, enemyTankD;
-    public static BufferedImage bulletL, bulletU, bulletR, bulletD;
-    public static BufferedImage[] explodes = new BufferedImage[16];
-    public static BufferedImage gameOver;
+    public static BufferedImage selfTankL, selfTankU, selfTankR, selfTankD;//存储我方坦克在不同方向的图片
+    public static BufferedImage enemyTankL, enemyTankU, enemyTankR, enemyTankD;//存储敌方坦克在不同方向的图片
+    public static BufferedImage bulletL, bulletU, bulletR, bulletD;//存储子弹在不同方向的图片
+    public static BufferedImage[] explodes = new BufferedImage[16];//存储坦克爆炸的动画图片数组
+    public static BufferedImage gameOver;//存储游戏结束的图片
     static {
         // 加载四个方向的我方坦克图片
         selfTankU = readImage("GoodTank1.png");
