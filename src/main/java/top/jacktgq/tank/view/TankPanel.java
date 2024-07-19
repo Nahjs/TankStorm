@@ -14,9 +14,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/23--19:19
- * @Description 游戏主界面
+ * 游戏主界面
  */
 public class TankPanel extends JPanel {
     public TankPanel() {

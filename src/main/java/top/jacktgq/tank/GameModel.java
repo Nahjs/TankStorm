@@ -16,10 +16,8 @@ import java.util.List;
 import java.util.*;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--15:31
- * @Description 将TankPanel和游戏对象（Tank、Bullet）分离，即Model和view分离
- *              使用门面模式，GameModel作为Facade，负责与TankPanel打交道
+ * 将TankPanel和游戏对象（Tank、Bullet）分离，即Model和view分离
+ * 使用门面模式，GameModel作为Facade，负责与TankPanel打交道
  */
 public class GameModel {
     public static final GameModel INSTANCE = new GameModel(ConfigLoader.getGameWidth(), ConfigLoader.getGameHeight());

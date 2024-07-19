@@ -5,9 +5,7 @@ import top.jacktgq.tank.loader.ConfigLoader;
 import javax.swing.*;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/23--18:25
- * @Description
+ * 游戏界面
  */
 public class TankFrame extends JFrame {
     private static final int GAME_WIDTH = ConfigLoader.getGameWidth();
