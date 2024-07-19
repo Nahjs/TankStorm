@@ -13,9 +13,7 @@ import top.jacktgq.tank.util.AudioUtil;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/27--17:46
- * @Description 坦克可以朝4个方向同时开火
+ * 新的坦克开火攻略：可以朝4个方向同时开火
  */
 public class FourDirectionsFireStrategy implements FireStrategy {
     @Override
