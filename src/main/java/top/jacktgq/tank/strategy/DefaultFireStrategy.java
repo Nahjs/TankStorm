@@ -12,9 +12,7 @@ import top.jacktgq.tank.util.AudioUtil;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/27--17:06
- * @Description 坦克默认的开火策略：只能朝一个方向打出子弹
+ * 坦克的开火策略：朝一个方向打出子弹
  */
 public class DefaultFireStrategy implements FireStrategy {
     @Override
@@ -53,10 +51,15 @@ public class DefaultFireStrategy implements FireStrategy {
             }
         }
 
+        //创建一个 BaseBullet 对象，表示新发射的子弹，并将其添加到游戏模型中。
         BaseBullet bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
         GameModel.INSTANCE.addBullet(bullet);
+
+
         // 将该坦克打出了新子弹的消息发送给服务器
         Client.INSTANCE.send(new BulletMsg(bullet));
+
+        //如果坦克属于玩家（Group.SELF），则播放开火音效
         if (t.group == Group.SELF) {
             new Thread(() -> new AudioUtil("audio/tank_fire.wav").play()).start();
         }
