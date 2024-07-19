@@ -1,7 +1,7 @@
 package top.jacktgq.tank.strategy;
 
 import net.Client;
-import net.msg.BulletNewMsg;
+import net.msg.BulletMsg;
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.Group;
@@ -36,7 +36,7 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         // 将该坦克打出了新子弹的消息发送给服务器
         //System.out.println(bullet);
         //System.out.println(new BulletNewMsg(bullet));
-        Client.INSTANCE.send(new BulletNewMsg(bullet));
+        Client.INSTANCE.send(new BulletMsg(bullet));
 
         // 上
         bulletWidth = ResourceMgr.bulletU.getWidth();
@@ -46,7 +46,7 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.UP, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
         GameModel.INSTANCE.addBullet(bullet);
         // 将该坦克打出了新子弹的消息发送给服务器
-        Client.INSTANCE.send(new BulletNewMsg(bullet));
+        Client.INSTANCE.send(new BulletMsg(bullet));
 
         // 右
         bulletHeight = ResourceMgr.bulletR.getHeight();
@@ -55,7 +55,7 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.RIGHT, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
         GameModel.INSTANCE.addBullet(bullet);
         // 将该坦克打出了新子弹的消息发送给服务器
-        Client.INSTANCE.send(new BulletNewMsg(bullet));
+        Client.INSTANCE.send(new BulletMsg(bullet));
 
         // 下
         bulletWidth = ResourceMgr.bulletD.getWidth();
@@ -64,7 +64,7 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.DOWN, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
         GameModel.INSTANCE.addBullet(bullet);
         // 将该坦克打出了新子弹的消息发送给服务器
-        Client.INSTANCE.send(new BulletNewMsg(bullet));
+        Client.INSTANCE.send(new BulletMsg(bullet));
 
         if (t.group == Group.SELF) {
             new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();

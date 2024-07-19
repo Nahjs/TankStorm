@@ -1,7 +1,7 @@
 package top.jacktgq.tank.collider;
 
 import net.Client;
-import net.msg.TankDieMsg;
+import net.msg.DieMsg;
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.GameObject;
 import top.jacktgq.tank.entity.GameObjectType;
@@ -29,7 +29,7 @@ public class NetBulletTankCollider implements Collider {
                 // 添加一个爆炸动画
                 GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createExplode(o2.getRect()));
                 // 有坦克被别人的子弹击中，就将消息发送到服务器
-                Client.INSTANCE.send(new TankDieMsg(o2.getId(), o1.getId()));
+                Client.INSTANCE.send(new DieMsg(o2.getId(), o1.getId()));
                 return true;
             }
         } else if (o1.getGameObjectType() == GameObjectType.TANK && o2.getGameObjectType() == GameObjectType.BULLET) {

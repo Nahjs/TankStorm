@@ -3,7 +3,7 @@ package net;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import net.msg.Msg;
-import net.msg.TankJoinMsg;
+import net.msg.JoinMsg;
 import top.jacktgq.tank.GameModel;
 
 public class ClientHandler extends SimpleChannelInboundHandler<Msg> {
@@ -15,6 +15,6 @@ public class ClientHandler extends SimpleChannelInboundHandler<Msg> {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(new TankJoinMsg(GameModel.INSTANCE.getSelfTank()));
+        ctx.writeAndFlush(new JoinMsg(GameModel.INSTANCE.getSelfTank()));
     }
 }

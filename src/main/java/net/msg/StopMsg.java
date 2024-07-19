@@ -1,49 +1,38 @@
 package net.msg;
 
-import net.Client;
 import top.jacktgq.tank.GameModel;
 import top.jacktgq.tank.entity.Dir;
 import top.jacktgq.tank.entity.GameObject;
-import top.jacktgq.tank.entity.Group;
 
 import java.io.*;
 import java.util.UUID;
 
 /**
  * @Author CandyWall
- * @Date 2021/1/31--17:53
- * @Description 玩家加入游戏的时候，给服务器发送的消息
+ * @Date 2021/2/3--13:47
+ * @Description 坦克停下来的时候，给服务器发送的消息
  */
-public class TankJoinMsg extends Msg {
+public class StopMsg extends Msg {
     public int x, y;
     public Dir dir;
-    public boolean moving;
-    public Group group;
     public UUID id;
-    public String name;
 
-    public TankJoinMsg() {
+    public StopMsg() {
 
     }
 
-    public TankJoinMsg(GameObject tank) {
+    public StopMsg(GameObject tank) {
         this.x = tank.getX();
         this.y = tank.getY();
         this.dir = tank.getDir();
-        this.moving = tank.isMoving();
-        this.group = tank.getGroup();
         this.id = tank.getId();
-        this.name = tank.getName();
     }
 
-    public TankJoinMsg(int x, int y, Dir dir, boolean isMoving, Group group, UUID id, String name) {
+    public StopMsg(int x, int y, Dir dir, UUID id) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.moving = isMoving;
-        this.group = group;
         this.id = id;
-        this.name = name;
     }
 
     @Override
@@ -56,8 +45,6 @@ public class TankJoinMsg extends Msg {
             this.x = dis.readInt();
             this.y = dis.readInt();
             this.dir = Dir.values()[dis.readInt()];
-            this.moving = dis.readBoolean();
-            this.group = Group.values()[dis.readInt()];
             this.id = new UUID(dis.readLong(), dis.readLong());
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,8 +74,6 @@ public class TankJoinMsg extends Msg {
             dos.writeInt(x);    // 4字节
             dos.writeInt(y);    // 4字节
             dos.writeInt(dir.ordinal()); // 4字节
-            dos.writeBoolean(moving);  // 1字节
-            dos.writeInt(group.ordinal()); // 4字节
             dos.writeLong(id.getMostSignificantBits());  // 8字节
             dos.writeLong(id.getLeastSignificantBits()); // 8字节
             dos.flush();
@@ -112,60 +97,34 @@ public class TankJoinMsg extends Msg {
 
     @Override
     public MsgType getMsgType() {
-        return MsgType.TankJoin;
+        return MsgType.TankStop;
     }
-    /*public byte[] toBytes() {
-        byte[] bytes = null;
-        ByteArrayOutputStream baos = null;
-        ObjectOutputStream oos = null;
-        try {
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
-            oos.writeObject(this);
-            bytes = baos.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (baos != null) {
-                    baos.close();
-                }
-                if (oos != null) {
-                    oos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return bytes;
-    }*/
 
     @Override
     public String toString() {
-        return "TankJoinMsg{" +
+        return "TankStopMsg{" +
                 "x=" + x +
                 ", y=" + y +
                 ", dir=" + dir +
-                ", isMoving=" + moving +
-                ", group=" + group +
                 ", id=" + id +
-                ", name='" + name + '\'' +
                 '}';
     }
 
     @Override
     public void handle() {
-        // 客户端接收到TankJoinMsg的逻辑处理：是不是自己？列表是否已经有了
+        // 客户端接收到TankJoinMsg的逻辑处理：是不是自己？
         // 如果传过来的连接信息的ID和本身的ID相等或者本地的列表中有这个ID，不做处理
-        if (this.id.equals(GameModel.INSTANCE.getSelfTank().getId()) ||
-                GameModel.INSTANCE.findTankByUUID(this.id) != null) {
+        if (this.id.equals(GameModel.INSTANCE.getSelfTank().getId())) {
             return;
         }
-        GameObject tank = GameModel.INSTANCE.factory.createSelfTank(this.id, this.x, this.y, this.dir, 5);
-        GameModel.INSTANCE.addTank(tank);
-
-        // 再发送一次消息给新连上的坦克
-        Client.INSTANCE.send(new TankJoinMsg(GameModel.INSTANCE.getSelfTank()));
+        // 根据id找到对应的坦克
+        GameObject tank = GameModel.INSTANCE.findTankByUUID(id);
+        if (tank != null) {
+            //System.out.println(tank);
+            tank.setMoving(false);
+            tank.setX(x);
+            tank.setY(y);
+            tank.setDir(dir);
+        }
     }
 }

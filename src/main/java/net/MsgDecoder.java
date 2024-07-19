@@ -34,22 +34,22 @@ public class MsgDecoder extends ByteToMessageDecoder {
         Msg msg = null;
         switch (msgType) {
             case TankJoin:
-                msg = new TankJoinMsg();
+                msg = new JoinMsg();
                 break;
             case TankDirChanged:
-                msg = new TankDirChangedMsg();
+                msg = new DirChangedMsg();
                 break;
             case TankStartMoving:
-                msg = new TankStartMovingMsg();
+                msg = new MoveMsg();
                 break;
             case TankStop:
-                msg = new TankStopMsg();
+                msg = new StopMsg();
                 break;
             case BulletNew:
-                msg = new BulletNewMsg();
+                msg = new BulletMsg();
                 break;
             case TankDie:
-                msg = new TankDieMsg();
+                msg = new DieMsg();
                 break;
             default:
                 break;

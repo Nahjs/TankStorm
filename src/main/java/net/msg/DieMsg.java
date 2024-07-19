@@ -10,15 +10,15 @@ import java.util.UUID;
  * @Date 2021/2/3--13:47
  * @Description 坦克死亡的时候，给服务器发送的消息
  */
-public class TankDieMsg extends Msg {
+public class DieMsg extends Msg {
     public UUID tankId;
     public UUID bulletId;
 
-    public TankDieMsg() {
+    public DieMsg() {
 
     }
 
-    public TankDieMsg(UUID tankId, UUID bulletId) {
+    public DieMsg(UUID tankId, UUID bulletId) {
         this.tankId = tankId;
         this.bulletId = bulletId;
     }

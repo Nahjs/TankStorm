@@ -10,25 +10,25 @@ import java.util.UUID;
 /**
  * @Author CandyWall
  * @Date 2021/2/3--13:47
- * @Description 坦克停下来的时候，给服务器发送的消息
+ * @Description 坦克方向改变的时候，给服务器发送的消息
  */
-public class TankStopMsg extends Msg {
+public class DirChangedMsg extends Msg {
     public int x, y;
     public Dir dir;
     public UUID id;
 
-    public TankStopMsg() {
+    public DirChangedMsg() {
 
     }
 
-    public TankStopMsg(GameObject tank) {
+    public DirChangedMsg(GameObject tank) {
         this.x = tank.getX();
         this.y = tank.getY();
         this.dir = tank.getDir();
         this.id = tank.getId();
     }
 
-    public TankStopMsg(int x, int y, Dir dir, UUID id) {
+    public DirChangedMsg(int x, int y, Dir dir, UUID id) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -97,12 +97,12 @@ public class TankStopMsg extends Msg {
 
     @Override
     public MsgType getMsgType() {
-        return MsgType.TankStop;
+        return MsgType.TankDirChanged;
     }
 
     @Override
     public String toString() {
-        return "TankStopMsg{" +
+        return "TankDirChangedMsg{" +
                 "x=" + x +
                 ", y=" + y +
                 ", dir=" + dir +
@@ -120,8 +120,6 @@ public class TankStopMsg extends Msg {
         // 根据id找到对应的坦克
         GameObject tank = GameModel.INSTANCE.findTankByUUID(id);
         if (tank != null) {
-            //System.out.println(tank);
-            tank.setMoving(false);
             tank.setX(x);
             tank.setY(y);
             tank.setDir(dir);

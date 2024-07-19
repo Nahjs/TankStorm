@@ -12,23 +12,23 @@ import java.util.UUID;
  * @Date 2021/2/3--13:47
  * @Description 坦克开始移动时给服务器发送的消息
  */
-public class TankStartMovingMsg extends Msg {
+public class MoveMsg extends Msg {
     public int x, y;
     public Dir dir;
     public UUID id;
 
-    public TankStartMovingMsg() {
+    public MoveMsg() {
 
     }
 
-    public TankStartMovingMsg(GameObject tank) {
+    public MoveMsg(GameObject tank) {
         this.x = tank.getX();
         this.y = tank.getY();
         this.dir = tank.getDir();
         this.id = tank.getId();
     }
 
-    public TankStartMovingMsg(int x, int y, Dir dir, UUID id) {
+    public MoveMsg(int x, int y, Dir dir, UUID id) {
         this.x = x;
         this.y = y;
         this.dir = dir;
