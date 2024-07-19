@@ -9,9 +9,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/29--8:13
- * @Description 墙
+ *  墙
  */
 public abstract class BaseWall extends GameObject {
     protected int width, height;

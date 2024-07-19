@@ -9,9 +9,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * @Author CandyWall
- * @Date 2021/1/28--9:19
- * @Description 坦克基类
+ * 坦克基类
  */
 public abstract class BaseTank extends GameObject {
     public boolean moving = true;
