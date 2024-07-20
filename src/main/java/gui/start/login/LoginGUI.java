@@ -1,4 +1,4 @@
-package login;
+package gui.start.login;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

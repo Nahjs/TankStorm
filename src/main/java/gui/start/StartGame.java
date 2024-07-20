@@ -1,14 +1,12 @@
 package gui.start;
 
 import game.loader.ResourceLoader;
-import login.LoginGUI;
+import gui.start.login.LoginGUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 
 public class StartGame {
     private JFrame frame;
