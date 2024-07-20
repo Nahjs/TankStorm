@@ -1,6 +1,6 @@
 package loader;
 
-import game.util.ImageUtil;
+import util.ImageUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

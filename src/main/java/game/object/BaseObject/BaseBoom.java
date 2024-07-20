@@ -3,7 +3,7 @@ package game.object.BaseObject;
 import game.object.GameObject;
 import game.object.GameObjectType;
 import game.object.Group;
-import game.util.AudioUtil;
+import util.AudioUtil;
 import game.object.Dir;
 
 import java.awt.*;

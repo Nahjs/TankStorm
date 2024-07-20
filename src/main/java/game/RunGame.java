@@ -1,6 +1,6 @@
 package game;
 
-import game.util.AudioUtil;
+import util.AudioUtil;
 import gui.progress.TankFrame;
 
 import javax.swing.*;

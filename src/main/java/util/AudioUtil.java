@@ -1,5 +1,5 @@
 
-package game.util;
+package util;
 
 import javax.sound.sampled.*;
 import java.io.IOException;

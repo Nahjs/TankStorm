@@ -1,4 +1,4 @@
-package game.util;
+package util;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;

@@ -5,7 +5,7 @@ import game.object.BaseObject.BaseBullet;
 import game.object.Group;
 import game.object.Tank;
 import loader.ResourceLoader;
-import game.util.AudioUtil;
+import util.AudioUtil;
 import net.Client;
 import net.msg.BulletMsg;
 
