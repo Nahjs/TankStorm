@@ -1,8 +1,6 @@
 package top.jacktgq.tank;
 
 import net.Client;
-import rank.Player;
-import rank.UpdateRanking;
 import top.jacktgq.tank.collider.ColliderChain;
 import top.jacktgq.tank.decorator.BorderDecorator;
 import top.jacktgq.tank.decorator.IdDecorator;
@@ -31,8 +29,7 @@ public class GameModel {
     public HashMap<UUID, GameObject> bulletMap = new HashMap<>();
     public ColliderChain colliderChain;
     public GameFactory factory;
-    Player player;
-    UpdateRanking u ;
+
     public Random random = new Random();
     public boolean gameOver = false;
     public boolean gameSuccess = false;
@@ -183,8 +180,6 @@ private void initEnemyTanks() {
             gameObjects.remove(tank);
             tankMap.remove(tankId);
 
-            player.destroyTank();
-            u.update();
         }
     }
 
