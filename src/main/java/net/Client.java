@@ -50,7 +50,7 @@ public class Client {
                 }
             }).sync();//阻塞当前线程，直到连接操作完成（成功或失败）。
             System.out.println("...");
-            //channel = future.channel();
+           // channel = future.channel();
             channel.closeFuture().sync();//阻塞当前线程，直到 channel 被关闭
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,6 +62,11 @@ public class Client {
 
     // 通过客户端通道发送消息到服务器。
     public void send(Msg msg) {
-        channel.writeAndFlush(msg);
+        if (channel != null && channel.isActive()) {
+            channel.writeAndFlush(msg);
+        } else {
+            // 处理 channel 为 null 或非活跃状态的情况
+            // 例如，记录日志、尝试重新连接等
+        }
     }
 }
