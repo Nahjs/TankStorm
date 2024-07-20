@@ -12,8 +12,10 @@ import top.jacktgq.tank.StartWindow;
 
 public class LoginGUI extends JFrame {
     private static boolean isLoggedIn = false;
+    //String accountName = null; // 用于存储从数据库中获取的账号名
     private  final Integer WIDTH=600;
     private  final Integer HEIGHT=400;
+
 
     private JPanel dialogPane;
     private JPanel contentPanel;
@@ -137,7 +139,7 @@ public class LoginGUI extends JFrame {
                     isLoggedIn = true; // 设置登录成功标志
                     dialog.add(new JLabel("登录成功！"));
 
-
+                   // accountName = rs.getString("Account"); // 获取账号名
                     this.dispose(); // 关闭登录窗口
 
                     // 使用Timer来实现弹窗一秒后自动关闭
@@ -158,9 +160,11 @@ public class LoginGUI extends JFrame {
             } finally {
                 JdbcUtils.release(conn, pstmt, rs);
             }
+
+
         });
         setVisible(true);
-
+        
 
         //添加注册按钮监听器
 

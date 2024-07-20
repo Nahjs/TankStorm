@@ -6,6 +6,7 @@ import top.jacktgq.tank.entity.Group;
 import top.jacktgq.tank.entity.BaseObject.BaseBullet;
 import top.jacktgq.tank.entity.BaseObject.BaseBoom;
 import top.jacktgq.tank.entity.BaseObject.BaseTank;
+import top.jacktgq.tank.entity.MyTank;
 
 import java.awt.*;
 import java.util.UUID;
@@ -39,4 +40,7 @@ public abstract class GameFactory {
     public abstract BaseBoom createExplode(Rectangle tankRect);
 
     public abstract GameObject createWall(int x, int y, int width, int height);
+
+
+
 }

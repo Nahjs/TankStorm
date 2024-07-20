@@ -12,6 +12,7 @@ import top.jacktgq.tank.loader.ConfigLoader;
 import top.jacktgq.tank.loader.ResourceLoader;
 
 import java.awt.*;
+import java.sql.*;
 import java.util.List;
 import java.util.*;
 
@@ -37,11 +38,7 @@ public class GameModel {
         this.gameHeight = gameHeight;
         factory = ConfigLoader.getFactory();
         colliderChain = new ColliderChain();
-        // 初始化墙
-//        gameObjects.add(factory.createWall(100, 400, 60, 200));
-//        gameObjects.add(factory.createWall(820, 400, 60, 200));
-//        gameObjects.add(factory.createWall(200, 200, 200, 50));
-//        gameObjects.add(factory.createWall(600, 200, 200, 50));
+
         // 初始化墙
         gameObjects.add(factory.createWall(100, 220, 50, 50));
         gameObjects.add(factory.createWall(620, 220, 50, 50));
@@ -69,6 +66,7 @@ public class GameModel {
     // 初始化我方坦克，位置随机（位置必须合法，不能和墙壁相交），方向随机
     private void initSelfTank() {
         Rectangle tankRect = new Rectangle();
+
         while (true) {
             boolean valid = true;
             tankRect.width = ResourceLoader.selfTankU.getWidth();
@@ -93,19 +91,11 @@ public class GameModel {
         selfTank = new IdDecorator(factory.createSelfTank(UUID.randomUUID(), tankRect.x, tankRect.y, Dir.values()[random.nextInt(4)], 5));
         //selfTank = factory.createSelfTank(tankRect.x, tankRect.y, Dir.values()[ramdom.nextInt(4)], 5);
         return;
+
+
     }
 
-//    private void initEnemyTanks() {
-//        int count = ConfigLoader.getEnemy_tank_count();
-//        // 将游戏区域网格化
-//        // 敌方坦克的高度和宽度
-//
-//        // int rows = this.getWidth();
-//        for (int i = 0; i < count; i++) {
-//             gameObjects.add(new BorderDecorator(factory.createEnemyTank(UUID.randomUUID(), 100 + 100 * i, 100, Dir.DOWN, 5)));
-//            // gameObjects.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5));
-//        }
-//    }
+
 private void initEnemyTanks() {
     int enemyTankCount = ConfigLoader.getEnemy_tank_count(); // 假设这是敌方坦克的数量
     for (int i = 0; i < enemyTankCount; i++) {
