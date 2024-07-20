@@ -1,8 +1,8 @@
 package game;
 
 import game.collider.ColliderChain;
-import game.decorator.BorderDecorator;
-import game.decorator.IdDecorator;
+import decorator.BorderDecorator;
+import decorator.IdDecorator;
 import game.entity.GameObject;
 import game.entity.GameObjectType;
 import game.factory.abstractfactory.GameFactory;

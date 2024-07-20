@@ -1,4 +1,4 @@
-package game.decorator;
+package decorator;
 
 import game.entity.GameObject;
 import game.entity.GameObjectType;
