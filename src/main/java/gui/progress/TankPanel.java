@@ -1,4 +1,4 @@
-package game.view;
+package gui.progress;
 
 import game.GameModel;
 import game.entity.GameObject;
