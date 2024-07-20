@@ -1,6 +1,6 @@
 package game.object;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.BaseObject.BaseBoom;
 import loader.ResourceLoader;
 
@@ -34,7 +34,7 @@ public class Boom extends BaseBoom {
         step++;
         // 播放到爆炸动画的最后一帧，就移除这个爆炸动画
         if (step == ResourceLoader.explodes.length) {
-            GameModel.INSTANCE.gameObjects.remove(this);
+            GameDesign.INSTANCE.gameObjects.remove(this);
         }
     }
 

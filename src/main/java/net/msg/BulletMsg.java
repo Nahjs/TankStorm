@@ -1,6 +1,6 @@
 package net.msg;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.Dir;
 import game.object.GameObject;
 import game.object.Group;
@@ -125,10 +125,10 @@ public class BulletMsg extends Msg {
     @Override
     public void handle() {
         // 客户端接收到BulletNewMsg的逻辑处理：是不是本机坦克打出？子弹列表是否已经有了？是的话就不做处理
-        if (this.tankId.equals(GameModel.INSTANCE.getSelfTank().getId()) ||
-                GameModel.INSTANCE.findBulletByUUID(this.id) != null) {
+        if (this.tankId.equals(GameDesign.INSTANCE.getSelfTank().getId()) ||
+                GameDesign.INSTANCE.findBulletByUUID(this.id) != null) {
             return;
         }
-        GameModel.INSTANCE.addBullet(GameModel.INSTANCE.factory.createBullet(this.id, this.tankId, this.x, this.y, this.dir, group));
+        GameDesign.INSTANCE.addBullet(GameDesign.INSTANCE.factory.createBullet(this.id, this.tankId, this.x, this.y, this.dir, group));
     }
 }

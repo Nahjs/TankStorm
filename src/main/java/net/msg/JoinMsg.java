@@ -1,7 +1,7 @@
 package net.msg;
 
 import net.Client;
-import game.GameModel;
+import designer.GameDesign;
 import game.object.Dir;
 import game.object.GameObject;
 import game.object.Group;
@@ -157,14 +157,14 @@ public class JoinMsg extends Msg {
     public void handle() {
         // 客户端接收到TankJoinMsg的逻辑处理：是不是自己？列表是否已经有了
         // 如果传过来的连接信息的ID和本身的ID相等或者本地的列表中有这个ID，不做处理
-        if (this.id.equals(GameModel.INSTANCE.getSelfTank().getId()) ||
-                GameModel.INSTANCE.findTankByUUID(this.id) != null) {
+        if (this.id.equals(GameDesign.INSTANCE.getSelfTank().getId()) ||
+                GameDesign.INSTANCE.findTankByUUID(this.id) != null) {
             return;
         }
-        GameObject tank = GameModel.INSTANCE.factory.createSelfTank(this.id, this.x, this.y, this.dir, 5);
-        GameModel.INSTANCE.addTank(tank);
+        GameObject tank = GameDesign.INSTANCE.factory.createSelfTank(this.id, this.x, this.y, this.dir, 5);
+        GameDesign.INSTANCE.addTank(tank);
 
         // 再发送一次消息给新连上的坦克
-        Client.INSTANCE.send(new JoinMsg(GameModel.INSTANCE.getSelfTank()));
+        Client.INSTANCE.send(new JoinMsg(GameDesign.INSTANCE.getSelfTank()));
     }
 }

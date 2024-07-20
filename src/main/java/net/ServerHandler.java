@@ -7,7 +7,7 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import net.msg.Msg;
-import util.LogUtils;
+import Log.LogPrint;
 /**
  * 客户端消息的处理器，它是服务器端的核心组件，负责处理客户端的连接和断开事件，以及接收和转发消息。
  */
@@ -22,7 +22,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Msg> {
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
         //记录客户端加入游戏的信息
-        String forwardMsg = LogUtils.getCurrentTime() + " [客户端 "+ channel.remoteAddress().toString().substring(1) +"] 加入游戏\n";
+        String forwardMsg = LogPrint.getCurrentTime() + " [客户端 "+ channel.remoteAddress().toString().substring(1) +"] 加入游戏\n";
 
         ServerFrame.INSTANCE.addMsg(forwardMsg);
         //将该客户单加入聊天的信息推送给其他在线的客户端
@@ -48,7 +48,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Msg> {
     protected void channelRead0(ChannelHandlerContext ctx, Msg msg) throws Exception {
         //获取到当前Channel
         Channel channel = ctx.channel();
-        String forwardMsg = LogUtils.getCurrentTime() + " 来自[客户端 " + channel.remoteAddress().toString().substring(1) + " " + msg.getMsgType() + "] 的消息：" + msg + "\n";
+        String forwardMsg = LogPrint.getCurrentTime() + " 来自[客户端 " + channel.remoteAddress().toString().substring(1) + " " + msg.getMsgType() + "] 的消息：" + msg + "\n";
         ServerFrame.INSTANCE.addMsg(forwardMsg);
         channelGroup.writeAndFlush(msg);
     }

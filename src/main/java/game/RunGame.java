@@ -1,6 +1,6 @@
 package game;
 
-import util.AudioUtil;
+import loader.AudioLoader;
 import gui.progress.TankFrame;
 
 import javax.swing.*;
@@ -19,6 +19,6 @@ public class RunGame {
 				createGUI();
 			}
 		});
-		new Thread(()->new AudioUtil("audio/war1.wav").loop()).start();
+		new Thread(()->new AudioLoader("audio/war1.wav").loop()).start();
 	}
 }

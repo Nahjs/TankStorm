@@ -1,6 +1,6 @@
 package game.object;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.BaseObject.BaseBullet;
 import loader.ResourceLoader;
 
@@ -46,7 +46,7 @@ public class Bullet extends BaseBullet {
     public void paint(Graphics g) {
         // 子弹越界或者打在坦克上，移除掉
         if (!islive()) {
-            GameModel.INSTANCE.gameObjects.remove(this);
+            GameDesign.INSTANCE.gameObjects.remove(this);
         }
         g.drawImage(curBulletImage, x, y, null);
         move();
@@ -91,8 +91,8 @@ public class Bullet extends BaseBullet {
      * @return
      */
     private boolean isOutOfScreen() {
-        int tankWidth = GameModel.INSTANCE.gameWidth;
-        int tankHeight = GameModel.INSTANCE.gameHeight;
+        int tankWidth = GameDesign.INSTANCE.gameWidth;
+        int tankHeight = GameDesign.INSTANCE.gameHeight;
         int bulletWidth = curBulletImage.getWidth();
         int bulletHeight = curBulletImage.getHeight();
         return x + bulletWidth < 0 || y + bulletHeight < 0 || x > tankWidth || y > tankHeight;

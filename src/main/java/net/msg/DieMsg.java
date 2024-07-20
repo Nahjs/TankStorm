@@ -1,6 +1,6 @@
 package net.msg;
 
-import game.GameModel;
+import designer.GameDesign;
 
 import java.io.*;
 import java.util.UUID;
@@ -95,10 +95,10 @@ public class DieMsg extends Msg {
     public void handle() {
         // 客户端接收到TankDieMsg的逻辑处理
         //  自己挂了，显示游戏结束
-        if (this.tankId.equals(GameModel.INSTANCE.getSelfTank().getId())) {
-            GameModel.INSTANCE.gameOver = true;
+        if (this.tankId.equals(GameDesign.INSTANCE.getSelfTank().getId())) {
+            GameDesign.INSTANCE.gameOver = true;
         }
-        GameModel.INSTANCE.removeTankByUUID(tankId);
-        GameModel.INSTANCE.removeBulletByUUID(bulletId);
+        GameDesign.INSTANCE.removeTankByUUID(tankId);
+        GameDesign.INSTANCE.removeBulletByUUID(bulletId);
     }
 }

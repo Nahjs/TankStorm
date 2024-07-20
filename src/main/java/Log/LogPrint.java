@@ -1,4 +1,4 @@
-package util;
+package Log;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  *日志打印类
  */
-public class LogUtils {
+public class LogPrint {
 
 	/**
 	 * 获取当前系统时间，并进行格式化

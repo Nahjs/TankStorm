@@ -4,7 +4,7 @@ import game.object.GameObject;
 import game.object.GameObjectType;
 import net.Client;
 import net.msg.DieMsg;
-import game.GameModel;
+import designer.GameDesign;
 
 /**
  * 网络版子弹和坦克的碰撞器
@@ -21,11 +21,11 @@ public class NetBulletTankCollider implements Collider {
             // 如果自己打出的子弹和击中了别的坦克
             if (o1.getRect().intersects(o2.getRect())) {
                 // 移除子弹
-                GameModel.INSTANCE.gameObjects.remove(o1);
+                GameDesign.INSTANCE.gameObjects.remove(o1);
                 // 移除坦克
-                GameModel.INSTANCE.gameObjects.remove(o2);
+                GameDesign.INSTANCE.gameObjects.remove(o2);
                 // 添加一个爆炸动画
-                GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createExplode(o2.getRect()));
+                GameDesign.INSTANCE.gameObjects.add(GameDesign.INSTANCE.factory.createExplode(o2.getRect()));
                 // 有坦克被别人的子弹击中，就将消息发送到服务器
                 Client.INSTANCE.send(new DieMsg(o2.getId(), o1.getId()));
                 return true;

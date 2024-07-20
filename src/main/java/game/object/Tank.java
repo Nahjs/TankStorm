@@ -1,6 +1,6 @@
 package game.object;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.BaseObject.BaseTank;
 import loader.ConfigLoader;
 import loader.ResourceLoader;
@@ -141,11 +141,11 @@ public abstract class Tank extends BaseTank {
         if (y < 0) {
             y = 0;
         }
-        if (x + curTankImage.getWidth() > GameModel.INSTANCE.gameWidth) {
-            x = GameModel.INSTANCE.gameWidth - curTankImage.getWidth();
+        if (x + curTankImage.getWidth() > GameDesign.INSTANCE.gameWidth) {
+            x = GameDesign.INSTANCE.gameWidth - curTankImage.getWidth();
         }
-        if (y + curTankImage.getHeight() > GameModel.INSTANCE.gameHeight) {
-            y = GameModel.INSTANCE.gameHeight - curTankImage.getHeight();
+        if (y + curTankImage.getHeight() > GameDesign.INSTANCE.gameHeight) {
+            y = GameDesign.INSTANCE.gameHeight - curTankImage.getHeight();
         }
     }
 

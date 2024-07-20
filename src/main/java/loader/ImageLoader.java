@@ -1,4 +1,4 @@
-package util;
+package loader;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
  * 图像处理工具类
  */
 
-public class ImageUtil {
+public class ImageLoader {
 
         // 旋转给定的图像指定的角度
         public static BufferedImage rotateImage(final BufferedImage bufferedimage,

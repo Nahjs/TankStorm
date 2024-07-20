@@ -1,11 +1,11 @@
 package game.strategy;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.BaseObject.BaseBullet;
 import game.object.Group;
 import game.object.Tank;
 import loader.ResourceLoader;
-import util.AudioUtil;
+import loader.AudioLoader;
 import net.Client;
 import net.msg.BulletMsg;
 
@@ -52,8 +52,8 @@ public class DefaultFireStrategy implements FireStrategy {
         }
 
         //创建一个 BaseBullet 对象，表示新发射的子弹，并将其添加到游戏模型中。
-        BaseBullet bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
-        GameModel.INSTANCE.addBullet(bullet);
+        BaseBullet bullet = GameDesign.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, t.dir, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
+        GameDesign.INSTANCE.addBullet(bullet);
 
 
         // 将该坦克打出了新子弹的消息发送给服务器
@@ -61,7 +61,7 @@ public class DefaultFireStrategy implements FireStrategy {
 
         //如果坦克属于玩家（Group.SELF），则播放开火音效
         if (t.group == Group.SELF) {
-            new Thread(() -> new AudioUtil("audio/tank_fire.wav").play()).start();
+            new Thread(() -> new AudioLoader("audio/tank_fire.wav").play()).start();
         }
     }
 }

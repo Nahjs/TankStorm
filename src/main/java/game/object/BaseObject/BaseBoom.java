@@ -3,7 +3,7 @@ package game.object.BaseObject;
 import game.object.GameObject;
 import game.object.GameObjectType;
 import game.object.Group;
-import util.AudioUtil;
+import loader.AudioLoader;
 import game.object.Dir;
 
 import java.awt.*;
@@ -26,7 +26,7 @@ public abstract class BaseBoom extends GameObject {
     public BaseBoom(Rectangle tankRect) {
         this.tankRect = tankRect;
         rect = new Rectangle();
-        new Thread(()->new AudioUtil("audio/explode.wav").play()).start();
+        new Thread(()->new AudioLoader("audio/explode.wav").play()).start();
     }
 
     /**

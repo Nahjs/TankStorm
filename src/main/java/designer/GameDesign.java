@@ -1,4 +1,4 @@
-package game;
+package designer;
 
 import game.collider.ColliderChain;
 import decorator.BorderDecorator;
@@ -19,8 +19,8 @@ import java.util.*;
  * 将TankPanel和游戏对象（Tank、Bullet）分离，即Model和view分离
  * 使用门面模式，GameModel作为Facade，负责与TankPanel打交道
  */
-public class GameModel {
-    public static final GameModel INSTANCE = new GameModel(ConfigLoader.getGameWidth(), ConfigLoader.getGameHeight());
+public class GameDesign {
+    public static final GameDesign INSTANCE = new GameDesign(ConfigLoader.getGameWidth(), ConfigLoader.getGameHeight());
     public int gameWidth, gameHeight;   // 游戏区域宽高
     GameObject selfTank;
     public List<GameObject> gameObjects = new ArrayList<>();
@@ -33,7 +33,7 @@ public class GameModel {
     public boolean gameOver = false;
     public boolean gameSuccess = false;
 
-    private GameModel(int gameWidth, int gameHeight) {
+    private GameDesign(int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         factory = ConfigLoader.getFactory();
@@ -97,7 +97,7 @@ public class GameModel {
 
 
 private void initEnemyTanks() {
-    int enemyTankCount = ConfigLoader.getEnemy_tank_count(); // 假设这是敌方坦克的数量
+    int enemyTankCount = ConfigLoader.getEnemy_tank_count(); // 敌方坦克的数量
     for (int i = 0; i < enemyTankCount; i++) {
         Rectangle tankRect = new Rectangle();
         boolean valid = false;

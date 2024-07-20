@@ -1,12 +1,12 @@
 package game.strategy;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.BaseObject.BaseBullet;
 import game.object.Dir;
 import game.object.Group;
 import game.object.Tank;
 import loader.ResourceLoader;
-import util.AudioUtil;
+import loader.AudioLoader;
 import net.Client;
 import net.msg.BulletMsg;
 
@@ -28,8 +28,8 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         bulletX = t.x - bulletWidth - 5;
         bulletHeight = ResourceLoader.bulletL.getHeight();
         bulletY = t.y + (tankHeight - bulletHeight) / 2;
-        BaseBullet bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.LEFT, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
-        GameModel.INSTANCE.addBullet(bullet);
+        BaseBullet bullet = GameDesign.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.LEFT, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
+        GameDesign.INSTANCE.addBullet(bullet);
         // System.out.println("发送子弹信息Left");
         // 将该坦克打出了新子弹的消息发送给服务器
         //System.out.println(bullet);
@@ -41,8 +41,8 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         bulletX = t.x + (tankWidth - bulletWidth) / 2;
         bulletHeight = ResourceLoader.bulletU.getHeight();
         bulletY = t.y - bulletHeight - 5;
-        bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.UP, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
-        GameModel.INSTANCE.addBullet(bullet);
+        bullet = GameDesign.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.UP, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
+        GameDesign.INSTANCE.addBullet(bullet);
         // 将该坦克打出了新子弹的消息发送给服务器
         Client.INSTANCE.send(new BulletMsg(bullet));
 
@@ -50,8 +50,8 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         bulletHeight = ResourceLoader.bulletR.getHeight();
         bulletX = t.x + tankWidth + 5;
         bulletY = t.y + (tankHeight - bulletHeight) / 2;
-        bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.RIGHT, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
-        GameModel.INSTANCE.addBullet(bullet);
+        bullet = GameDesign.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.RIGHT, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
+        GameDesign.INSTANCE.addBullet(bullet);
         // 将该坦克打出了新子弹的消息发送给服务器
         Client.INSTANCE.send(new BulletMsg(bullet));
 
@@ -59,13 +59,13 @@ public class FourDirectionsFireStrategy implements FireStrategy {
         bulletWidth = ResourceLoader.bulletD.getWidth();
         bulletX = t.x + (tankWidth - bulletWidth) / 2;
         bulletY = t.y + tankHeight + 5;
-        bullet = GameModel.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.DOWN, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
-        GameModel.INSTANCE.addBullet(bullet);
+        bullet = GameDesign.INSTANCE.factory.createBullet(UUID.randomUUID(), t.getId(), bulletX, bulletY, Dir.DOWN, t.group == Group.SELF ? Group.SELF : Group.ENEMY);
+        GameDesign.INSTANCE.addBullet(bullet);
         // 将该坦克打出了新子弹的消息发送给服务器
         Client.INSTANCE.send(new BulletMsg(bullet));
 
         if (t.group == Group.SELF) {
-            new Thread(() -> new AudioUtil("audio/tank_fire.wav").play()).start();
+            new Thread(() -> new AudioLoader("audio/tank_fire.wav").play()).start();
         }
     }
 }

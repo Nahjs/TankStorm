@@ -1,6 +1,6 @@
 package net.msg;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.Dir;
 import game.object.GameObject;
 
@@ -112,11 +112,11 @@ public class MoveMsg extends Msg {
     public void handle() {
         // 客户端接收到TankJoinMsg的逻辑处理：是不是自己？
         // 如果传过来的连接信息的ID和本身的ID相等或者本地的列表中有这个ID，不做处理
-        if (this.id.equals(GameModel.INSTANCE.getSelfTank().getId())) {
+        if (this.id.equals(GameDesign.INSTANCE.getSelfTank().getId())) {
             return;
         }
         // 根据id找到对应的坦克
-        GameObject tank = GameModel.INSTANCE.findTankByUUID(id);
+        GameObject tank = GameDesign.INSTANCE.findTankByUUID(id);
         if (tank != null) {
             tank.setMoving(true);
             tank.setX(x);

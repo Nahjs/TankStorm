@@ -2,7 +2,7 @@ package game.collider;
 
 import game.object.GameObject;
 import game.object.GameObjectType;
-import game.GameModel;
+import designer.GameDesign;
 
 /**
  * 子弹和墙的碰撞器
@@ -15,7 +15,7 @@ public class BulletWallCollider implements Collider {
             // 如果子弹和墙碰撞到一起了
             if (o1.getRect().intersects(o2.getRect())) {
                 // 移除子弹
-                GameModel.INSTANCE.gameObjects.remove(o1);
+                GameDesign.INSTANCE.gameObjects.remove(o1);
                 return true;
             }
         } else if (o1.getGameObjectType() == GameObjectType.WALL && o2.getGameObjectType() == GameObjectType.BULLET) {

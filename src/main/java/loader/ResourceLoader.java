@@ -1,7 +1,5 @@
 package loader;
 
-import util.ImageUtil;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -18,19 +16,19 @@ public class ResourceLoader {
     static {
         // 加载四个方向的我方坦克图片
         selfTankU = readImage("GoodTank1.png");
-        selfTankL = ImageUtil.rotateImage(selfTankU, -90);
-        selfTankR = ImageUtil.rotateImage(selfTankU, 90);
-        selfTankD = ImageUtil.rotateImage(selfTankU, 180);
+        selfTankL = ImageLoader.rotateImage(selfTankU, -90);
+        selfTankR = ImageLoader.rotateImage(selfTankU, 90);
+        selfTankD = ImageLoader.rotateImage(selfTankU, 180);
         // 加载四个方向的敌方坦克图片
         enemyTankU = readImage("BadTank1.png");
-        enemyTankL = ImageUtil.rotateImage(enemyTankU, -90);
-        enemyTankR = ImageUtil.rotateImage(enemyTankU, 90);
-        enemyTankD = ImageUtil.rotateImage(enemyTankU, 180);
+        enemyTankL = ImageLoader.rotateImage(enemyTankU, -90);
+        enemyTankR = ImageLoader.rotateImage(enemyTankU, 90);
+        enemyTankD = ImageLoader.rotateImage(enemyTankU, 180);
         // 加载四个方向的子弹图片
         bulletU = readImage("bulletU.png");
-        bulletL = ImageUtil.rotateImage(bulletU, -90);
-        bulletR = ImageUtil.rotateImage(bulletU, 90);
-        bulletD = ImageUtil.rotateImage(bulletU, 180);
+        bulletL = ImageLoader.rotateImage(bulletU, -90);
+        bulletR = ImageLoader.rotateImage(bulletU, 90);
+        bulletD = ImageLoader.rotateImage(bulletU, 180);
         // 加载坦克爆炸的图片
         for (int i = 0; i < explodes.length; i++) {
             explodes[i] = readImage("e" + (i + 1) + ".gif");

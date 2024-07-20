@@ -1,12 +1,12 @@
 
-package util;
+package loader;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
 /**
  * 用于处理音频播放的工具类
  */
-public class AudioUtil {
+public class AudioLoader {
 
 	byte[] b = new byte[1024 * 1024 * 15];//存储音频数据的字节数组。
 
@@ -20,10 +20,10 @@ public class AudioUtil {
 
 
 	//加载音频文件
-	public AudioUtil(String fileName) {
+	public AudioLoader(String fileName) {
 		try {
 			//加载指定文件名的音频资源
-			audioInputStream = AudioSystem.getAudioInputStream(AudioUtil.class.getClassLoader().getResource(fileName));
+			audioInputStream = AudioSystem.getAudioInputStream(AudioLoader.class.getClassLoader().getResource(fileName));
 			//音频输入流中获取音频格式
 			audioFormat = audioInputStream.getFormat();
 			//使用该格式创建数据行信息。
@@ -96,7 +96,7 @@ public class AudioUtil {
 
 	public static void main(String[] args) {
 		// Audio a = new Audio("audio/explode.wav");
-		AudioUtil a = new AudioUtil("audio/war1.wav");
+		AudioLoader a = new AudioLoader("audio/war1.wav");
 		a.loop();
 
 	}

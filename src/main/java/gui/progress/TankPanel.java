@@ -1,6 +1,6 @@
 package gui.progress;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.GameObject;
 import net.Client;
 import net.msg.DirChangeMsg;
@@ -54,7 +54,7 @@ public class TankPanel extends JPanel {
                         break;
                     }
                     case KeyEvent.VK_SPACE: {
-                        GameModel.INSTANCE.getSelfTank().fire();
+                        GameDesign.INSTANCE.getSelfTank().fire();
                         return;
                     }
                 }
@@ -95,7 +95,7 @@ public class TankPanel extends JPanel {
              * 设置坦克方向
              */
             public void setMainTankDir() {
-                GameObject selfTank = GameModel.INSTANCE.getSelfTank();
+                GameObject selfTank = GameDesign.INSTANCE.getSelfTank();
                 // 如果四个方向键都没有被按下
                 if (!isL && !isU && !isR && !isD) {
                     //System.out.println("四个方向键都没有被按下！");
@@ -152,6 +152,6 @@ public class TankPanel extends JPanel {
         super.paintComponent(g);
         int width = this.getWidth();
         int height = this.getHeight();
-        GameModel.INSTANCE.paint(g, width, height);
+        GameDesign.INSTANCE.paint(g, width, height);
     }
 }

@@ -1,6 +1,6 @@
 package game.collider;
 
-import game.GameModel;
+import designer.GameDesign;
 import game.object.GameObject;
 import game.object.GameObjectType;
 import game.object.Group;
@@ -23,11 +23,11 @@ public class BulletTankCollider implements Collider {
             // 如果子弹和坦克碰撞到一起了
             if (o1.getRect().intersects(o2.getRect())) {
                 // 移除子弹
-                GameModel.INSTANCE.gameObjects.remove(o1);
+                GameDesign.INSTANCE.gameObjects.remove(o1);
                 // 移除坦克
-                GameModel.INSTANCE.gameObjects.remove(o2);
+                GameDesign.INSTANCE.gameObjects.remove(o2);
                 // 添加一个爆炸动画
-                GameModel.INSTANCE.gameObjects.add(GameModel.INSTANCE.factory.createExplode(o2.getRect()));
+                GameDesign.INSTANCE.gameObjects.add(GameDesign.INSTANCE.factory.createExplode(o2.getRect()));
                 return true;
             }
         } else if (o1.getGameObjectType() == GameObjectType.TANK && o2.getGameObjectType() == GameObjectType.BULLET) {
