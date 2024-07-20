@@ -9,7 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class StartGame {
-    private JFrame frame;
+    public JFrame frame;
 
     public StartGame() {
         frame = new JFrame("坦克风云");

@@ -6,14 +6,19 @@ import decorator.IdDecorator;
 import game.object.GameObject;
 import game.object.GameObjectType;
 import game.factory.abstractfactory.GameFactory;
+import gui.over.OverGame;
+import gui.start.StartGame;
 import loader.ConfigLoader;
 import loader.ResourceLoader;
 import net.Client;
 import game.object.Dir;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
+
+import static game.RunGame.closeRunGame;
 
 /**
  * 将TankPanel和游戏对象（Tank、Bullet）分离，即Model和view分离
@@ -179,6 +184,12 @@ private void initEnemyTanks() {
             gameObjects.remove(tank);
             tankMap.remove(tankId);
 
+            // 关闭当前游戏窗口
+            closeRunGame();
+
+//            // 启动结束游戏窗口
+//            JFrame mainFrame1 = new StartGame().frame; // 获取主界面窗口的引用
+//            new OverGame(mainFrame1);
         }
     }
 
