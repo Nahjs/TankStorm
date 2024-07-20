@@ -15,7 +15,7 @@ public class ServerFrame extends JFrame {
     //创建用于全局访问 ServerFrame的单例实例。
     public static final ServerFrame INSTANCE = new ServerFrame();
     // 创建用于显示服务器日志的文本区域。
-    private JTextArea jTextArea;
+    private static JTextArea jTextArea;
 
     private ServerFrame() {
         setLayout(new BorderLayout());
@@ -29,7 +29,7 @@ public class ServerFrame extends JFrame {
         }).start();*/
     }
 
-    private void initFrame() {
+    public void initFrame() {
         setTitle("Netty服务端");
         setVisible(true);
         setSize(800, 400);
@@ -46,7 +46,7 @@ public class ServerFrame extends JFrame {
     }
 
     //初始化和启动 Netty 服务器端
-    private void initServer() {
+    public static void initServer() {
         EventLoopGroup connectionAcceptorGroup = new NioEventLoopGroup();// 用于接受连接
         EventLoopGroup dataProcessingGroup = new NioEventLoopGroup();// 用于处理数据读写
         ServerBootstrap bootstrap = new ServerBootstrap();
@@ -88,9 +88,8 @@ public class ServerFrame extends JFrame {
             dataProcessingGroup.shutdownGracefully();
         }
     }
-    //程序入口点
+
     public static void main(String[] args) {
-        // 初始化服务器端
-        ServerFrame.INSTANCE.initServer();
+        initServer();
     }
 }

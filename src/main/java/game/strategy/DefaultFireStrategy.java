@@ -2,10 +2,9 @@ package game.strategy;
 
 import game.GameModel;
 import game.entity.BaseObject.BaseBullet;
-import game.entity.Dir;
 import game.entity.Group;
 import game.entity.Tank;
-import game.loader.ResourceLoader;
+import loader.ResourceLoader;
 import game.util.AudioUtil;
 import net.Client;
 import net.msg.BulletMsg;

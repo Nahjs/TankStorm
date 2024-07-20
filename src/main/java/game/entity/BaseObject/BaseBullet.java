@@ -5,7 +5,7 @@ import game.entity.GameObject;
 import game.entity.Group;
 import game.entity.Dir;
 import game.entity.GameObjectType;
-import game.loader.ResourceLoader;
+import loader.ResourceLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

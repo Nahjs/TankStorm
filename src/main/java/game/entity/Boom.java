@@ -2,7 +2,7 @@ package game.entity;
 
 import game.GameModel;
 import game.entity.BaseObject.BaseBoom;
-import game.loader.ResourceLoader;
+import loader.ResourceLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

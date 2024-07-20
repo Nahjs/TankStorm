@@ -1,4 +1,4 @@
-package game.loader;
+package loader;
 
 import game.collider.Collider;
 import game.factory.abstractfactory.GameFactory;

@@ -1,4 +1,4 @@
-package game.loader;
+package loader;
 
 import game.util.ImageUtil;
 

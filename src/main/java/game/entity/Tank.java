@@ -2,8 +2,8 @@ package game.entity;
 
 import game.GameModel;
 import game.entity.BaseObject.BaseTank;
-import game.loader.ConfigLoader;
-import game.loader.ResourceLoader;
+import loader.ConfigLoader;
+import loader.ResourceLoader;
 import game.strategy.DefaultFireStrategy;
 import game.strategy.FireStrategy;
 

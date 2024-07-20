@@ -1,7 +1,7 @@
 package game.collider;
 
 import game.entity.GameObject;
-import game.loader.ConfigLoader;
+import loader.ConfigLoader;
 
 import java.util.LinkedList;
 

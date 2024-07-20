@@ -1,7 +1,7 @@
 package gui.start;
 
-import game.loader.ResourceLoader;
-import gui.start.login.LoginGUI;
+import game.RunGame;
+import loader.ResourceLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +12,9 @@ public class StartGame {
     private JFrame frame;
 
     public StartGame() {
-        frame = new JFrame("\u5766\u514b\u98ce\u4e91"); // 确保标题使用正确的编码
+        frame = new JFrame("坦克风云");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
+        frame.setSize(1100, 625);
         frame.setLocationRelativeTo(null);
 
         // 设置背景面板
@@ -30,19 +30,18 @@ public class StartGame {
         frame.add(backgroundPanel);
 
         // 创建登录按钮
-        JButton loginButton = new JButton("\u767b\u5f55");
-        loginButton.setBounds(350, 500, 100, 30); // 根据需要调整位置和大小
+        JButton loginButton = new JButton("开始游戏");
+        loginButton.setBounds(350, 500, 150, 50); // 根据需要调整位置和大小
         backgroundPanel.add(loginButton);
 
         // 创建退出按钮
-        JButton exitButton = new JButton("\u9000\u51fa");
-        exitButton.setBounds(500, 500, 100, 30); // 根据需要调整位置和大小
+        JButton exitButton = new JButton("退出游戏");
+        exitButton.setBounds(750, 500, 150, 50); // 根据需要调整位置和大小
         backgroundPanel.add(exitButton);
 
-        // 为登录按钮添加监听器
+        // 为开始游戏按钮添加监听器
         loginButton.addActionListener(e -> {
-            LoginGUI loginGUI = new LoginGUI(); // 运行LoginGUI类
-            loginGUI.setVisible(true);
+            RunGame.createGUI();
             frame.dispose(); // 关闭当前窗口
         });
 
@@ -52,7 +51,7 @@ public class StartGame {
             int closeCode = JOptionPane.showConfirmDialog(
                     frame,
                     "确定退出游戏？",
-                    "提示！",
+                    "提示！！！",
                     JOptionPane.YES_NO_OPTION
             );
             // 检查用户是否点击了“是”
@@ -77,6 +76,7 @@ public class StartGame {
     }
 
     public static void main(String[] args) {
+
         new StartGame();
     }
 }

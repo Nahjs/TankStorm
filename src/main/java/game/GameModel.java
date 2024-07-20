@@ -6,8 +6,8 @@ import decorator.IdDecorator;
 import game.entity.GameObject;
 import game.entity.GameObjectType;
 import game.factory.abstractfactory.GameFactory;
-import game.loader.ConfigLoader;
-import game.loader.ResourceLoader;
+import loader.ConfigLoader;
+import loader.ResourceLoader;
 import net.Client;
 import game.entity.Dir;
 

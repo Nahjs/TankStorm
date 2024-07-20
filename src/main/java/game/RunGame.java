@@ -7,7 +7,7 @@ import javax.swing.*;
 
 
 
-public class StartWindow {
+public class RunGame {
 	public static void createGUI() {
 		TankFrame tankFrame = new TankFrame();
 	}

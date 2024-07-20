@@ -8,7 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import game.StartWindow;
+import game.RunGame;
+import gui.start.StartGame;
 
 public class LoginGUI extends JFrame {
     private static boolean isLoggedIn = false;
@@ -145,8 +146,8 @@ public class LoginGUI extends JFrame {
                     // 使用Timer来实现弹窗一秒后自动关闭
                     new Timer(1000, event -> dialog.dispose()).start();
 
-                    // 登录成功后，启动StartWindow
-                    StartWindow.createGUI();
+                    // 登录成功后，启动游戏
+                    new StartGame();
 
                 } else {
                     isLoggedIn = false; // 重置登录失败标志

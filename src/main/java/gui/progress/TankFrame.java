@@ -1,6 +1,6 @@
 package gui.progress;
 
-import game.loader.ConfigLoader;
+import loader.ConfigLoader;
 
 import javax.swing.*;
 
