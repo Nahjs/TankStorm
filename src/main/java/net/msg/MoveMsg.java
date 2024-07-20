@@ -1,8 +1,8 @@
 package net.msg;
 
-import top.jacktgq.tank.GameModel;
-import top.jacktgq.tank.entity.Dir;
-import top.jacktgq.tank.entity.GameObject;
+import top.jacktgq.game.GameModel;
+import top.jacktgq.game.entity.Dir;
+import top.jacktgq.game.entity.GameObject;
 
 import java.io.*;
 import java.util.UUID;

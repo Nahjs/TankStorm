@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import top.jacktgq.tank.StartWindow;
+import top.jacktgq.game.StartWindow;
 
 public class LoginGUI extends JFrame {
     private static boolean isLoggedIn = false;
