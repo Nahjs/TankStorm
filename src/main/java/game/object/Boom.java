@@ -1,7 +1,7 @@
-package game.entity;
+package game.object;
 
 import game.GameModel;
-import game.entity.BaseObject.BaseBoom;
+import game.object.BaseObject.BaseBoom;
 import loader.ResourceLoader;
 
 import java.awt.*;

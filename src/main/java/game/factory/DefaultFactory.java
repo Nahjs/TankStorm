@@ -1,10 +1,10 @@
 package game.factory;
 
-import game.entity.*;
-import game.entity.BaseObject.BaseBullet;
-import game.entity.BaseObject.BaseTank;
+import game.object.*;
+import game.object.BaseObject.BaseBullet;
+import game.object.BaseObject.BaseTank;
 
-import game.entity.BaseObject.BaseBoom;
+import game.object.BaseObject.BaseBoom;
 import game.factory.abstractfactory.GameFactory;
 
 import java.awt.*;

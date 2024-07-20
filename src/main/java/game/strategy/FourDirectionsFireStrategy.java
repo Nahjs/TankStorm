@@ -1,10 +1,10 @@
 package game.strategy;
 
 import game.GameModel;
-import game.entity.BaseObject.BaseBullet;
-import game.entity.Dir;
-import game.entity.Group;
-import game.entity.Tank;
+import game.object.BaseObject.BaseBullet;
+import game.object.Dir;
+import game.object.Group;
+import game.object.Tank;
 import loader.ResourceLoader;
 import game.util.AudioUtil;
 import net.Client;

@@ -1,9 +1,9 @@
 package net.msg;
 
 import game.GameModel;
-import game.entity.Dir;
-import game.entity.GameObject;
-import game.entity.Group;
+import game.object.Dir;
+import game.object.GameObject;
+import game.object.Group;
 
 import java.io.*;
 import java.util.UUID;

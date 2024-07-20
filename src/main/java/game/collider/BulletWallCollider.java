@@ -1,7 +1,7 @@
 package game.collider;
 
-import game.entity.GameObject;
-import game.entity.GameObjectType;
+import game.object.GameObject;
+import game.object.GameObjectType;
 import game.GameModel;
 
 /**

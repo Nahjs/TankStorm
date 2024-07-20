@@ -1,12 +1,12 @@
 package gui.progress;
 
 import game.GameModel;
-import game.entity.GameObject;
+import game.object.GameObject;
 import net.Client;
 import net.msg.DirChangeMsg;
 import net.msg.MoveMsg;
 import net.msg.StopMsg;
-import game.entity.Dir;
+import game.object.Dir;
 
 import javax.swing.*;
 import java.awt.*;

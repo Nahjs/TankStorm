@@ -1,4 +1,4 @@
-package game.entity;
+package game.object;
 
 /**
  * 方向控制类

@@ -1,9 +1,9 @@
 package decorator;
 
-import game.entity.GameObject;
-import game.entity.GameObjectType;
-import game.entity.Group;
-import game.entity.Dir;
+import game.object.GameObject;
+import game.object.GameObjectType;
+import game.object.Group;
+import game.object.Dir;
 
 import java.awt.*;
 import java.util.UUID;

@@ -1,6 +1,6 @@
 package game.collider;
 
-import game.entity.GameObject;
+import game.object.GameObject;
 
 /**
  *  碰撞器：完成两个游戏物体间的碰撞检测

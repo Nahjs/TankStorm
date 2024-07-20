@@ -1,9 +1,9 @@
 package game.collider;
 
 import game.GameModel;
-import game.entity.GameObject;
-import game.entity.GameObjectType;
-import game.entity.Group;
+import game.object.GameObject;
+import game.object.GameObjectType;
+import game.object.Group;
 
 /**
  * 子弹和坦克的碰撞器

@@ -1,6 +1,6 @@
-package game.entity;
+package game.object;
 
-import game.entity.BaseObject.BaseWall;
+import game.object.BaseObject.BaseWall;
 
 import java.awt.*;
 

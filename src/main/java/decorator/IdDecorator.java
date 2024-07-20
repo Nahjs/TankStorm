@@ -1,6 +1,6 @@
 package decorator;
 
-import game.entity.GameObject;
+import game.object.GameObject;
 
 import java.awt.*;
 

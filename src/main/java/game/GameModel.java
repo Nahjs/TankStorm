@@ -3,13 +3,13 @@ package game;
 import game.collider.ColliderChain;
 import decorator.BorderDecorator;
 import decorator.IdDecorator;
-import game.entity.GameObject;
-import game.entity.GameObjectType;
+import game.object.GameObject;
+import game.object.GameObjectType;
 import game.factory.abstractfactory.GameFactory;
 import loader.ConfigLoader;
 import loader.ResourceLoader;
 import net.Client;
-import game.entity.Dir;
+import game.object.Dir;
 
 import java.awt.*;
 import java.util.List;

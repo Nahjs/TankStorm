@@ -1,9 +1,9 @@
-package game.entity.BaseObject;
+package game.object.BaseObject;
 
-import game.entity.GameObject;
-import game.entity.Dir;
-import game.entity.GameObjectType;
-import game.entity.Group;
+import game.object.GameObject;
+import game.object.Dir;
+import game.object.GameObjectType;
+import game.object.Group;
 
 import java.awt.*;
 import java.util.UUID;

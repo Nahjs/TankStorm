@@ -1,10 +1,10 @@
-package game.entity.BaseObject;
+package game.object.BaseObject;
 
 
-import game.entity.GameObject;
-import game.entity.Group;
-import game.entity.Dir;
-import game.entity.GameObjectType;
+import game.object.GameObject;
+import game.object.Group;
+import game.object.Dir;
+import game.object.GameObjectType;
 import loader.ResourceLoader;
 
 import java.awt.*;

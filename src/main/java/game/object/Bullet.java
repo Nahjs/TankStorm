@@ -1,7 +1,7 @@
-package game.entity;
+package game.object;
 
 import game.GameModel;
-import game.entity.BaseObject.BaseBullet;
+import game.object.BaseObject.BaseBullet;
 import loader.ResourceLoader;
 
 import java.awt.*;

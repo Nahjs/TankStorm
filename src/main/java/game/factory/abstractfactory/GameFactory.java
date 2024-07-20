@@ -1,11 +1,11 @@
 package game.factory.abstractfactory;
 
-import game.entity.BaseObject.BaseBullet;
-import game.entity.BaseObject.BaseTank;
-import game.entity.GameObject;
-import game.entity.Group;
-import game.entity.Dir;
-import game.entity.BaseObject.BaseBoom;
+import game.object.BaseObject.BaseBullet;
+import game.object.BaseObject.BaseTank;
+import game.object.GameObject;
+import game.object.Group;
+import game.object.Dir;
+import game.object.BaseObject.BaseBoom;
 
 import java.awt.*;
 import java.util.UUID;

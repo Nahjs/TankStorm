@@ -1,6 +1,6 @@
 package game.strategy;
 
-import game.entity.Tank;
+import game.object.Tank;
 
 /**
  * 开火策略

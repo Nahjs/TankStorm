@@ -1,4 +1,4 @@
-package game.entity;
+package game.object;
 
 /**
  * 游戏物体类型
