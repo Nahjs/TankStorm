@@ -1,10 +1,10 @@
 package net.msg;
 
 import net.Client;
-import top.jacktgq.game.GameModel;
-import top.jacktgq.game.entity.Dir;
-import top.jacktgq.game.entity.GameObject;
-import top.jacktgq.game.entity.Group;
+import game.GameModel;
+import game.entity.Dir;
+import game.entity.GameObject;
+import game.entity.Group;
 
 import java.io.*;
 import java.util.UUID;

@@ -1,6 +1,6 @@
 package net.msg;
 
-import top.jacktgq.game.GameModel;
+import game.GameModel;
 
 import java.io.*;
 import java.util.UUID;

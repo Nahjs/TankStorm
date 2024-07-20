@@ -4,7 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import net.msg.Msg;
 import net.msg.JoinMsg;
-import top.jacktgq.game.GameModel;
+import game.GameModel;
 /**
  * 客户端的消息处理器 ，用于处理从服务器接收的消息以及处理客户端通道的活动状态.
  */
