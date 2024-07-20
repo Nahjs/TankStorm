@@ -28,8 +28,9 @@ public class GameModel {
     public HashMap<UUID, GameObject> bulletMap = new HashMap<>();
     public ColliderChain colliderChain;
     public GameFactory factory;
-    public Random ramdom = new Random();
+    public Random random = new Random();
     public boolean gameOver = false;
+    public boolean gameSuccess = false;
 
     private GameModel(int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
@@ -37,15 +38,28 @@ public class GameModel {
         factory = ConfigLoader.getFactory();
         colliderChain = new ColliderChain();
         // 初始化墙
-        gameObjects.add(factory.createWall(100, 400, 60, 200));
-        gameObjects.add(factory.createWall(820, 400, 60, 200));
-        gameObjects.add(factory.createWall(200, 200, 200, 50));
-        gameObjects.add(factory.createWall(600, 200, 200, 50));
+//        gameObjects.add(factory.createWall(100, 400, 60, 200));
+//        gameObjects.add(factory.createWall(820, 400, 60, 200));
+//        gameObjects.add(factory.createWall(200, 200, 200, 50));
+//        gameObjects.add(factory.createWall(600, 200, 200, 50));
+        // 初始化墙
+        gameObjects.add(factory.createWall(100, 220, 50, 50));
+        gameObjects.add(factory.createWall(620, 220, 50, 50));
+        gameObjects.add(factory.createWall(100, 530, 50, 50));
+        gameObjects.add(factory.createWall(820, 130, 50, 50));
+        gameObjects.add(factory.createWall(270, 300, 60, 100));
+        gameObjects.add(factory.createWall(830, 300, 60, 100));
+        gameObjects.add(factory.createWall(250, 120, 50, 50));
+        gameObjects.add(factory.createWall(480, 120, 50, 50));
+        gameObjects.add(factory.createWall(750, 530, 50, 50));
+        gameObjects.add(factory.createWall(520, 530, 50, 50));
+        gameObjects.add(factory.createWall(460, 360, 100, 50));
+
         // 初始化我方坦克，位置随机（位置必须合法，不能和墙壁相交），方向随机
         initSelfTank();
         addTank(selfTank);
         // 随机产生enemy_tank_count辆敌方坦克
-        // initEnemyTanks();
+        initEnemyTanks();
         // 连接服务器
         new Thread(() -> {
             Client.INSTANCE.connect();
@@ -59,8 +73,8 @@ public class GameModel {
             boolean valid = true;
             tankRect.width = ResourceLoader.selfTankU.getWidth();
             tankRect.height = ResourceLoader.selfTankU.getHeight();
-            tankRect.x = ramdom.nextInt(gameWidth - tankRect.width);
-            tankRect.y = ramdom.nextInt(gameHeight - tankRect.height);
+            tankRect.x = random.nextInt(gameWidth - tankRect.width);
+            tankRect.y = random.nextInt(gameHeight - tankRect.height);
             for (GameObject gameObject : gameObjects) {
                 if (gameObject.getGameObjectType() == GameObjectType.WALL) {
                     // 如果此次生成的随机坦克位置和围墙相交，就重新生成
@@ -76,22 +90,51 @@ public class GameModel {
             }
         }
         // 使用装饰器模式在坦克上方绘制id，用以标识
-        selfTank = new IdDecorator(factory.createSelfTank(UUID.randomUUID(), tankRect.x, tankRect.y, Dir.values()[ramdom.nextInt(4)], 5));
+        selfTank = new IdDecorator(factory.createSelfTank(UUID.randomUUID(), tankRect.x, tankRect.y, Dir.values()[random.nextInt(4)], 5));
         //selfTank = factory.createSelfTank(tankRect.x, tankRect.y, Dir.values()[ramdom.nextInt(4)], 5);
         return;
     }
 
-    private void initEnemyTanks() {
-        int count = ConfigLoader.getEnemy_tank_count();
-        // 将游戏区域网格化
-        // 敌方坦克的高度和宽度
-
-        // int rows = this.getWidth();
-        for (int i = 0; i < count; i++) {
-             gameObjects.add(new BorderDecorator(factory.createEnemyTank(UUID.randomUUID(), 100 + 100 * i, 100, Dir.DOWN, 5)));
-            // gameObjects.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5));
+//    private void initEnemyTanks() {
+//        int count = ConfigLoader.getEnemy_tank_count();
+//        // 将游戏区域网格化
+//        // 敌方坦克的高度和宽度
+//
+//        // int rows = this.getWidth();
+//        for (int i = 0; i < count; i++) {
+//             gameObjects.add(new BorderDecorator(factory.createEnemyTank(UUID.randomUUID(), 100 + 100 * i, 100, Dir.DOWN, 5)));
+//            // gameObjects.add(factory.createEnemyTank(100 + 100 * i, 100, Dir.DOWN, 5));
+//        }
+//    }
+private void initEnemyTanks() {
+    int enemyTankCount = ConfigLoader.getEnemy_tank_count(); // 假设这是敌方坦克的数量
+    for (int i = 0; i < enemyTankCount; i++) {
+        Rectangle tankRect = new Rectangle();
+        boolean valid = false;
+        while (!valid) {
+            tankRect.width = ResourceLoader.enemyTankU.getWidth(); // 假设这是敌方坦克的图像宽度
+            tankRect.height = ResourceLoader.enemyTankU.getHeight(); // 假设这是敌方坦克的图像高度
+            tankRect.x = random.nextInt(gameWidth - tankRect.width);
+            tankRect.y = random.nextInt(gameHeight - tankRect.height);
+            valid = true; // 假设位置有效
+            for (GameObject gameObject : gameObjects) {
+                if (gameObject.getGameObjectType() == GameObjectType.WALL) {
+                    // 如果此次生成的随机坦克位置和围墙相交，就重新生成
+                    if (gameObject.getRect().intersects(tankRect)) {
+                        valid = false;
+                        break;
+                    }
+                }
+            }
         }
+        // 随机生成方向
+        Dir direction = Dir.values()[random.nextInt(Dir.values().length)];
+        // 创建敌方坦克并添加到游戏对象列表中
+        GameObject enemyTank = factory.createEnemyTank(UUID.randomUUID(), tankRect.x, tankRect.y, direction, 5);
+        gameObjects.add(new BorderDecorator(enemyTank));
+        tankMap.put(enemyTank.getId(), enemyTank);
     }
+}
 
     public void paint(Graphics g, int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;

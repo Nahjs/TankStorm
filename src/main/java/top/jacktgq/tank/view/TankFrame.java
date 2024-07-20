@@ -12,7 +12,7 @@ public class TankFrame extends JFrame {
     private static final int GAME_HEIGHT =  ConfigLoader.getGameHeight();
 
     public TankFrame() {
-        setTitle("糖果坦克大战");
+        setTitle("坦克风云");
         setSize(GAME_WIDTH, GAME_HEIGHT);
         getContentPane().add(new TankPanel());
         setLocationRelativeTo(null);

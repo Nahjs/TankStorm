@@ -23,8 +23,8 @@ public class EnemyTank extends Tank {
         if (random.nextInt(100) > 90) {
             dir = Dir.values()[random.nextInt(4)];
         }
-        // %5的机会开火
-        if (random.nextInt(100) > 95) {
+        // %3的机会开火
+        if (random.nextInt(100) > 97) {
             fire();
         }
     }
