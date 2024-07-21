@@ -9,7 +9,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class StartGame {
-    public JFrame frame;
+
+    public static JFrame frame;
 
     public StartGame() {
         frame = new JFrame("坦克风云");
@@ -29,10 +30,15 @@ public class StartGame {
         backgroundPanel.setLayout(null);
         frame.add(backgroundPanel);
 
+
+
         // 创建登录按钮
         JButton loginButton = new JButton("开始游戏");
         loginButton.setBounds(350, 500, 150, 50); // 根据需要调整位置和大小
         backgroundPanel.add(loginButton);
+
+        loginButton.setVisible(true);
+
 
         // 创建退出按钮
         JButton exitButton = new JButton("退出游戏");
@@ -75,6 +81,10 @@ public class StartGame {
             frame.setVisible(true);
     }
 
+    // 公共静态方法来获取主窗口的引用
+    public static JFrame getMainFrame() {
+        return frame;
+    }
     public static void main(String[] args) {
 
         new StartGame();

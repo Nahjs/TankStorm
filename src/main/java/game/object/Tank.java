@@ -16,7 +16,18 @@ import java.util.UUID;
  */
 public abstract class Tank extends BaseTank {
     public Group group;
-    protected int speed = 10;
+    protected int speed = 6;
+    private boolean isAlive = true; // 初始状态为存活
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+    public void die() {
+        this.isAlive = false;
+    }
 
     public BufferedImage curTankImage;  // 当前坦克加载的图片
 
@@ -154,8 +165,9 @@ public abstract class Tank extends BaseTank {
      */
     @Override
     public void fire() {
-        fireStrategy.fire(this);
-    }
+        if (isAlive) {
+            fireStrategy.fire(this);
+        }}
 
     // 获取坦克图片坐标和宽高
     @Override

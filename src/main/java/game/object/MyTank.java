@@ -12,10 +12,6 @@ public class MyTank extends Tank {
         super(id, x, y, dir, speed, Group.SELF);
         moving = false;
     }
-    public MyTank( String id, int x, int y, Dir dir, int speed) {
-        super(UUID.fromString(id), x, y, dir, speed, Group.SELF);
-        moving = false;
-    }
 
     @Override
     public void paint(Graphics g) {

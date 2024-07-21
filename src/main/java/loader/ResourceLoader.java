@@ -33,7 +33,7 @@ public class ResourceLoader {
         for (int i = 0; i < explodes.length; i++) {
             explodes[i] = readImage("e" + (i + 1) + ".gif");
         }
-        gameOver = readImage("GameOver.png");
+//        gameOver = readImage("GameOver.png");
     }
 
     private static BufferedImage readImage(String filename) {

@@ -99,6 +99,7 @@ public class DieMsg extends Msg {
             GameDesign.INSTANCE.gameOver = true;
         }
         GameDesign.INSTANCE.removeTankByUUID(tankId);
+        GameDesign.INSTANCE.removePlayerTankByUUID(tankId);
         GameDesign.INSTANCE.removeBulletByUUID(bulletId);
     }
 }

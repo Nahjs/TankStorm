@@ -1,24 +1,21 @@
 package designer;
 
+import game.RunGame;
 import game.collider.ColliderChain;
 import decorator.BorderDecorator;
 import decorator.IdDecorator;
-import game.object.GameObject;
-import game.object.GameObjectType;
+import game.object.*;
 import game.factory.abstractfactory.GameFactory;
-import gui.over.OverGame;
+import gui.over.OverGUI;
 import gui.start.StartGame;
 import loader.ConfigLoader;
 import loader.ResourceLoader;
 import net.Client;
-import game.object.Dir;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
-
-import static game.RunGame.closeRunGame;
 
 /**
  * 将TankPanel和游戏对象（Tank、Bullet）分离，即Model和view分离
@@ -130,19 +127,17 @@ private void initEnemyTanks() {
         tankMap.put(enemyTank.getId(), enemyTank);
     }
 }
-
+//游戏背景设置
     public void paint(Graphics g, int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
-        g.setColor(Color.BLACK);
+      //  g.setColor(Color.darkGray);//游戏背景色设置
+        // 加载背景图片
+        ImageIcon background = new ImageIcon(ResourceLoader.class.getResource("/images/background.png"));
+        Image backgroundImage = background.getImage();
 
-        g.fillRect(0, 0, gameWidth, gameHeight);
-        if (gameOver) {
-            int imgWidth = ResourceLoader.gameOver.getWidth();
-            int imgHeight = ResourceLoader.gameOver.getHeight();
-            g.drawImage(ResourceLoader.gameOver, (gameWidth - imgWidth) / 2, (gameHeight - imgHeight) / 2, null);
-        }
-        g.setColor(Color.WHITE);
+        // 缩放图片以适应窗口大小
+        g.drawImage(backgroundImage, 0, 0, gameWidth, gameHeight, null);
         // 绘制所有游戏物体：坦克、子弹、爆炸
         for (int i = 0; i < gameObjects.size(); i++) {
             gameObjects.get(i).paint(g);
@@ -180,19 +175,49 @@ private void initEnemyTanks() {
 
     public void removeTankByUUID(UUID tankId) {
         GameObject tank = tankMap.get(tankId);
-        if (tank != null) {
+        // 检查坦克是否存在，并且不是玩家控制的坦克（即不是MyTank的实例）
+        if (tank != null && !(tank instanceof MyTank)) {
             gameObjects.remove(tank);
             tankMap.remove(tankId);
-
-            // 关闭当前游戏窗口
-            closeRunGame();
-
-//            // 启动结束游戏窗口
-//            JFrame mainFrame1 = new StartGame().frame; // 获取主界面窗口的引用
-//            new OverGame(mainFrame1);
         }
     }
 
+    public void removePlayerTankByUUID(UUID tankId) {
+        System.out.println("GameDesign: Removing player tank by UUID: " + tankId);
+
+        // 从tankMap中获取坦克对象
+        GameObject tank = tankMap.get(tankId);
+
+        // 检查坦克是否存在
+        System.out.println("GameDesign: Tank found? " + (tank != null));
+
+        if (tank != null) {
+            // 检查坦克是否是玩家控制的坦克（MyTank的实例）
+            if (tank instanceof MyTank) {
+                MyTank playerTank = (MyTank) tank;
+
+                System.out.println("GameDesign: Tank is an instance of MyTank.");
+
+                // 设置坦克死亡状态
+                System.out.println("GameDesign: Setting player tank death state.");
+                playerTank.die();
+
+                // ... 其他代码 ...
+                // 关闭 RunGame 窗口
+                System.out.println("GameDesign: Closing RunGame window.");
+                RunGame.closeRunGame();
+
+                // 启动游戏结束窗口
+                System.out.println("GameDesign: Creating and showing OverGUI.");
+                OverGUI overGUI = new OverGUI();
+                overGUI.setVisible(true);
+            } else {
+                System.out.println("GameDesign: Tank is not an instance of MyTank.");
+            }
+        } else {
+            System.out.println("GameDesign: Tank not found in tankMap.");
+        }
+    }
     public void removeBulletByUUID(UUID bulletId) {
         GameObject bullet = bulletMap.get(bulletId);
         if (bullet != null) {
