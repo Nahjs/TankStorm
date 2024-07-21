@@ -25,9 +25,20 @@ public class VictoryGUI extends JFrame {
         setLayout(null);
         
         // 添加背景图片
-        JLabel background = new JLabel(new ImageIcon(ResourceLoader.class.getResource("/images/win.png")));
-        background.setBounds(0, 0, 1100, 700);
+
+        ImageIcon originalIcon = new ImageIcon(ResourceLoader.class.getResource("/images/win.png"));
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+        JLabel background = new JLabel(scaledIcon);
+        background.setBounds(0, 0, getWidth(), getHeight());
         this.add(background);
+
+//        JLabel background = new JLabel(new ImageIcon(ResourceLoader.class.getResource("/images/win.png")));
+//
+//        background.setBounds(0, 0, 1100, 700);
+//        this.add(background);
 
         // 创建并添加回到游戏按钮
         JButton backToMainButton = new JButton("回到游戏");

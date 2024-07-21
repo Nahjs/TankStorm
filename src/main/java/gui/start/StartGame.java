@@ -13,9 +13,11 @@ public class StartGame {
     public static JFrame frame;
 
     public StartGame() {
+
+
         frame = new JFrame("坦克风云");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1100, 625);
+        frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
 
         // 设置背景面板
@@ -23,7 +25,7 @@ public class StartGame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon background = new ImageIcon(ResourceLoader.class.getResource("/images/background/background.png"));
+                ImageIcon background = new ImageIcon(ResourceLoader.class.getResource("/images/startgame.png"));
                 g.drawImage(background.getImage(), 0, 0, null);
             }
         };

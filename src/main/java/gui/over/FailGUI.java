@@ -8,12 +8,12 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class OverGUI {
+public class FailGUI {
 
     private JFrame frame;
     private boolean visible;
 
-    public OverGUI() {
+    public FailGUI() {
         visible = false;
         initUI();
     }
@@ -30,6 +30,11 @@ public class OverGUI {
                 super.paintComponent(g);
                 ImageIcon background = new ImageIcon(ResourceLoader.class.getResource("/images/GameOver.png"));
                 g.drawImage(background.getImage(), 0, 0, null);
+//                ImageIcon background = new ImageIcon(ResourceLoader.class.getResource("/images/GameOver.png"));
+//                Image backgroundImage = background.getImage();
+//
+//                // 缩放图片以适应窗口大小
+//                g.drawImage(backgroundImage, 0, 0, gameWidth, gameHeight, null);
             }
         };
         backgroundPanel.setLayout(null);
@@ -39,10 +44,9 @@ public class OverGUI {
         backgroundPanel.add(endGameButton);
 
         endGameButton.addActionListener(e -> {
-            int closeCode = JOptionPane.showConfirmDialog(frame, "确定退出游戏？", "提示！", JOptionPane.YES_NO_OPTION);
-            if (closeCode == JOptionPane.YES_OPTION) {
+
                 System.exit(0);
-            }
+
         });
 
         JButton backToMainButton = new JButton("回到游戏");
@@ -78,6 +82,6 @@ public class OverGUI {
     }
 
     public static void main(String[] args) {
-        new OverGUI().setVisible(true);
+        new FailGUI().setVisible(true);
     }
 }

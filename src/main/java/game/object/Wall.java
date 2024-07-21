@@ -16,5 +16,6 @@ public class Wall extends BaseWall {
     public void paint(Graphics g) {
         g.setColor(new Color(0xdba989));
         g.fillRect(x, y, width, height);
+       // g.drawImage(curTankImage, x, y, null);
     }
 }

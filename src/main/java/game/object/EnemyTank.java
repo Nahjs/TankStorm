@@ -19,12 +19,12 @@ public class EnemyTank extends Tank {
     @Override
     protected void move() {
         super.move();
-        // %10的机会改变方向
-        if (random.nextInt(100) > 90) {
+        // %20的机会改变方向
+        if (random.nextInt(100) > 80) {
             dir = Dir.values()[random.nextInt(4)];
         }
-        // %3的机会开火
-        if (random.nextInt(100) > 97) {
+        // %10的机会开火
+        if (random.nextInt(100) > 90) {
             fire();
         }
     }
