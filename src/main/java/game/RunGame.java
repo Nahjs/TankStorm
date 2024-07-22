@@ -6,7 +6,7 @@ import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.xdgf.usermodel.section.geometry.PolyLineTo;
 
 import javax.swing.*;
-
+import java.awt.*;
 
 
 public class RunGame {
@@ -14,6 +14,10 @@ public class RunGame {
 
 	public static void createGUI() {
 		runGameFrame = new TankFrame(); // 假设 TankFrame 是游戏窗口
+
+        runGameFrame.repaint(10);
+
+		runGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 设置关闭窗口时退出应用程序
 		runGameFrame.setVisible(true);
 	}
 

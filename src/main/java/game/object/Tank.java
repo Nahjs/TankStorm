@@ -41,7 +41,7 @@ public abstract class Tank extends BaseTank {
         this.dir = dir;
         this.speed = speed;
         this.group = group;
-        // this.curTankImage = (group == Group.SELF ? ResourceMgr.selfTankU : ResourceMgr.enemyTankD);
+         this.curTankImage = (group == Group.SELF ? ResourceLoader.selfTankU : ResourceLoader.enemyTankD);
         initCurTankImage();
         this.rect = new Rectangle();
         updateRect();

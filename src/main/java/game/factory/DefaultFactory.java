@@ -1,11 +1,10 @@
 package game.factory;
 
-import game.object.*;
+import game.factory.abstractfactory.GameFactory;
+import game.object.BaseObject.BaseBoom;
 import game.object.BaseObject.BaseBullet;
 import game.object.BaseObject.BaseTank;
-
-import game.object.BaseObject.BaseBoom;
-import game.factory.abstractfactory.GameFactory;
+import game.object.*;
 
 import java.awt.*;
 import java.util.UUID;
@@ -16,7 +15,9 @@ import java.util.UUID;
 public class DefaultFactory extends GameFactory {
     @Override
     public BaseTank createSelfTank(UUID id, int x, int y, Dir dir, int speed) {
-        return new MyTank(id, x, y, dir, speed);
+        MyTank tank = new MyTank(id, x, y, dir, speed);
+        //GameDesign.INSTANCE.registerTank(id, new Player(id.toString())); // 注册坦克和玩家的映射
+        return tank;
     }
 
     @Override
@@ -35,7 +36,7 @@ public class DefaultFactory extends GameFactory {
     }
 
     @Override
-    public GameObject createWall(int x, int y, int width, int height) {
-        return new Wall(x, y, width, height);
+    public GameObject createWall(Image image, int x, int y, int width, int height) {
+        return new Wall(image,x, y, width, height);
     }
 }

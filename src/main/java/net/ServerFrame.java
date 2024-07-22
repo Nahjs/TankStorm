@@ -30,7 +30,7 @@ public class ServerFrame extends JFrame {
     }
 
     public void initFrame() {
-        setTitle("Netty服务端");
+        setTitle("服务器的日志信息");
         setVisible(true);
         setSize(800, 400);
 

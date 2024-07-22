@@ -20,11 +20,11 @@ public class EnemyTank extends Tank {
     protected void move() {
         super.move();
         // %10的机会改变方向
-        if (random.nextInt(100) > 80) {
+        if (random.nextInt(100) > 90) {
             dir = Dir.values()[random.nextInt(4)];
         }
-        // %10的机会开火
-        if (random.nextInt(100) > 90) {
+        // %5的机会开火
+        if (random.nextInt(100) > 95) {
             fire();
         }
     }
@@ -36,4 +36,5 @@ public class EnemyTank extends Tank {
         g.drawImage(curTankImage, x, y, null);
         move();
     }
+
 }

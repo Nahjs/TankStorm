@@ -8,11 +8,12 @@ import java.awt.*;
 import java.util.List;
 
 
-public class VictoryGUI extends JFrame {
-    private boolean playerWon; // 是否玩家胜利
 
-    public VictoryGUI(boolean playerWon, List<Boolean> playerStatuses) {
-        this.playerWon = playerWon;
+public class VictoryGUI extends JFrame {
+    public boolean gameSuccess; // 是否玩家胜利
+
+    public VictoryGUI(boolean gamewin, List<Boolean> playerStatuses) {
+        this.gameSuccess = gamewin;
         initGUI(playerStatuses);
     }
 

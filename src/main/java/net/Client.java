@@ -69,4 +69,12 @@ public class Client {
             // 例如，记录日志、尝试重新连接等
         }
     }
+//    public void sendGameOverCheckRequest() {
+//        if (channel != null && channel.isActive()) {
+//            GameOverCheckRequestMsg gameOverCheckRequest = new GameOverCheckRequestMsg(!playerTanks.isEmpty());
+//            channel.writeAndFlush(gameOverCheckRequest);
+//        } else {
+//            // Handle channel being null or inactive
+//        }
+//    }
 }

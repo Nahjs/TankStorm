@@ -9,5 +9,6 @@ public enum MsgType {
     TankStop,           // 坦克停下来
     TankStartMoving,    // 坦克开始移动
     BulletNew,          // 新增子弹
+    GameResult, //游戏结果
     TankDie             // 坦克死亡
 }
