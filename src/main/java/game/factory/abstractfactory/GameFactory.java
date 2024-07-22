@@ -1,14 +1,12 @@
 package game.factory.abstractfactory;
 
-import designer.GameDesign;
+import game.object.BaseObject.BaseBoom;
 import game.object.BaseObject.BaseBullet;
 import game.object.BaseObject.BaseTank;
+import game.object.Dir;
 import game.object.GameObject;
 import game.object.Group;
-import game.object.Dir;
-import game.object.BaseObject.BaseBoom;
 import game.object.MyTank;
-import rank.Player;
 
 import java.awt.*;
 import java.util.UUID;
@@ -23,7 +21,7 @@ public abstract class GameFactory {
      */
     public BaseTank createSelfTank(UUID id, int x, int y, Dir dir, int speed) {
         MyTank tank = new MyTank(id, x, y, dir, speed);
-        GameDesign.INSTANCE.registerTank(id, new Player(id.toString())); // 注册坦克和玩家的映射
+        //GameDesign.INSTANCE.registerTank(id, new Player(id.toString())); // 注册坦克和玩家的映射
         return tank;
     }/**
      * 创建敌方坦克

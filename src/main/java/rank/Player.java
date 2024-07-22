@@ -4,8 +4,8 @@ public class Player {
     private String uuid; // 坦克的UUID作为玩家的名字
     private int score;
 
-    public Player(String uuid) {
-        this.uuid = uuid;
+    public Player(String tankId) {
+        this.uuid = tankId; // 直接使用坦克的ID作为玩家的UUID
         this.score = 0;
     }
     // 更新玩家得分的方法
@@ -21,4 +21,6 @@ public class Player {
     public int getScore() {
         return score;
     }
+
+
 }

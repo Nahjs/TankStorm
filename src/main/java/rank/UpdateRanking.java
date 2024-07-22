@@ -25,16 +25,16 @@ public class UpdateRanking {
     public void update() {
         try {
             // 查询当前得分
-            List<Player> players = rankManager.queryScores();
+            List<Player> players = RankManager.queryScores();
 
             // 按得分降序排序玩家列表
-            Collections.sort(players, (p1, p2) -> Integer.compare((Integer) p2.getScore(), (Integer) p1.getScore()));
+            Collections.sort(players, (p1, p2) -> Integer.compare(p2.getScore(), (Integer) p1.getScore()));
 
             // 清空现有得分记录（根据实际业务逻辑可能需要调整）
            // rankManager.clearScoreboard();
 
             // 更新数据库中的得分记录
-            updateScoresInDatabase(players);
+         //   updateScoresInDatabase(players);
 
             // 导出到Excel
             excelManager.exportToExcel(players);

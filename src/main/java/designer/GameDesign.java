@@ -1,24 +1,24 @@
 package designer;
 
+import Log.LogPrint;
 import decorator.BorderDecorator;
 import decorator.IdDecorator;
 import game.RunGame;
+import game.collider.BulletTankCollider;
+import game.collider.Collider;
 import game.collider.ColliderChain;
 import game.factory.abstractfactory.GameFactory;
-import game.object.Dir;
-import game.object.GameObject;
-import game.object.GameObjectType;
+import game.object.*;
 import gui.over.FailGUI;
 import gui.start.login.JdbcUtils;
 import loader.ConfigLoader;
 import loader.ResourceLoader;
 import net.Client;
 import rank.Player;
-import rank.UpdateRanking;
+import rank.RankManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.*;
@@ -35,11 +35,11 @@ public class GameDesign {
     GameObject selfTank;
     int enemyTankCount = ConfigLoader.getEnemy_tank_count(); // 敌方坦克的数量
 
-    private Set<GameObject> playerTanks = new HashSet<>(); // 玩家坦克的集合
+
     public List<GameObject> gameObjects = new ArrayList<>();
     public HashMap<UUID, GameObject> tankMap = new HashMap<>();
     private Map<UUID, Player> tankToPlayerMap= new HashMap<>();; // 存储坦克UUID和Player对象的映射
-    private Player selfPlayer; // 假设这是当前玩家的Player对象
+
     public HashMap<UUID, GameObject> bulletMap = new HashMap<>();
     public ColliderChain colliderChain;
     public GameFactory factory;
@@ -74,7 +74,6 @@ public class GameDesign {
 
         // 随机产生enemy_tank_count辆敌方坦克
         initEnemyTanks();
-
 
 
         // 连接服务器
@@ -112,9 +111,10 @@ public class GameDesign {
 //        BaseTank playerTank = factory.createSelfTank(UUID.randomUUID(), 100, 100, Dir.NORTH, 5);
 
         // 使用装饰器模式在坦克上方绘制id，用以标识
-        selfTank = new IdDecorator(factory.createSelfTank(UUID.randomUUID(), tankRect.x, tankRect.y,
+        UUID tankId = UUID.randomUUID(); // 为坦克生成ID
+        selfTank = new IdDecorator(factory.createSelfTank(tankId, tankRect.x, tankRect.y,
                 Dir.values()[random.nextInt(4)], 5));
-//        playerTanks.add(selfTank);// 添加到我方坦克集合
+       // Player player = new Player(tankId.toString());
     }
 
 
@@ -184,8 +184,10 @@ private void initEnemyTanks() {
     public void registerTank(UUID tankId, Player player) {
         tankToPlayerMap.put(tankId, player);
     }
+
     // findPlayerByTankId方法的实现
     public Player findPlayerByTankId(UUID tankId) {
+        LogPrint.log(this.getClass().getSimpleName(), "Searching for player with tank ID: " + tankId);
         return tankToPlayerMap.get(tankId); // 直接从映射中获取Player对象
     }
         public void addBullet(GameObject bullet) {
@@ -217,31 +219,94 @@ private void initEnemyTanks() {
                 new FailGUI().setVisible(true);
             });
         } else {
-            // 在游戏结束的地方调用
-            try {
-                Connection databaseConnection = JdbcUtils.getConnection(); // 获取数据库连接
-                String excelFilePath = "Scoreboard.xlsx"; // 指定Excel文件路径
-                UpdateRanking updateRanking = new UpdateRanking(databaseConnection, excelFilePath);
-                updateRanking.update(); // 更新排行榜
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // 处理数据库连接异常
-            }
 
-//            UpdateRanking updateRanking = new UpdateRanking(databaseConnection, excelFilePath);
-//            updateRanking.update();
+            checkBulletHits();
+            // 如果游戏成功完成，则更新排行榜
 //            SwingUtilities.invokeLater(() -> {
-//                RunGame.closeRunGame();
-//                new VictoryGUI(true, null).setVisible(true);
+//                try {
+//                    // 获取数据库连接
+//                    Connection databaseConnection = JdbcUtils.getConnection();
+//                    if (databaseConnection != null) {
+//                        // 指定Excel文件路径
+//                        String excelFilePath = "Scoreboard.xlsx";
+//                        // 创建UpdateRanking实例
+//                        UpdateRanking updateRanking = new UpdateRanking(databaseConnection, excelFilePath);
+//
+//                        // 更新排行榜
+//                        updateRanking.update();
+//                    } else {
+//                        // 如果无法获取数据库连接，打印错误信息
+//                        System.err.println("Failed to connect to the database.");
+//                    }
+//                } catch (SQLException e) {
+//                    // 打印异常信息
+//                    e.printStackTrace();
+//                }
+//
+////            UpdateRanking updateRanking = new UpdateRanking(databaseConnection, excelFilePath);
+////            updateRanking.update();
+////            SwingUtilities.invokeLater(() -> {
+////                RunGame.closeRunGame();
+////                new VictoryGUI(true, null).setVisible(true);
 //            });
         }
     }
-
     public void removeBulletByUUID(UUID bulletId) {
         GameObject bullet = bulletMap.get(bulletId);
         if (bullet != null) {
             gameObjects.remove(bullet);
             bulletMap.remove(bulletId);
+        }
+    }
+
+    // 检查并处理子弹击中目标的逻辑
+    public void checkBulletHits() {
+        List<GameObject> gameObjectsCopy = new ArrayList<>(gameObjects);
+
+        LogPrint.log(this.getClass().getSimpleName(), "Checking bullet hits...");
+
+        for (GameObject possibleBullet : gameObjectsCopy) {
+            if (possibleBullet.getGameObjectType() == GameObjectType.BULLET) {
+                Bullet bullet = (Bullet) possibleBullet;
+                LogPrint.log(this.getClass().getSimpleName(), "Checking bullet: " + bullet.getId());
+
+                for (GameObject possibleTank : gameObjects) {
+                    if (possibleTank.getGameObjectType() == GameObjectType.TANK) {
+                        Tank tank = (Tank) possibleTank;
+                        LogPrint.log(this.getClass().getSimpleName(), "Checking against tank: " + tank.getId());
+
+                        Collider collider = new BulletTankCollider();
+                        if (collider.collide(bullet, tank)) {
+                            LogPrint.log(this.getClass().getSimpleName(), "Collision detected between bullet " + bullet.getId() + " and tank " + tank.getId() + ". Calling updateScoreOnHit.");
+                            updateScoreOnHit(bullet, tank);
+                            gameObjects.remove(bullet);
+                            gameObjects.remove(tank);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateScoreOnHit(Bullet bullet, Tank tank) {
+        UUID tankId = tank.getId();
+        Player player = findPlayerByTankId(tankId);
+
+        if (player != null) {
+            LogPrint.log(this.getClass().getSimpleName(), "Updating score for player: " + player.getUsername());
+            player.updateScore();
+
+            try {
+                RankManager rankManager = new RankManager(JdbcUtils.getConnection());
+                rankManager.insertScore(player);
+                LogPrint.log(this.getClass().getSimpleName(), "Score updated in database for player: " + player.getUsername());
+            } catch (SQLException e) {
+                e.printStackTrace();
+                LogPrint.log(this.getClass().getSimpleName(), "Error updating score in database: " + e.getMessage());
+            }
+        } else {
+            LogPrint.log(this.getClass().getSimpleName(), "No player found for tank ID: " + tankId);
         }
     }
 

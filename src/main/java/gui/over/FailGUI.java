@@ -49,7 +49,7 @@ public class FailGUI {
 
         });
 
-        JButton backToMainButton = new JButton("回到游戏");
+        JButton backToMainButton = new JButton("重新开始");
         backgroundPanel.add(backToMainButton);
 
         backToMainButton.addActionListener(e -> {

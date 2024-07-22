@@ -2,17 +2,14 @@ package game.object;
 
 import game.object.BaseObject.BaseWall;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 /**
  * 墙
  */
 public class Wall extends BaseWall {
-    private Image image;
-
+    Image image =  new ImageIcon("images/wall/steel.gif").getImage();
     public Wall(Image image, int x, int y, int width, int height) {
         super(x, y, width, height);
         this.image = image; // 确保传入的 image 参数不是 null

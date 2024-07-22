@@ -53,6 +53,7 @@ public class RankManager {
                 String username = rs.getString("username");
                 int score = rs.getInt("score");
                 Player player = new Player(username);
+
                 players.add(player);
             }
         }
