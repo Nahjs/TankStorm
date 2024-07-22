@@ -39,7 +39,10 @@ public class AudioLoader {
 		}
 	}
 
-	//播放音频
+    public static void stop() {
+    }
+
+    //播放音频
 	public void play() {
 		try {
 			byte[] b = new byte[1024*5];//临时存储音频数据
