@@ -1,16 +1,25 @@
 package gui.start;
 
 import game.RunGame;
+import loader.ConfigLoader;
 import loader.ResourceLoader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class StartGame {
 
     public static JFrame frame;
+
+    private static int selectedEnemyTankCount;
+
+    public static int getEnemyCount() {
+        return   selectedEnemyTankCount;
+    }
 
     public StartGame() {
 
@@ -32,9 +41,48 @@ public class StartGame {
         backgroundPanel.setLayout(null);
         frame.add(backgroundPanel);
 
+        String[] difficulties = {ConfigLoader.EASY, ConfigLoader.NORMAL, ConfigLoader.HARD, ConfigLoader.EXPERT, ConfigLoader.INSANE};
 
+        JComboBox<String> difficultyComboBox = new JComboBox<>(new String[]{
+                ConfigLoader.EASY,
+                ConfigLoader.NORMAL,
+                ConfigLoader.HARD,
+                ConfigLoader.EXPERT,
+                ConfigLoader.INSANE
+        });
+        //
+//        JComboBox<String> difficultyComboBox = new JComboBox<>(
+//                new AbstractListModel<String>() {
+//                    @Override
+//                    public int getSize() {
+//                        return difficulties.length;
+//                    }
+//
+//                    @Override
+//                    public String getElementAt(int index) {
+//                        // 使用 getDifficultyDisplayName 获取本地化的难度显示名称
+//                        return ConfigLoader.getDifficultyDisplayName(difficulties[index]);
+//                    }
+//                }
+//
+//
+//
+//        );
 
-        // 创建登录按钮
+        difficultyComboBox.setBounds(550, 500, 150, 30); // 根据需要调整位置和大小
+
+        difficultyComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedDifficulty = (String) difficultyComboBox.getSelectedItem();
+                // 根据选择的难度获取敌人坦克数量
+                selectedEnemyTankCount = ConfigLoader.getEnemyTankCount(selectedDifficulty);
+                // 可以在这里设置游戏的敌人坦克数量或其他难度相关的设置
+            }
+        });
+        backgroundPanel.add(difficultyComboBox);
+
+        // 创建开始游戏按钮
         JButton loginButton = new JButton("开始游戏");
         loginButton.setBounds(350, 500, 150, 50); // 根据需要调整位置和大小
         backgroundPanel.add(loginButton);
@@ -91,4 +139,6 @@ public class StartGame {
 
         new StartGame();
     }
+
+
 }

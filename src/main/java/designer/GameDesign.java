@@ -10,6 +10,7 @@ import game.collider.ColliderChain;
 import game.factory.abstractfactory.GameFactory;
 import game.object.*;
 import gui.over.FailGUI;
+import gui.start.StartGame;
 import gui.start.login.JdbcUtils;
 import loader.ConfigLoader;
 import loader.ResourceLoader;
@@ -33,7 +34,6 @@ public class GameDesign {
     public int gameWidth, gameHeight;   // 游戏区域宽高
 
     GameObject selfTank;
-    int enemyTankCount = ConfigLoader.getEnemy_tank_count(); // 敌方坦克的数量
 
 
     public List<GameObject> gameObjects = new ArrayList<>();
@@ -73,7 +73,7 @@ public class GameDesign {
         addTank(selfTank);
 
         // 随机产生enemy_tank_count辆敌方坦克
-        initEnemyTanks();
+        initEnemyTanks(StartGame.getEnemyCount());
 
 
         // 连接服务器
@@ -117,8 +117,11 @@ public class GameDesign {
        // Player player = new Player(tankId.toString());
     }
 
+    public int getEnemyTankCountByDifficulty(String difficulty) {
+        return ConfigLoader.getEnemyTankCount(difficulty);
+    }
 
-private void initEnemyTanks() {
+private void initEnemyTanks(int enemyTankCount) {
 
     for (int i = 0; i < enemyTankCount; i++) {
         Rectangle tankRect = new Rectangle();
