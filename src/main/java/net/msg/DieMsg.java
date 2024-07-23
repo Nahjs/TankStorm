@@ -1,6 +1,6 @@
 package net.msg;
 
-import designer.GameDesign;
+import design.GameDesign;
 
 import java.io.*;
 import java.util.UUID;
@@ -12,9 +12,6 @@ public class DieMsg extends Msg {
     public UUID tankId;
     public UUID bulletId;
 
-    public UUID getBulletId() {
-        return bulletId;
-    }
 
     public DieMsg() {
 
@@ -89,7 +86,7 @@ public class DieMsg extends Msg {
 
     @Override
     public String toString() {
-        return "TankDieMsg{" +
+        return "DieMsg{" +
                 "tankId=" + tankId +
                 ", bulletId=" + bulletId +
                 '}';

@@ -1,11 +1,11 @@
 package game.object;
 
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.BaseObject.BaseTank;
+import game.strategy.OneFireStrategy;
+import game.strategy.FireStrategy;
 import loader.ConfigLoader;
 import loader.ResourceLoader;
-import game.strategy.DefaultFireStrategy;
-import game.strategy.FireStrategy;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -32,7 +32,7 @@ public abstract class Tank extends BaseTank {
     public BufferedImage curTankImage;  // 当前坦克加载的图片
 
     private Rectangle rect;
-    private FireStrategy fireStrategy = new DefaultFireStrategy();
+    private FireStrategy fireStrategy = new OneFireStrategy();
 
     public Tank(UUID id, int x, int y, Dir dir, int speed, Group group) {
         this.id = id;

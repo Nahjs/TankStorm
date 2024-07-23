@@ -8,6 +8,7 @@ import java.io.IOException;
  */
 public class AudioLoader {
 
+	private Clip clip;//用来停止音乐循环
 	byte[] b = new byte[1024 * 1024 * 15];//存储音频数据的字节数组。
 
 
@@ -39,8 +40,11 @@ public class AudioLoader {
 		}
 	}
 
-    public static void stop() {
-    }
+	public void stop() {
+		if (clip != null && clip.isRunning()) {
+			clip.stop();
+		}
+	}
 
     //播放音频
 	public void play() {
@@ -97,8 +101,8 @@ public class AudioLoader {
 		}
 	}
 
+	//测试
 	public static void main(String[] args) {
-		// Audio a = new Audio("audio/explode.wav");
 		AudioLoader a = new AudioLoader("audio/war1.wav");
 		a.loop();
 

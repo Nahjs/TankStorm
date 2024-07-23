@@ -1,6 +1,6 @@
 package game.strategy;
 
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.BaseObject.BaseBullet;
 import game.object.Group;
 import game.object.Tank;
@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * 坦克的开火策略：朝一个方向打出子弹
  */
-public class DefaultFireStrategy implements FireStrategy {
+public class OneFireStrategy implements FireStrategy {
     @Override
     public void fire(Tank t) {
         // 检查坦克是否存活

@@ -2,7 +2,7 @@ package game.collider;
 
 import game.object.GameObject;
 import game.object.GameObjectType;
-import designer.GameDesign;
+import design.GameDesign;
 
 /**
  * 子弹和墙的碰撞器

@@ -1,30 +1,36 @@
 package game.object;
 
 import game.object.BaseObject.BaseWall;
+import loader.ResourceLoader;
 
-import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * 墙
  */
 public class Wall extends BaseWall {
-    Image image =  new ImageIcon("images/wall/steel.gif").getImage();
-    public Wall(Image image, int x, int y, int width, int height) {
+    public static BufferedImage curwall ;
+    public Wall( int x, int y, int width, int height) {
         super(x, y, width, height);
-        this.image = image; // 确保传入的 image 参数不是 null
+        this.curwall = initCurWallImage();; // 确保传入的 image 参数不是 null
     }
-  //  public Wall(int x, int y, int width, int height) {
+
+    private BufferedImage initCurWallImage() {
+        return curwall=ResourceLoader.wall;
+
+    }
+    //  public Wall(int x, int y, int width, int height) {
      //   super(x, y, width, height);
  //   }
 
     @Override
     public void paint(Graphics g) {
        // g.setColor(new Color(209, 214, 215));
+        //g.fillRect(x, y, width, height);
 
-        if (image != null) {
-            g.drawImage(image, 0, 0, getWidth(), getHeight(), null); // 使用 null 作为 ImageObserver
-            g.fillRect(x, y, width, height);
+        if (g != null) {
+            g.drawImage(curwall, x, y, getWidth(), getHeight(), null); // 使用 null 作为 ImageObserver
         } else {
             System.out.println("Image is not initialized.");
         }

@@ -1,6 +1,6 @@
 package game.collider;
 
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.GameObject;
 import game.object.GameObjectType;
 import game.object.Group;

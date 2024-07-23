@@ -1,10 +1,10 @@
 package game.collider;
 
+import design.GameDesign;
 import game.object.GameObject;
 import game.object.GameObjectType;
 import net.Client;
 import net.msg.DieMsg;
-import designer.GameDesign;
 
 /**
  * 网络版子弹和坦克的碰撞器

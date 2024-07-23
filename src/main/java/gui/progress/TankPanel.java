@@ -1,6 +1,6 @@
 package gui.progress;
 
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.GameObject;
 import net.Client;
 import net.msg.DirChangeMsg;
@@ -20,6 +20,7 @@ public class TankPanel extends JPanel {
     public TankPanel() {
         super(true);
         // 键盘监听事件的前提：获取焦点
+        // 点击即可屏幕可控制坦克
         setFocusable(true);
         this.addKeyListener(new KeyAdapter() {
             private boolean isU;

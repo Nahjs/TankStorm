@@ -50,24 +50,6 @@ public class StartGame {
                 ConfigLoader.EXPERT,
                 ConfigLoader.INSANE
         });
-        //
-//        JComboBox<String> difficultyComboBox = new JComboBox<>(
-//                new AbstractListModel<String>() {
-//                    @Override
-//                    public int getSize() {
-//                        return difficulties.length;
-//                    }
-//
-//                    @Override
-//                    public String getElementAt(int index) {
-//                        // 使用 getDifficultyDisplayName 获取本地化的难度显示名称
-//                        return ConfigLoader.getDifficultyDisplayName(difficulties[index]);
-//                    }
-//                }
-//
-//
-//
-//        );
 
         difficultyComboBox.setBounds(550, 500, 150, 30); // 根据需要调整位置和大小
 
@@ -131,14 +113,8 @@ public class StartGame {
             frame.setVisible(true);
     }
 
-    // 公共静态方法来获取主窗口的引用
-    public static JFrame getMainFrame() {
-        return frame;
-    }
+    // 测试用
     public static void main(String[] args) {
-
         new StartGame();
     }
-
-
 }

@@ -1,7 +1,10 @@
 package gui.over;
 
 import gui.start.StartGame;
+import loader.ConfigLoader;
 import loader.ResourceLoader;
+import rank.RankManager;
+import rank.RankingsGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,11 +12,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.List;
 
 public class FailGUI {
 
     private JFrame frame;
     private boolean visible;
+
+    private static final int gameWidth= ConfigLoader.getGameWidth(),
+            gameHeight = ConfigLoader.getGameHeight();
 
     public FailGUI() {
         visible = false;
@@ -23,7 +31,7 @@ public class FailGUI {
     private void initUI() {
         frame = new JFrame("你个菜B");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.setSize(800, 836);
+        frame.setSize(800, 837);
         frame.setLocationRelativeTo(null);
 
         JPanel backgroundPanel = new JPanel() {
@@ -31,7 +39,7 @@ public class FailGUI {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 ImageIcon background = new ImageIcon(ResourceLoader.class.getResource("/images/GameOver.png"));
-                g.drawImage(background.getImage(), 0, 0, null);
+                g.drawImage(background.getImage(), 0, 0, gameWidth, gameHeight, null);
 //                ImageIcon background = new ImageIcon(ResourceLoader.class.getResource("/images/GameOver.png"));
 //                Image backgroundImage = background.getImage();
 //
@@ -45,11 +53,6 @@ public class FailGUI {
         JButton endGameButton = new JButton("打不过，滚！");
         backgroundPanel.add(endGameButton);
 
-//        endGameButton.addActionListener(e -> {
-//
-//                System.exit(0);
-//
-//        });
         endGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,7 +70,7 @@ public class FailGUI {
             }
         });
 
-        JButton backToMainButton = new JButton("不服，再战！");
+        JButton backToMainButton = new JButton("不服，观战！");
         backgroundPanel.add(backToMainButton);
 
         backToMainButton.addActionListener(e -> {
@@ -77,6 +80,35 @@ public class FailGUI {
 
         endGameButton.setBounds(600, 750, 150, 40);
         backToMainButton.setBounds(50, 750, 150, 40);
+
+        // 添加查看排行榜的按钮
+        JButton rankingsButton = new JButton("查看排行榜");
+        backgroundPanel.add(rankingsButton);
+
+// 为排行榜按钮添加事件监听器
+        rankingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    // 获取更新后的玩家排名信息
+                    List updatedPlayers = RankManager.queryScores();
+                    // 创建并显示排行榜界面
+                    RankingsGUI rankingsGUI = new RankingsGUI(updatedPlayers);
+                    //rankingsGUI.pack(); // 根据内容调整窗口大小
+                    rankingsGUI.setVisible(true);
+                    // 可以选择隐藏失败界面
+                     frame.dispose();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    // 处理数据库查询异常，例如显示错误消息
+                    JOptionPane.showMessageDialog(frame, "无法加载排行榜: " + ex.getMessage(), "错误", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+// 为按钮设置位置（示例位置，根据实际布局调整）
+        rankingsButton.setBounds(300, 700, 120, 30);
+
 
         frame.addWindowListener(new WindowAdapter() {
             @Override

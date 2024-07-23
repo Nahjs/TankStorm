@@ -9,7 +9,7 @@ public class RankingsGUI extends JFrame {
     private List<Player> players;
 
     public RankingsGUI(List<Player> players) {
-        this.players = players;
+        this.players = (List<Player>) players;
         initializeUI();
     }
 

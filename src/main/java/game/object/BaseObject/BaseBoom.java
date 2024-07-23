@@ -1,10 +1,10 @@
 package game.object.BaseObject;
 
+import game.object.Dir;
 import game.object.GameObject;
 import game.object.GameObjectType;
 import game.object.Group;
 import loader.AudioLoader;
-import game.object.Dir;
 
 import java.awt.*;
 import java.util.UUID;

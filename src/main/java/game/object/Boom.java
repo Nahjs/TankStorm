@@ -1,6 +1,6 @@
 package game.object;
 
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.BaseObject.BaseBoom;
 import loader.ResourceLoader;
 

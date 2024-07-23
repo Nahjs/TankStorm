@@ -1,6 +1,6 @@
 package net.msg;
 
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.Dir;
 import game.object.GameObject;
 
@@ -100,7 +100,7 @@ public class StopMsg extends Msg {
 
     @Override
     public String toString() {
-        return "TankStopMsg{" +
+        return "StopMsg{" +
                 "x=" + x +
                 ", y=" + y +
                 ", dir=" + dir +

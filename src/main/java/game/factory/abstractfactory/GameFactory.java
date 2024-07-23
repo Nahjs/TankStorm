@@ -42,5 +42,5 @@ public abstract class GameFactory {
     public abstract BaseBoom createExplode(Rectangle tankRect);
 
 
-    public abstract GameObject createWall(Image image, int x, int y, int width, int height);
+    public abstract GameObject createWall( int x, int y, int width, int height);
 }

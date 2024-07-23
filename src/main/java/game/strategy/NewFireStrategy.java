@@ -1,6 +1,6 @@
 package game.strategy;
 
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.BaseObject.BaseBullet;
 import game.object.Dir;
 import game.object.Group;
@@ -15,7 +15,7 @@ import java.util.UUID;
 /**
  * 新的坦克开火攻略：可以朝4个方向同时开火
  */
-public class FourDirectionsFireStrategy implements FireStrategy {
+public class NewFireStrategy implements FireStrategy {
     @Override
     public void fire(Tank t) {
         // 根据坦克的方向确定打出子弹的位置

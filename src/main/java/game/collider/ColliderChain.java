@@ -6,7 +6,7 @@ import loader.ConfigLoader;
 import java.util.LinkedList;
 
 /**
- * 碰撞器链
+ * （责任链模式）碰撞器链
  */
 public class ColliderChain implements Collider {
     private LinkedList<Collider> colliders;

@@ -1,6 +1,6 @@
 package net.msg;
 
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.Dir;
 import game.object.GameObject;
 import game.object.Group;
@@ -112,7 +112,7 @@ public class BulletMsg extends Msg {
 
     @Override
     public String toString() {
-        return "BulletNewMsg{" +
+        return "BulletMsg{" +
                 "x=" + x +
                 ", y=" + y +
                 ", dir=" + dir +

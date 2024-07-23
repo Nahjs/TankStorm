@@ -41,7 +41,7 @@ public class RankManager {
         }
     }
 
-    public static List<Player> queryScores() throws SQLException {
+    public static java.util.List queryScores() throws SQLException {
         List<Player> players = new ArrayList<>();
         String sql = "SELECT username, score FROM scoreboard";
 
@@ -57,7 +57,7 @@ public class RankManager {
                 players.add(player);
             }
         }
-        return players;
+        return  players;
     }
 
     public void clearScoreboard() throws SQLException {

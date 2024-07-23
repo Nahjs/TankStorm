@@ -12,7 +12,7 @@ public class ResourceLoader {
     public static BufferedImage enemyTankL, enemyTankU, enemyTankR, enemyTankD;//存储敌方坦克在不同方向的图片
     public static BufferedImage bulletL, bulletU, bulletR, bulletD;//存储子弹在不同方向的图片
     public static BufferedImage[] explodes = new BufferedImage[16];//存储坦克爆炸的动画图片数组
-    public static BufferedImage gameOver;//存储游戏结束的图片
+    public static BufferedImage wall;//存储墙的图片
     static {
         // 加载四个方向的我方坦克图片
         selfTankU = readImage("GoodTank1.png");
@@ -32,8 +32,10 @@ public class ResourceLoader {
         // 加载坦克爆炸的图片
         for (int i = 0; i < explodes.length; i++) {
             explodes[i] = readImage("e" + (i + 1) + ".gif");
+
+            //墙的图片
+            wall = readImage("brick.png");
         }
-//        gameOver = readImage("GameOver.png");
     }
 
     private static BufferedImage readImage(String filename) {

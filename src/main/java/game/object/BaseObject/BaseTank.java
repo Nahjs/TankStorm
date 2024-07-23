@@ -1,7 +1,7 @@
 package game.object.BaseObject;
 
-import game.object.GameObject;
 import game.object.Dir;
+import game.object.GameObject;
 import game.object.GameObjectType;
 import game.object.Group;
 
@@ -18,6 +18,9 @@ public abstract class BaseTank extends GameObject {
     public UUID id;
 
     protected GameObjectType gameObjectType = GameObjectType.TANK;
+
+
+
 
     public abstract void setDir(Dir dir);
 

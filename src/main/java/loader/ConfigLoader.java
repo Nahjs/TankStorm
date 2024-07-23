@@ -67,7 +67,7 @@ public class ConfigLoader {
     // 获取敌方坦克开火策略
     public static FireStrategy getEnemy_tank_fs() {
         try {
-            Class<?> clazz = Class.forName("game.strategy." + get("enemy_tank_fs"));
+            Class<?> clazz = Class.forName("game.strategy." + get("enemyTankFs"));
             return (FireStrategy) clazz.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,7 +78,7 @@ public class ConfigLoader {
     // 获取己方坦克开火策略
     public static FireStrategy getSelf_tank_fs() {
         try {
-            Class<?> clazz = Class.forName("game.strategy." + get("self_tank_fs"));
+            Class<?> clazz = Class.forName("game.strategy." + get("myTankFs"));
             return (FireStrategy) clazz.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,7 +89,7 @@ public class ConfigLoader {
     // 获取生产坦克、炮弹和爆炸效果的工厂类
     public static GameFactory getFactory() {
         try {
-            Class<?> clazz = Class.forName("game.factory." + get("factory_style"));
+            Class<?> clazz = Class.forName("game.factory." + get("factory"));
             return (GameFactory) clazz.newInstance();
         } catch (Exception e) {
             e.printStackTrace();

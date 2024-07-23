@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.UUID;
 
 /**
- * 游戏物体装饰器
+ * 游戏物体的装饰器
  */
 public class ObjectDecorator extends GameObject {
     protected GameObject gameObject;

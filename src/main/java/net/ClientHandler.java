@@ -1,6 +1,6 @@
 package net;
 
-import designer.GameDesign;
+import design.GameDesign;
 import gui.over.FailGUI;
 import gui.over.VictoryGUI;
 import io.netty.channel.ChannelHandlerContext;

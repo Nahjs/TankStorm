@@ -12,6 +12,7 @@ public abstract class GameObject {
 
     public Dir dir = Dir.DOWN;
 
+
     public abstract void paint(Graphics g);
 
     public abstract Rectangle getRect();

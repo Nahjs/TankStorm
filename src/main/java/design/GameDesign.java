@@ -1,4 +1,4 @@
-package designer;
+package design;
 
 import Log.LogPrint;
 import decorator.BorderDecorator;
@@ -25,27 +25,24 @@ import java.util.List;
 import java.util.*;
 
 /**
- * 将TankPanel和游戏对象（Tank、Bullet）分离，即Model和view分离
- * 使用门面模式，GameDesign作为Facade，负责与TankPanel打交道
+ * 使用门面模式，将TankPanel和游戏对象（Tank、Bullet）分离。GameDesign作为Facade，负责与TankPanel打交道
  */
 public class GameDesign {
     public static final GameDesign INSTANCE = new GameDesign(ConfigLoader.getGameWidth(), ConfigLoader.getGameHeight());
 
     public int gameWidth, gameHeight;   // 游戏区域宽高
 
-    GameObject selfTank;
-
-
-    public List<GameObject> gameObjects = new ArrayList<>();
-    public HashMap<UUID, GameObject> tankMap = new HashMap<>();
+    GameObject selfTank;//玩家坦克
+    public List<GameObject> gameObjects = new ArrayList<>();//游戏中的所有物体
+    public HashMap<UUID, GameObject> tankMap = new HashMap<>();//存储坦克UUID和坦克对象的映射
     private Map<UUID, Player> tankToPlayerMap= new HashMap<>();; // 存储坦克UUID和Player对象的映射
 
-    public HashMap<UUID, GameObject> bulletMap = new HashMap<>();
-    public ColliderChain colliderChain;
+    public HashMap<UUID, GameObject> bulletMap = new HashMap<>();//// 存储坦克UUID和子弹对象的映射
+    public ColliderChain colliderChain;//责任链模式的应用
     public GameFactory factory;
 
     public Random random = new Random();
-    public boolean gameFail = false;
+    public boolean gameFail = false;//判断游戏结果
 
 
     private GameDesign(int gameWidth, int gameHeight) {
@@ -55,18 +52,17 @@ public class GameDesign {
         colliderChain = new ColliderChain();
 
         // 初始化墙
-        Image image =  new ImageIcon("images/wall/steel.gif").getImage();
-        gameObjects.add(factory.createWall(image,100, 220, 50, 50));
-        gameObjects.add(factory.createWall(image,620, 220, 50, 50));
-        gameObjects.add(factory.createWall(image,100, 530, 50, 50));
-        gameObjects.add(factory.createWall(image,820, 130, 50, 50));
-        gameObjects.add(factory.createWall(image,270, 300, 50, 50));//
-        gameObjects.add(factory.createWall(image,830, 300, 50, 50));
-        gameObjects.add(factory.createWall(image,250, 120, 50, 50));
-        gameObjects.add(factory.createWall(image,480, 120, 50, 50));
-        gameObjects.add(factory.createWall(image,750, 530, 50, 50));
-        gameObjects.add(factory.createWall(image,520, 530, 50, 50));
-        gameObjects.add(factory.createWall(image,460, 360, 50, 50));
+        gameObjects.add(factory.createWall(100, 220, 50, 50));
+        gameObjects.add(factory.createWall(620, 220, 50, 50));
+        gameObjects.add(factory.createWall(100, 530, 50, 50));
+        gameObjects.add(factory.createWall(820, 130, 50, 50));
+        gameObjects.add(factory.createWall(270, 300, 50, 50));
+        gameObjects.add(factory.createWall(830, 300, 50, 50));
+        gameObjects.add(factory.createWall(250, 120, 50, 50));
+        gameObjects.add(factory.createWall(480, 120, 50, 50));
+        gameObjects.add(factory.createWall(750, 530, 50, 50));
+        gameObjects.add(factory.createWall(520, 530, 50, 50));
+        gameObjects.add(factory.createWall(460, 360, 50, 50));
 
         // 初始化我方坦克，位置随机（位置必须合法，不能和墙壁相交），方向随机
         initSelfTank();
@@ -106,20 +102,18 @@ public class GameDesign {
             }
 
         }
-        // 假设这是创建玩家坦克的代码
-//        UUID playerTankId = UUID.randomUUID();
-//        BaseTank playerTank = factory.createSelfTank(UUID.randomUUID(), 100, 100, Dir.NORTH, 5);
 
         // 使用装饰器模式在坦克上方绘制id，用以标识
         UUID tankId = UUID.randomUUID(); // 为坦克生成ID
         selfTank = new IdDecorator(factory.createSelfTank(tankId, tankRect.x, tankRect.y,
                 Dir.values()[random.nextInt(4)], 5));
-       // Player player = new Player(tankId.toString());
+        Player player = new Player(tankId.toString());
+        registerTank( tankId,player);//调用方法向存储坦克UUID和Player对象的映射中插入信息...（未实现排行功能）
     }
 
-    public int getEnemyTankCountByDifficulty(String difficulty) {
-        return ConfigLoader.getEnemyTankCount(difficulty);
-    }
+   // public int getEnemyTankCountByDifficulty(String difficulty) {
+//        return ConfigLoader.getEnemyTankCount(difficulty);
+//    }
 
 private void initEnemyTanks(int enemyTankCount) {
 
@@ -144,13 +138,15 @@ private void initEnemyTanks(int enemyTankCount) {
         }
         // 随机生成方向
         Dir direction = Dir.values()[random.nextInt(Dir.values().length)];
+
         // 创建敌方坦克并添加到游戏对象列表中
         GameObject enemyTank = factory.createEnemyTank(UUID.randomUUID(), tankRect.x, tankRect.y, direction, 5);
         gameObjects.add(new BorderDecorator(enemyTank));
         tankMap.put(enemyTank.getId(), enemyTank);
     }
 }
-//游戏背景设置
+
+    //游戏内容设置
     public void paint(Graphics g, int gameWidth, int gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
@@ -162,15 +158,16 @@ private void initEnemyTanks(int enemyTankCount) {
         // 缩放图片以适应窗口大小
         g.drawImage(backgroundImage, 0, 0, gameWidth, gameHeight, null);
 
-        // 绘制所有游戏物体：坦克、子弹、爆炸
+        // 绘制所有游戏物体：坦克、子弹、爆炸，加上了墙
         for (int i = 0; i < gameObjects.size(); i++) {
             gameObjects.get(i).paint(g);
+
         }
 
         // 处理游戏物体间的碰撞
         for (int i = 0; i < gameObjects.size(); i++) {
             for (int j = i + 1; j < gameObjects.size(); j++) {
-                colliderChain.collide(gameObjects.get(i), gameObjects.get(j));
+                colliderChain.collide(gameObjects.get(i), gameObjects.get(j));//碰撞检测链用在这里
             }
         }
     }
@@ -181,18 +178,19 @@ private void initEnemyTanks(int enemyTankCount) {
 
     public void addTank(GameObject tank) {
         gameObjects.add(new IdDecorator(tank));
-        tankMap.put(tank.getId(), tank);
+        tankMap.put(tank.getId(), tank);//往映射中插入数据
     }
-    // （做排行榜用）当创建一个新的坦克时，将其添加到映射中
+
     public void registerTank(UUID tankId, Player player) {
         tankToPlayerMap.put(tankId, player);
-    }
+    }// （排行榜）当创建一个新的坦克时，将其添加到映射中
 
     // findPlayerByTankId方法的实现
     public Player findPlayerByTankId(UUID tankId) {
-        LogPrint.log(this.getClass().getSimpleName(), "Searching for player with tank ID: " + tankId);
+        LogPrint.log(this.getClass().getSimpleName(), "Searching for player with tank ID: " + tankId);//no
         return tankToPlayerMap.get(tankId); // 直接从映射中获取Player对象
     }
+
         public void addBullet(GameObject bullet) {
         gameObjects.add(bullet);
         bulletMap.put(bullet.getId(), bullet);
@@ -223,7 +221,8 @@ private void initEnemyTanks(int enemyTankCount) {
             });
         } else {
 
-            checkBulletHits();
+            checkBulletHits();//用来使击毁敌人坦克的玩家得分加1的方法
+
             // 如果游戏成功完成，则更新排行榜
 //            SwingUtilities.invokeLater(() -> {
 //                try {
@@ -266,17 +265,17 @@ private void initEnemyTanks(int enemyTankCount) {
     public void checkBulletHits() {
         List<GameObject> gameObjectsCopy = new ArrayList<>(gameObjects);
 
-        LogPrint.log(this.getClass().getSimpleName(), "Checking bullet hits...");
+        LogPrint.log(this.getClass().getSimpleName(), "Checking bullet hits...");//yes
 
         for (GameObject possibleBullet : gameObjectsCopy) {
             if (possibleBullet.getGameObjectType() == GameObjectType.BULLET) {
                 Bullet bullet = (Bullet) possibleBullet;
-                LogPrint.log(this.getClass().getSimpleName(), "Checking bullet: " + bullet.getId());
+                LogPrint.log(this.getClass().getSimpleName(), "Checking bullet: " + bullet.getId());//yes
 
                 for (GameObject possibleTank : gameObjects) {
                     if (possibleTank.getGameObjectType() == GameObjectType.TANK) {
                         Tank tank = (Tank) possibleTank;
-                        LogPrint.log(this.getClass().getSimpleName(), "Checking against tank: " + tank.getId());
+                        LogPrint.log(this.getClass().getSimpleName(), "Checking against tank: " + tank.getId());//no...
 
                         Collider collider = new BulletTankCollider();
                         if (collider.collide(bullet, tank)) {

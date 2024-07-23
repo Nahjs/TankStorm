@@ -1,7 +1,7 @@
 package net.msg;
 
 import net.Client;
-import designer.GameDesign;
+import design.GameDesign;
 import game.object.Dir;
 import game.object.GameObject;
 import game.object.Group;
@@ -142,7 +142,7 @@ public class JoinMsg extends Msg {
 
     @Override
     public String toString() {
-        return "TankJoinMsg{" +
+        return "JoinMsg{" +
                 "x=" + x +
                 ", y=" + y +
                 ", dir=" + dir +
