@@ -17,7 +17,7 @@ public class RunGame {
         runGameFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int closeCode = JOptionPane.showConfirmDialog(runGameFrame, "确定退出游戏？", "提示！",
+                int closeCode = JOptionPane.showConfirmDialog(runGameFrame, "确定就离开了吗？", "你有机会排第一！",
                         JOptionPane.YES_NO_OPTION);
                 if (closeCode == JOptionPane.YES_OPTION) {
                     closeRunGame();

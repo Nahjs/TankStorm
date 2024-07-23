@@ -26,7 +26,7 @@ import java.util.*;
 
 /**
  * 将TankPanel和游戏对象（Tank、Bullet）分离，即Model和view分离
- * 使用门面模式，GameModel作为Facade，负责与TankPanel打交道
+ * 使用门面模式，GameDesign作为Facade，负责与TankPanel打交道
  */
 public class GameDesign {
     public static final GameDesign INSTANCE = new GameDesign(ConfigLoader.getGameWidth(), ConfigLoader.getGameHeight());
